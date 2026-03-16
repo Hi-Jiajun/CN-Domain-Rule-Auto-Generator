@@ -60,39 +60,18 @@ jobs:
         
       - name: Create Release
         if: steps.changes.outputs.has_changes == 'true'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: latest
-          release_name: Latest CN Domain Rules
           body: |
             Auto-generated CN domain rules
             Updated at: ${{ github.run_id }}
           draft: false
           prerelease: false
-        continue-on-error: true
-        
-      - name: Upload Release Asset
-        if: steps.changes.outputs.has_changes == 'true'
-        uses: actions/upload-release-asset@v1
+          files: |
+            custom_cn_mark.txt
+            organized_cn_mark.txt
+            generate_cn_rules.py
+            custom.txt
+            custom_rule.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: custom_cn_mark.txt
-          asset_name: custom_cn_mark.txt
-          asset_content_type: text/plain
-        continue-on-error: true
-        
-      - name: Upload Release Asset 2
-        if: steps.changes.outputs.has_changes == 'true'
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: organized_cn_mark.txt
-          asset_name: organized_cn_mark.txt
-          asset_content_type: text/plain
-        continue-on-error: true
