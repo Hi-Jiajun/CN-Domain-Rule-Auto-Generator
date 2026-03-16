@@ -1,10 +1,10 @@
-# 🌏 CN-Domain-Rule-Auto-Generator
+# 🌏 CN-Domain-Rule-Auto-Generator 中国大陆直连域名规则自动生成
 
 [![GitHub Stars](https://img.shields.io/github/stars/Hi-Jiajun/CN-Domain-Rule-Auto-Generator?style=flat)](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/stargazers)
 [![GitHub License](https://img.shields.io/github/license/Hi-Jiajun/CN-Domain-Rule-Auto-Generator)](LICENSE)
 [![Auto Update](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/actions/workflows/auto-update.yml/badge.svg)](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/actions)
 
-Automated Generator for China Mainland Direct Connect Domain Marking Rules - Specially designed for [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS).
+[English](./README_EN.md) | [中文](./README.md)
 
 ---
 
