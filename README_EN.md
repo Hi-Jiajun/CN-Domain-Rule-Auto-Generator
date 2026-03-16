@@ -1,4 +1,6 @@
-# 🌏 CN-Domain-Rule-Auto-Generator 中国大陆直连域名规则自动生成
+# 🌏 CN-Domain-Rule-Auto-Generator
+
+### Automated Generator for China Mainland Direct Connect Domain Marking Rules
 
 [![GitHub Stars](https://img.shields.io/github/stars/Hi-Jiajun/CN-Domain-Rule-Auto-Generator?style=flat)](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/stargazers)
 [![GitHub License](https://img.shields.io/github/license/Hi-Jiajun/CN-Domain-Rule-Auto-Generator)](LICENSE)
