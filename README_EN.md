@@ -1,34 +1,37 @@
-# CN-Domain-Rule-Auto-Generator
+# 🌏 CN-Domain-Rule-Auto-Generator
 
-Automated Generator for China Mainland Direct Connect Domain Marking Rules
+[![GitHub Stars](https://img.shields.io/github/stars/Hi-Jiajun/CN-Domain-Rule-Auto-Generator?style=flat)](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/stargazers)
+[![GitHub License](https://img.shields.io/github/license/Hi-Jiajun/CN-Domain-Rule-Auto-Generator)](LICENSE)
+[![Auto Update](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/actions/workflows/auto-update.yml/badge.svg)](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/actions)
 
-[中文 README](./README.md)
+Automated Generator for China Mainland Direct Connect Domain Marking Rules - Specially designed for [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS).
 
-## Introduction
+---
 
-This project is specifically designed for [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS) to generate the `custom_cn_mark.txt` rule file. It automatically aggregates multiple upstream high-quality China mainland direct connect domains, performs priority-based deduplication, cleans invalid rules, formats output, and updates daily without manual maintenance.
+## 📋 Introduction
 
-## Features
+This project generates `custom_cn_mark.txt` rule file for [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS) with the following features:
 
-- **Multi-source Aggregation**: Fetch domain rules from multiple sources with priority (Athersailor > Loyalsoldier > v2fly > Custom Links > Personal Custom)
-- **China Network Friendly**: All rule fetching uses ghfast.top reverse proxy by default, accessible for China users
-- **Smart Deduplication**: Automatically removes duplicate rules, keeping higher priority rules
-- **Invalid Rule Cleanup**: Automatically cleans commented invalid domains
-- **Custom Support**: Supports local `custom.txt` and `custom_rule.txt` for custom rules
-- **Format Conversion**: Automatically formats output to PaoPaoDNS rule syntax
-- **Auto Update**: GitHub Actions runs daily to keep rules up-to-date
+- 🔄 **Multi-source Aggregation** - Automatically fetch domain rules from multiple upstream sources
+- 🇨🇳 **China Network Friendly** - Uses ghfast.top reverse proxy for China users
+- 🔀 **Smart Deduplication** - Automatically removes duplicate rules by priority
+- 🧹 **Invalid Cleanup** - Automatically cleans commented invalid domains
+- ⚙️ **Custom Support** - Supports local custom rule extension
+- 🔄 **Auto Update** - GitHub Actions runs daily to keep rules up-to-date
 
-## Quick Start
+---
+
+## 🚀 Quick Start
 
 ### Local Run
 
 ```bash
 # Clone repository
 git clone https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator.git
-cd CN-Domain-Generator
+cd CN-Domain-Rule-Auto-Generator
 
 # Run script
-python-Rule-Auto3 generate_cn_rules.py
+python3 generate_cn_rules.py
 
 # View help
 python3 generate_cn_rules.py -h
@@ -47,9 +50,11 @@ python3 generate_cn_rules.py -v -f
 | `-h`, `--help` | Show help information |
 | `-v`, `--verbose` | Show detailed output |
 | `--log` | Generate log file |
-| `-f`, `--use-fallback` | Use fallback links directly (for China network) |
+| `-f`, `--use-fallback` | Use fallback CDN links (for China network) |
 
-## Configuration Files
+---
+
+## 📁 File Description
 
 ### Input/Config Files
 
@@ -62,51 +67,69 @@ python3 generate_cn_rules.py -v -f
 
 | File | Description |
 |------|-------------|
-| `organized_cn_mark.txt` | Merged and deduplicated original rule file |
-| `custom_cn_mark.txt` | PaoPaoDNS专用最终规则文件 |
+| `organized_cn_mark.txt` | Merged and deduplicated original rules |
+| `custom_cn_mark.txt` | Final formatted rules for PaoPaoDNS |
 
-## Direct Subscription
+---
+
+## 📊 Data Sources
+
+Domain rules are aggregated from the following open source projects:
+
+| Source | Repository |
+|--------|------------|
+| Custom_OpenClash_Rules | [Aethersailor/Custom_OpenClash_Rules](https://github.com/Aethersailor/Custom_OpenClash_Rules) |
+| v2ray-rules-dat | [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) |
+| domain-list-community | [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) |
+| dnsmasq-china-list | [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list) |
+
+---
+
+## 🔗 Direct Subscription
 
 ### GitHub Raw Links
 
 - [custom_cn_mark.txt](https://raw.githubusercontent.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/main/custom_cn_mark.txt)
 - [organized_cn_mark.txt](https://raw.githubusercontent.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/main/organized_cn_mark.txt)
 
-### China CDN Links
+### China CDN Link
 
-- custom_cn_mark.txt: `https://ghfast.top/https://raw.githubusercontent.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/main/custom_cn_mark.txt`
+```
+https://ghfast.top/https://raw.githubusercontent.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/main/custom_cn_mark.txt
+```
 
-## Data Sources
+---
 
-This project's rule data comes from the following open source projects (sorted by priority):
-
-1. [Aethersailor/Custom_OpenClash_Rules](https://github.com/Aethersailor/Custom_OpenClash_Rules) - Highest Priority
-2. [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
-3. [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community)
-4. [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list)
-
-## Applicable Projects
-
-- [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS) - Dedicated for this rule set
-
-## Acknowledgments
+## 👏 Acknowledgments
 
 Thanks to the contributors of the following open source projects:
 
-- PaoPaoDNS Project
-- Aethersailor
-- Loyalsoldier
-- v2fly
-- felixonmars
+- **[PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS)** - Dedicated project for this rule set
+- **[Aethersailor](https://github.com/Aethersailor)** - Custom_OpenClash_Rules
+- **[Loyalsoldier](https://github.com/Loyalsoldier)** - v2ray-rules-dat
+- **[v2fly](https://github.com/v2fly)** - domain-list-community
+- **[felixonmars](https://github.com/felixonmars)** - dnsmasq-china-list
 
-## Donation Support
+---
+
+## 💖 Donation Support
 
 If this project is helpful to you, your donations are greatly appreciated!
 
-<!-- Local donation QR code paths (displayed locally, not uploaded to repo) -->
-<!-- Alipay: C:\Users\hiliang\Pictures\个人收款码\alipay_qrcode.jpg -->
-<!-- WeChat Pay: C:\Users\hiliang\Pictures\个人收款码\wechat_qrcode.png -->
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Hi-Jiajun/cdn/main/donate/alipay.png" alt="Alipay" width="200"/>
+  <img src="https://raw.githubusercontent.com/Hi-Jiajun/cdn/main/donate/wechat.png" alt="WeChat Pay" width="200"/>
+</p>
 
-## License
+---
 
-MIT License
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+## 🔧 Related Projects
+
+- Applicable Project: [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS)
+- Auto Update: Daily at 03:00 UTC

@@ -1,24 +1,27 @@
-# CN-Domain-Rule-Auto-Generator
+# 🌏 CN-Domain-Rule-Auto-Generator
 
-中国大陆直连域名标记规则自动生成工具
+[![GitHub Stars](https://img.shields.io/github/stars/Hi-Jiajun/CN-Domain-Rule-Auto-Generator?style=flat)](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/stargazers)
+[![GitHub License](https://img.shields.io/github/license/Hi-Jiajun/CN-Domain-Rule-Auto-Generator)](LICENSE)
+[![Auto Update](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/actions/workflows/auto-update.yml/badge.svg)](https://github.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/actions)
 
-[English README](./README_EN.md)
+中国大陆直连域名标记规则自动生成工具，专为 [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS) 项目设计。
 
-## 项目简介
+---
 
-本项目专为 [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS) 项目生成 `custom_cn_mark.txt` 规则文件，自动聚合多上游优质大陆直连域名，按优先级去重、清理失效规则、格式化输出，每日自动更新，无需手动维护。
+## 📋 项目简介
 
-## 功能特性
+本项目专为 [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS) 生成 `custom_cn_mark.txt` 规则文件，实现以下功能：
 
-- **多源聚合**：按优先级抓取多源域名规则（Aethersailor > Loyalsoldier > v2fly > 自定义链接规则 > 个人自定义域名）
-- **国内网络友好**：所有规则拉取默认使用 ghfast.top 反向代理，国内用户可正常访问
-- **智能去重**：自动去除重复规则，严格按优先级保留（高优先级覆盖低优先级）
-- **失效清理**：自动清理注释失效域名
-- **自定义支持**：支持本地 `custom.txt` 和 `custom_rule.txt` 自定义规则
-- **格式转换**：自动格式化输出 PaoPaoDNS 专用规则语法
-- **自动更新**：GitHub Actions 每日自动运行更新，保持规则实时最新
+- 🔄 **多源聚合** - 自动抓取多个上游优质大陆直连域名规则
+- 🇨🇳 **国内网络友好** - 使用 ghfast.top 反向代理，国内用户可正常访问
+- 🔀 **智能去重** - 自动去除重复规则，严格按优先级保留
+- 🧹 **失效清理** - 自动清理注释失效域名
+- ⚙️ **自定义支持** - 支持本地自定义规则扩展
+- 🔄 **自动更新** - GitHub Actions 每日自动运行，保持规则实时最新
 
-## 快速开始
+---
+
+## 🚀 快速开始
 
 ### 本地运行
 
@@ -49,7 +52,9 @@ python3 generate_cn_rules.py -v -f
 | `--log` | 生成日志文件 |
 | `-f`, `--use-fallback` | 直接使用备用链接下载（大陆环境） |
 
-## 配置文件说明
+---
+
+## 📁 文件说明
 
 ### 输入/配置文件
 
@@ -65,7 +70,22 @@ python3 generate_cn_rules.py -v -f
 | `organized_cn_mark.txt` | 合并去重后的原始规则文件 |
 | `custom_cn_mark.txt` | PaoPaoDNS 项目专用最终规则文件 |
 
-## 直接订阅使用
+---
+
+## 📊 规则数据来源
+
+本项目规则数据来源于以下开源项目：
+
+| 来源 | 仓库 |
+|------|------|
+| Custom_OpenClash_Rules | [Aethersailor/Custom_OpenClash_Rules](https://github.com/Aethersailor/Custom_OpenClash_Rules) |
+| v2ray-rules-dat | [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) |
+| domain-list-community | [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) |
+| dnsmasq-china-list | [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-chna-list) |
+
+---
+
+## 🔗 直接订阅使用
 
 ### GitHub Raw 链接
 
@@ -74,39 +94,44 @@ python3 generate_cn_rules.py -v -f
 
 ### 国内加速链接
 
-- custom_cn_mark.txt: `https://ghfast.top/https://raw.githubusercontent.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/main/custom_cn_mark.txt`
+```
+https://ghfast.top/https://raw.githubusercontent.com/Hi-Jiajun/CN-Domain-Rule-Auto-Generator/main/custom_cn_mark.txt
+```
 
-## 规则数据来源
+---
 
-本项目规则数据来源于以下开源项目（按优先级排序）：
-
-1. [Aethersailor/Custom_OpenClash_Rules](https://github.com/Aethersailor/Custom_OpenClash_Rules) - 最高优先级
-2. [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
-3. [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community)
-4. [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list)
-
-## 适用项目
-
-- [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS) - 本规则专用适配项目
-
-## 致谢
+## 👏 致谢
 
 感谢以下开源项目的贡献者：
 
-- PaoPaoDNS 项目
-- Aethersailor
-- Loyalsoldier
-- v2fly
-- felixonmars
+- **[PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS)** - 本规则专用适配项目
+- **[Aethersailor](https://github.com/Aethersailor)** - Custom_OpenClash_Rules
+- **[Loyalsoldier](https://github.com/Loyalsoldier)** - v2ray-rules-dat
+- **[v2fly](https://github.com/v2fly)** - domain-list-community
+- **[felixonmars](https://github.com/felixonmars)** - dnsmasq-china-list
 
-## 捐赠支持
+---
 
-如本项目对你有帮助，欢迎赞赏支持，感谢你的鼓励～
+## 💖 赞赏支持
 
-<!-- 捐赠码图片路径（本地展示，不上传仓库） -->
-<!-- 支付宝：C:\Users\hiliang\Pictures\个人收款码\alipay_qrcode.jpg -->
-<!-- 微信支付：C:\Users\hiliang\Pictures\个人收款码\wechat_qrcode.png -->
+如果本项目对你有帮助，欢迎赞赏支持，感谢你的鼓励！
 
-## License
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Hi-Jiajun/cdn/main/donate/alipay.png" alt="支付宝" width="200"/>
+  <img src="https://raw.githubusercontent.com/Hi-Jiajun/cdn/main/donate/wechat.png" alt="微信" width="200"/>
+</p>
 
-MIT License
+> 注：收款码图片使用 GitHub CDN 图床外链展示，请勿将本地收款码图片上传至仓库。
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+## 🔧 相关信息
+
+- 适用项目：[PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS)
+- 自动化更新：每日凌晨 3:00 UTC 自动运行
