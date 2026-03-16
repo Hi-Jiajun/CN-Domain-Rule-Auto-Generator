@@ -1,0 +1,17 @@
+# 第三方规则链接列表
+# 
+# 每行填写一个规则链接，脚本会自动抓取此处链接中的域名规则
+# 统一标记为「其他域名」
+#
+# 优先级顺序：Aethersailor > Loyalsoldier > v2fly > 本文件规则 > 个人自定义
+#
+# 支持的格式：
+#   DOMAIN-SUFFIX,example.com
+#   DOMAIN,example.com
+#   full:example.com
+#   domain:example.com
+#   example.com (裸域名)
+#
+# 示例：
+# https://raw.githubusercontent.com/username/repo/main/rules.txt
+# https://example.com/custom_rules.txt

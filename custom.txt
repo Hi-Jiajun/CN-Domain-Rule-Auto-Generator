@@ -1,0 +1,15 @@
+# 个人自定义直连域名列表
+# 
+# 格式：支持以下格式（每行一条规则）
+#   domain:example.com      - 域名后缀匹配（包含子域名）
+#   full:example.com       - 完整精确匹配
+#   regexp:.*\.example\.com$ - 正则匹配
+#   keyword:example       - 关键字匹配
+#
+# 重复域名会自动跳过并标注注释「下载规则已存在该域名」
+# 自定义域名会标记为「个人自定义标记CN域名」
+#
+# 示例：
+# domain:example.com
+# full:example.org
+# keyword:google
