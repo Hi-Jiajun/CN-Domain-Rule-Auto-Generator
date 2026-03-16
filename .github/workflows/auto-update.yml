@@ -14,6 +14,8 @@ on:
 jobs:
   generate-rules:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository
@@ -56,12 +58,41 @@ jobs:
           git push
         continue-on-error: true
         
-      - name: Upload artifact
+      - name: Create Release
         if: steps.changes.outputs.has_changes == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: generated-rules
-          path: |
-            custom_cn_mark.txt
-            organized_cn_mark.txt
-          retention-days: 7
+          tag_name: latest
+          release_name: Latest CN Domain Rules
+          body: |
+            Auto-generated CN domain rules
+            Updated at: ${{ github.run_id }}
+          draft: false
+          prerelease: false
+        continue-on-error: true
+        
+      - name: Upload Release Asset
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: custom_cn_mark.txt
+          asset_name: custom_cn_mark.txt
+          asset_content_type: text/plain
+        continue-on-error: true
+        
+      - name: Upload Release Asset 2
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: organized_cn_mark.txt
+          asset_name: organized_cn_mark.txt
+          asset_content_type: text/plain
+        continue-on-error: true
