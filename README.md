@@ -13,7 +13,7 @@
 本项目专为 [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS) 生成 `custom_cn_mark.txt` 规则文件，实现以下功能：
 
 - 🔄 **多源聚合** - 自动抓取多个上游优质大陆直连域名规则
-- 🇨🇳 **国内网络友好** - 使用 ghfast.top 反向代理，国内用户可正常访问
+- 🇨🇳 **国内网络友好** - 使用 JsDelivr CDN / ghfast.top 反向代理，国内用户可正常访问
 - 🔀 **智能去重** - 自动去除重复规则，严格按优先级保留
 - 🧹 **失效清理** - 自动清理注释失效域名
 - ⚙️ **自定义支持** - 支持本地自定义规则扩展
@@ -81,7 +81,7 @@ python3 generate_cn_rules.py -v -f
 | Custom_OpenClash_Rules | [Aethersailor/Custom_OpenClash_Rules](https://github.com/Aethersailor/Custom_OpenClash_Rules) |
 | v2ray-rules-dat | [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) |
 | domain-list-community | [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) |
-| dnsmasq-china-list | [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-chna-list) |
+| dnsmasq-china-list | [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list) |
 
 ---
 
@@ -126,22 +126,12 @@ python3 generate_cn_rules.py -v -f
 
 如果本项目对你有帮助，欢迎赞赏支持，感谢你的鼓励！
 
-<p align="center">
-  <img src="https://Hi-Jiajun.github.io/picx-images-hosting/alipay_qrcode.7p45v27tjq.webp" alt="支付宝" width="200"/>
-  <img src="https://Hi-Jiajun.github.io/picx-images-hosting/wechat_qrcode.icohq9bcf.webp" alt="微信" width="200"/>
-</p>
-
-> 注：收款码图片使用 GitHub CDN 图床外链展示，请勿将本地收款码图片上传至仓库。
+| 支付宝 | 微信支付 |
+|:------:|:--------:|
+| <img src="https://Hi-Jiajun.github.io/picx-images-hosting/alipay_qrcode.7p45v27tjq.webp" width="150" /> | <img src="https://Hi-Jiajun.github.io/picx-images-hosting/wechat_qrcode.icohq9bcf.webp" width="150" /> |
 
 ---
 
 ## 📄 License
 
 MIT License - see [LICENSE](LICENSE) for details.
-
----
-
-## 🔧 相关信息
-
-- 适用项目：[PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS)
-- 自动化更新：每日凌晨 3:00 UTC 自动运行

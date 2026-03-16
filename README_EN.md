@@ -13,7 +13,7 @@ Automated Generator for China Mainland Direct Connect Domain Marking Rules - Spe
 This project generates `custom_cn_mark.txt` rule file for [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS) with the following features:
 
 - 🔄 **Multi-source Aggregation** - Automatically fetch domain rules from multiple upstream sources
-- 🇨🇳 **China Network Friendly** - Uses ghfast.top reverse proxy for China users
+- 🇨🇳 **China Network Friendly** - Uses JsDelivr CDN / ghfast.top reverse proxy for China users
 - 🔀 **Smart Deduplication** - Automatically removes duplicate rules by priority
 - 🧹 **Invalid Cleanup** - Automatically cleans commented invalid domains
 - ⚙️ **Custom Support** - Supports local custom rule extension
@@ -126,20 +126,12 @@ Thanks to the contributors of the following open source projects:
 
 If this project is helpful to you, your donations are greatly appreciated!
 
-<p align="center">
-  <img src="https://Hi-Jiajun.github.io/picx-images-hosting/alipay_qrcode.7p45v27tjq.webp" alt="Alipay" width="200"/>
-  <img src="https://Hi-Jiajun.github.io/picx-images-hosting/wechat_qrcode.icohq9bcf.webp" alt="WeChat Pay" width="200"/>
-</p>
+| Alipay | WeChat Pay |
+|:------:|:----------:|
+| <img src="https://Hi-Jiajun.github.io/picx-images-hosting/alipay_qrcode.7p45v27tjq.webp" width="150" /> | <img src="https://Hi-Jiajun.github.io/picx-images-hosting/wechat_qrcode.icohq9bcf.webp" width="150" /> |
 
 ---
 
 ## 📄 License
 
 MIT License - see [LICENSE](LICENSE) for details.
-
----
-
-## 🔧 Related Projects
-
-- Applicable Project: [PaoPaoDNS](https://github.com/kkkgo/PaoPaoDNS)
-- Auto Update: Daily at 03:00 UTC
