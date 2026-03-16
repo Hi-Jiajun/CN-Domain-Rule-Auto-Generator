@@ -61,28 +61,26 @@ jobs:
           git push || echo "Push failed, continuing..."
         continue-on-error: true
         
-      - name: Create tag
+      - name: Create tag and Release
         if: env.has_changes == 'true'
         run: |
-          git tag -f daily-${{ github.run_id }} || echo "Tag creation failed"
-          git push -f origin daily-${{ github.run_id }} || echo "Tag push failed"
-        continue-on-error: true
-        
-      - name: Create Release
-        if: env.has_changes == 'true'
-        uses: softprops/action-gh-release@v2
-        with:
-          body: |
-            Auto-generated CN domain rules
-            Updated at: ${{ github.run_id }}
-            Build: ${{ github.run_number }}
-          draft: false
-          prerelease: false
-          files: |
-            custom_cn_mark.txt
-            organized_cn_mark.txt
-            generate_cn_rules.py
-            custom.txt
-            custom_rule.txt
+          # 创建 tag
+          TAG_NAME="daily-$(date '+%Y%m%d')"
+          git tag -a $TAG_NAME -m "Daily CN domain rules update"
+          git push origin $TAG_NAME || echo "Tag push failed"
+          
+          # 等待 tag 推送完成
+          sleep 3
+          
+          # 创建 Release
+          gh release create $TAG_NAME \
+            --title "CN Domain Rules - $TAG_NAME" \
+            --notes "Auto-generated CN domain rules updated at $(date)" \
+            custom_cn_mark.txt \
+            organized_cn_mark.txt \
+            generate_cn_rules.py \
+            custom.txt \
+            custom_rule.txt || echo "Release creation failed"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
