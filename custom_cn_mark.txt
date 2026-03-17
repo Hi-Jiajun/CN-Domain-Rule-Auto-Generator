@@ -1,6 +1,6 @@
 # ============================================
 # PaoPaoDNS CN 标记域名列表
-# 生成时间: 2026-03-16 12:50:06
+# 生成时间: 2026-03-17 04:55:01
 # ============================================
 # 
 # 格式说明:
@@ -153,6 +153,12 @@ domain:scratch5.com
 domain:meiyitou.top
 domain:misea.top
 domain:axuex.top
+domain:zhangleglobal.com
+domain:hongxingdl.love
+domain:hongxingdl.com
+domain:chushi.cool
+domain:qianfan.app
+domain:xboxfan.com
 domain:85sc.com
 domain:babawar.com
 domain:iot889.com

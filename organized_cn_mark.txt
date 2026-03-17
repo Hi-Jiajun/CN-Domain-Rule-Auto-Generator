@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-03-16 12:50:06
+# 生成时间: 2026-03-17 04:55:01
 # ============================================
 
 
@@ -148,6 +148,12 @@ DOMAIN-SUFFIX,scratch5.com
 DOMAIN-SUFFIX,meiyitou.top
 DOMAIN-SUFFIX,misea.top
 DOMAIN-SUFFIX,axuex.top
+DOMAIN-SUFFIX,zhangleglobal.com
+DOMAIN-SUFFIX,hongxingdl.love
+DOMAIN-SUFFIX,hongxingdl.com
+DOMAIN-SUFFIX,chushi.cool
+DOMAIN-SUFFIX,qianfan.app
+DOMAIN-SUFFIX,xboxfan.com
 DOMAIN-SUFFIX,85sc.com
 DOMAIN-SUFFIX,babawar.com
 DOMAIN-SUFFIX,iot889.com
