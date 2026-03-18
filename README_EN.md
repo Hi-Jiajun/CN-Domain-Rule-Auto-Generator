@@ -19,7 +19,7 @@ This project generates `custom_cn_mark.txt` rule file for [PaoPaoDNS](https://gi
 - 🔀 **Smart Deduplication** - Automatically removes duplicate rules by priority
 - 🧹 **Invalid Cleanup** - Automatically cleans commented invalid domains
 - ⚙️ **Custom Support** - Supports local custom rule extension
-- 🔄 **Auto Update** - GitHub Actions runs daily to keep rules up-to-date
+- 🔄 **Auto Update** - GitHub Actions runs daily and supports manual dispatch to keep rules up-to-date
 
 ---
 

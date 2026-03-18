@@ -6,10 +6,6 @@ on:
     - cron: '0 3 * * *'
   # 支持手动触发
   workflow_dispatch:
-  # 当有代码推送时触发
-  push:
-    branches:
-      - main
 
 jobs:
   generate-rules:
