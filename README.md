@@ -43,6 +43,12 @@ python3 generate_cn_rules.py -v
 
 # 大陆环境使用备用链接
 python3 generate_cn_rules.py -v -f
+
+# 生成日志并刷新本地缓存
+python3 generate_cn_rules.py --log
+
+# 仅使用本地缓存，不发起网络下载
+python3 generate_cn_rules.py --no-download
 ```
 
 ### 命令行参数
@@ -51,7 +57,8 @@ python3 generate_cn_rules.py -v -f
 |------|------|
 | `-h`, `--help` | 显示帮助信息 |
 | `-v`, `--verbose` | 显示详细输出 |
-| `--log` | 生成日志文件 |
+| `--log` | 生成日志文件，并在默认模式下刷新 `.cache/` |
+| `--no-download` | 跳过网络下载，仅使用 `.cache/` 中已缓存的源文件 |
 | `-f`, `--use-fallback` | 直接使用备用链接下载（大陆环境） |
 
 ---

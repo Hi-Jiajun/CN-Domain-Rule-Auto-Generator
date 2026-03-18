@@ -66,23 +66,30 @@ jobs:
       - name: Create tag and Release
         if: env.has_changes == 'true'
         run: |
-          # 创建 tag
           TAG_NAME="daily-$(date '+%Y%m%d')"
-          git tag -a $TAG_NAME -m "Daily CN domain rules update"
-          git push origin $TAG_NAME || echo "Tag push failed"
           
-          # 等待 tag 推送完成
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Tag $TAG_NAME already exists locally, skipping release creation"
+            exit 0
+          fi
+          
+          if git ls-remote --tags origin "$TAG_NAME" | grep -q "$TAG_NAME"; then
+            echo "Tag $TAG_NAME already exists on origin, skipping release creation"
+            exit 0
+          fi
+          
+          git tag -a "$TAG_NAME" -m "Daily CN domain rules update"
+          git push origin "$TAG_NAME"
+          
           sleep 3
           
-          # 创建 Release
-          gh release create $TAG_NAME \
+          gh release create "$TAG_NAME" \
             --title "CN Domain Rules - $TAG_NAME" \
             --notes "Auto-generated CN domain rules updated at $(date)" \
             custom_cn_mark.txt \
             organized_cn_mark.txt \
             generate_cn_rules.py \
             custom.txt \
-            custom_rule.txt || echo "Release creation failed"
+            custom_rule.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true

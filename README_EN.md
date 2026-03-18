@@ -43,6 +43,12 @@ python3 generate_cn_rules.py -v
 
 # Use fallback links (for China network)
 python3 generate_cn_rules.py -v -f
+
+# Generate log and refresh local cache
+python3 generate_cn_rules.py --log
+
+# Use local cache only, without any network download
+python3 generate_cn_rules.py --no-download
 ```
 
 ### Command Line Options
@@ -51,7 +57,8 @@ python3 generate_cn_rules.py -v -f
 |--------|-------------|
 | `-h`, `--help` | Show help information |
 | `-v`, `--verbose` | Show detailed output |
-| `--log` | Generate log file |
+| `--log` | Generate log file and refresh `.cache/` in normal mode |
+| `--no-download` | Skip network download and use cached source files from `.cache/` only |
 | `-f`, `--use-fallback` | Use fallback CDN links (for China network) |
 
 ---
@@ -131,6 +138,13 @@ If this project is helpful to you, your donations are greatly appreciated!
 | Alipay | WeChat Pay |
 |:------:|:----------:|
 | <img src="https://Hi-Jiajun.github.io/picx-images-hosting/alipay_qrcode.7p45v27tjq.webp" width="150" /> | <img src="https://Hi-Jiajun.github.io/picx-images-hosting/wechat_qrcode.icohq9bcf.webp" width="150" /> |
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+de.icohq9bcf.webp" width="150" /> |
 
 ---
 
