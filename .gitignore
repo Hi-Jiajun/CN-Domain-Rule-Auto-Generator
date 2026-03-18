@@ -42,3 +42,6 @@ Thumbs.db
 tmp/
 temp/
 *.tmp
+
+# Local cache
+.cache/

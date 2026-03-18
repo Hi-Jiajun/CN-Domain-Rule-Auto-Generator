@@ -23,6 +23,7 @@ OUTPUT_ORGANIZED = os.path.join(BASE_DIR, "organized_cn_mark.txt")
 OUTPUT_CUSTOM = os.path.join(BASE_DIR, "custom_cn_mark.txt")
 OUTPUT_CUSTOM_SRC = os.path.join(BASE_DIR, "custom.txt")
 OUTPUT_LOG = os.path.join(BASE_DIR, "generate.log")
+CACHE_DIR = os.path.join(BASE_DIR, ".cache")
 
 # 数据源配置
 SOURCES = {
@@ -335,6 +336,27 @@ def load_custom_rules(filepath):
     
     return rules
 
+def get_cache_file_path(source_name, filename):
+    """获取缓存文件路径"""
+    safe_source = re.sub(r'[^a-zA-Z0-9._-]+', '_', source_name)
+    safe_filename = re.sub(r'[^a-zA-Z0-9._-]+', '_', filename)
+    return os.path.join(CACHE_DIR, f"{safe_source}__{safe_filename}")
+
+def save_cache_file(source_name, filename, content):
+    """保存下载内容到缓存"""
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    cache_path = get_cache_file_path(source_name, filename)
+    with open(cache_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+def load_cache_file(source_name, filename):
+    """从缓存加载内容"""
+    cache_path = get_cache_file_path(source_name, filename)
+    if not os.path.exists(cache_path):
+        return None
+    with open(cache_path, 'r', encoding='utf-8') as f:
+        return f.read()
+
 # ==================== 主流程 ====================
 
 def generate_rules(args):
@@ -355,33 +377,44 @@ def generate_rules(args):
         
         for filename, urls in source_config["files"]:
             if args.verbose:
-                log(f"  下载: {filename}", log_file)
+                action = "读取缓存" if args.no_download else "下载"
+                log(f"  {action}: {filename}", log_file)
             
-            # 尝试下载（支持多个URL备用）
             content = None
             
-            if isinstance(urls, str):
-                urls = [urls]  # 兼容旧格式
-            
-            for url in urls:
-                if args.verbose:
-                    log(f"    尝试: {url[:60]}...", log_file)
-                content = download_file_with_fallback(
-                    url, 
-                    timeout=180 if source_name == "v2fly" else 60, 
-                    verbose=args.verbose,
-                    use_fallback_direct=args.use_fallback
-                )
-                if content:
-                    break
-            
-            if not content:
-                error_msg = f"错误: {filename} 下载失败，脚本退出"
-                log(error_msg, log_file)
-                if log_file:
-                    log_file.close()
-                print(error_msg)
-                sys.exit(1)
+            if args.no_download:
+                content = load_cache_file(source_name, filename)
+                if not content:
+                    error_msg = f"错误: {filename} 缓存不存在，无法在 --no-download 模式下继续"
+                    log(error_msg, log_file)
+                    if log_file:
+                        log_file.close()
+                    print(error_msg)
+                    sys.exit(1)
+            else:
+                if isinstance(urls, str):
+                    urls = [urls]  # 兼容旧格式
+                
+                for url in urls:
+                    if args.verbose:
+                        log(f"    尝试: {url[:60]}...", log_file)
+                    content = download_file_with_fallback(
+                        url, 
+                        timeout=180 if source_name == "v2fly" else 60, 
+                        verbose=args.verbose,
+                        use_fallback_direct=args.use_fallback
+                    )
+                    if content:
+                        save_cache_file(source_name, filename, content)
+                        break
+                
+                if not content:
+                    error_msg = f"错误: {filename} 下载失败，脚本退出"
+                    log(error_msg, log_file)
+                    if log_file:
+                        log_file.close()
+                    print(error_msg)
+                    sys.exit(1)
             
             # 解析内容
             if source_name == "v2fly":
@@ -499,14 +532,15 @@ def show_help():
   --help, -h       显示帮助信息
   --verbose, -v    显示详细输出
   --log            生成日志文件
-  --no-download    跳过下载，仅处理现有文件
+  --no-download    跳过下载，仅处理缓存文件
   -f, --use-fallback  直接使用备用链接下载（大陆环境）
 
 【输出文件】
   organized_cn_mark.txt  - 合并去重后的原始规则文件
   custom_cn_mark.txt     - 格式化后的最终规则文件 (PaoPaoDNS 使用)
-  custom.txt            - 个人自定义规则文件 (可选)
-  generate.log          - 日志文件 (可选)
+  custom.txt             - 个人自定义规则文件 (可选)
+  generate.log           - 日志文件 (可选)
+  .cache/                - 已下载源文件缓存目录
 
 【自定义规则格式】
   支持以下格式:
@@ -517,16 +551,18 @@ def show_help():
   - example.com (裸域名)
 
 【注意事项】
-  1. 需要网络连接以下载规则文件
+  1. 默认模式需要网络连接以下载规则文件，并会刷新 .cache
   2. 如果规则解析为0，脚本会报错退出（可能是网络问题）
   3. 使用 -f 参数可直接使用备用链接（适用于大陆网络环境）
-  2. 运行时会覆盖已有的输出文件
-  3. v2fly 源文件较大，下载可能需要较长时间
+  4. 使用 --no-download 时，若 .cache 缺少任一源文件则会报错退出
+  5. 运行时会覆盖已有的输出文件
+  6. v2fly 源文件较大，下载可能需要较长时间
 
 【示例】
-  python3 generate_cn_rules.py           # 执行生成
-  python3 generate_cn_rules.py -v        # 详细输出
-  python3 generate_cn_rules.py --log      # 生成日志
+  python3 generate_cn_rules.py                # 执行生成（在线下载并刷新缓存）
+  python3 generate_cn_rules.py -v             # 详细输出
+  python3 generate_cn_rules.py --log          # 生成日志
+  python3 generate_cn_rules.py --no-download  # 仅使用 .cache 中的已下载源文件
 
 """
     print(help_text)
@@ -540,9 +576,9 @@ if __name__ == "__main__":
     parser.add_argument("--log", action="store_true")
     parser.add_argument("--no-download", action="store_true")
     parser.add_argument("-f", "--use-fallback", action="store_true", help="直接使用备用链接下载（大陆环境）")
-    
+
     args = parser.parse_args()
-    
+
     if args.help:
         show_help()
     else:

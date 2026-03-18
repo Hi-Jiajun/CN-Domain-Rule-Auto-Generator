@@ -1,6 +1,6 @@
 # ============================================
 # PaoPaoDNS CN 标记域名列表
-# 生成时间: 2026-03-17 10:31:34
+# 生成时间: 2026-03-18 10:45:14
 # ============================================
 # 
 # 格式说明:
@@ -11,7 +11,6 @@
 # ============================================
 
 domain:immortalwrt.org
-domain:kyarucloud.moe
 domain:tailscale.com
 domain:argotunnel.com
 domain:gh-proxy.com
@@ -57,6 +56,8 @@ domain:kit327.com
 domain:members.3322.org
 domain:msftconnecttest.com
 domain:msftncsi.com
+domain:kaspersky.com
+domain:kaspersky-labs.com
 domain:akamaihd.net
 domain:akamaized.net
 domain:powershellgallery.com
@@ -153,6 +154,21 @@ domain:scratch5.com
 domain:meiyitou.top
 domain:misea.top
 domain:axuex.top
+domain:hutaoyun.top
+domain:0734cn.top
+domain:xfltd.org
+domain:osbdf.com
+domain:00333118.com
+domain:jzagile.com
+domain:bochaai.com
+domain:91shenfan.com
+domain:onetools.top
+domain:gamepp.com
+domain:asgardion.space
+domain:alonginwind.to
+domain:alonginwind.eu.org
+domain:hezuvip.com
+domain:iosgujian.com
 domain:zhangleglobal.com
 domain:hongxingdl.love
 domain:hongxingdl.com
@@ -166,9 +182,6 @@ domain:packertec.com
 domain:419g.com
 domain:ijingyi.com
 domain:excelbbx.net
-domain:hutaoyun.top
-domain:0734cn.top
-domain:xfltd.org
 domain:2mcnxs.cc
 domain:zhouyiy.com
 domain:mblyun.com
@@ -176,10 +189,8 @@ domain:hybiome.com
 domain:zysou.com
 domain:tmallyc.com
 domain:betahub.tech
-domain:osbdf.com
 domain:wwwwqq.com
 domain:4xiaoshuo.org
-domain:00333118.com
 domain:z-tek.com
 domain:77shuku.org
 domain:kaihong.com
@@ -188,10 +199,6 @@ domain:youzhiyouxing.com
 domain:et0731.com
 domain:gvgoo.com
 domain:jjzyy.org
-domain:jzagile.com
-domain:bochaai.com
-domain:91shenfan.com
-domain:onetools.top
 domain:melecode.com
 domain:fdfinvoice.com
 domain:quanxinfu.com
@@ -206,9 +213,7 @@ domain:piedaochuan.top
 domain:xingaochengtai.com
 domain:qiaoqiaoyun.com
 domain:latexlive.com
-domain:gamepp.com
 domain:giomeru.com
-domain:asgardion.space
 domain:hkchat.app
 domain:aidream.website
 domain:guaitao.cc
@@ -217,11 +222,8 @@ domain:0044696.com
 domain:pkghund.com
 domain:htkgsx.com
 domain:hangnakeji.com
-domain:alonginwind.top
-domain:alonginwind.eu.org
 domain:shuangqingtech.com
 domain:nanhuabx.com
-domain:hezuvip.com
 domain:ponyemu.com
 domain:xiqueer.com
 domain:jieyoutsg.com
@@ -230,7 +232,6 @@ domain:dayilive.com
 domain:natchecker.com
 domain:mchuiji.com
 domain:mcxyzt.cc
-domain:iosgujian.com
 domain:aisnogames.com
 domain:harbourmooc.com
 domain:zqin758.xyz

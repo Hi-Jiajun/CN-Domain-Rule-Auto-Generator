@@ -1,12 +1,11 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-03-17 10:31:34
+# 生成时间: 2026-03-18 10:45:14
 # ============================================
 
 
 # --- Aethersailor ---
 DOMAIN-SUFFIX,immortalwrt.org
-DOMAIN-SUFFIX,kyarucloud.moe
 DOMAIN-SUFFIX,tailscale.com
 DOMAIN-SUFFIX,argotunnel.com
 DOMAIN-SUFFIX,gh-proxy.com
@@ -52,6 +51,8 @@ DOMAIN-SUFFIX,kit327.com
 DOMAIN-SUFFIX,members.3322.org
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
+DOMAIN-SUFFIX,kaspersky.com
+DOMAIN-SUFFIX,kaspersky-labs.com
 DOMAIN-SUFFIX,akamaihd.net
 DOMAIN-SUFFIX,akamaized.net
 DOMAIN-SUFFIX,powershellgallery.com
@@ -148,6 +149,21 @@ DOMAIN-SUFFIX,scratch5.com
 DOMAIN-SUFFIX,meiyitou.top
 DOMAIN-SUFFIX,misea.top
 DOMAIN-SUFFIX,axuex.top
+DOMAIN-SUFFIX,hutaoyun.top
+DOMAIN-SUFFIX,0734cn.top
+DOMAIN-SUFFIX,xfltd.org
+DOMAIN-SUFFIX,osbdf.com
+DOMAIN-SUFFIX,00333118.com
+DOMAIN-SUFFIX,jzagile.com
+DOMAIN-SUFFIX,bochaai.com
+DOMAIN-SUFFIX,91shenfan.com
+DOMAIN-SUFFIX,onetools.top
+DOMAIN-SUFFIX,gamepp.com
+DOMAIN-SUFFIX,asgardion.space
+DOMAIN-SUFFIX,alonginwind.to
+DOMAIN-SUFFIX,alonginwind.eu.org
+DOMAIN-SUFFIX,hezuvip.com
+DOMAIN-SUFFIX,iosgujian.com
 DOMAIN-SUFFIX,zhangleglobal.com
 DOMAIN-SUFFIX,hongxingdl.love
 DOMAIN-SUFFIX,hongxingdl.com
@@ -161,9 +177,6 @@ DOMAIN-SUFFIX,packertec.com
 DOMAIN-SUFFIX,419g.com
 DOMAIN-SUFFIX,ijingyi.com
 DOMAIN-SUFFIX,excelbbx.net
-DOMAIN-SUFFIX,hutaoyun.top
-DOMAIN-SUFFIX,0734cn.top
-DOMAIN-SUFFIX,xfltd.org
 DOMAIN-SUFFIX,2mcnxs.cc
 DOMAIN-SUFFIX,zhouyiy.com
 DOMAIN-SUFFIX,mblyun.com
@@ -171,10 +184,8 @@ DOMAIN-SUFFIX,hybiome.com
 DOMAIN-SUFFIX,zysou.com
 DOMAIN-SUFFIX,tmallyc.com
 DOMAIN-SUFFIX,betahub.tech
-DOMAIN-SUFFIX,osbdf.com
 DOMAIN-SUFFIX,wwwwqq.com
 DOMAIN-SUFFIX,4xiaoshuo.org
-DOMAIN-SUFFIX,00333118.com
 DOMAIN-SUFFIX,z-tek.com
 DOMAIN-SUFFIX,77shuku.org
 DOMAIN-SUFFIX,kaihong.com
@@ -183,10 +194,6 @@ DOMAIN-SUFFIX,youzhiyouxing.com
 DOMAIN-SUFFIX,et0731.com
 DOMAIN-SUFFIX,gvgoo.com
 DOMAIN-SUFFIX,jjzyy.org
-DOMAIN-SUFFIX,jzagile.com
-DOMAIN-SUFFIX,bochaai.com
-DOMAIN-SUFFIX,91shenfan.com
-DOMAIN-SUFFIX,onetools.top
 DOMAIN-SUFFIX,melecode.com
 DOMAIN-SUFFIX,fdfinvoice.com
 DOMAIN-SUFFIX,quanxinfu.com
@@ -201,9 +208,7 @@ DOMAIN-SUFFIX,piedaochuan.top
 DOMAIN-SUFFIX,xingaochengtai.com
 DOMAIN-SUFFIX,qiaoqiaoyun.com
 DOMAIN-SUFFIX,latexlive.com
-DOMAIN-SUFFIX,gamepp.com
 DOMAIN-SUFFIX,giomeru.com
-DOMAIN-SUFFIX,asgardion.space
 DOMAIN-SUFFIX,hkchat.app
 DOMAIN-SUFFIX,aidream.website
 DOMAIN-SUFFIX,guaitao.cc
@@ -212,11 +217,8 @@ DOMAIN-SUFFIX,0044696.com
 DOMAIN-SUFFIX,pkghund.com
 DOMAIN-SUFFIX,htkgsx.com
 DOMAIN-SUFFIX,hangnakeji.com
-DOMAIN-SUFFIX,alonginwind.top
-DOMAIN-SUFFIX,alonginwind.eu.org
 DOMAIN-SUFFIX,shuangqingtech.com
 DOMAIN-SUFFIX,nanhuabx.com
-DOMAIN-SUFFIX,hezuvip.com
 DOMAIN-SUFFIX,ponyemu.com
 DOMAIN-SUFFIX,xiqueer.com
 DOMAIN-SUFFIX,jieyoutsg.com
@@ -225,7 +227,6 @@ DOMAIN-SUFFIX,dayilive.com
 DOMAIN-SUFFIX,natchecker.com
 DOMAIN-SUFFIX,mchuiji.com
 DOMAIN-SUFFIX,mcxyzt.cc
-DOMAIN-SUFFIX,iosgujian.com
 DOMAIN-SUFFIX,aisnogames.com
 DOMAIN-SUFFIX,harbourmooc.com
 DOMAIN-SUFFIX,zqin758.xyz
