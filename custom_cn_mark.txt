@@ -1,6 +1,6 @@
 # ============================================
 # PaoPaoDNS CN 标记域名列表
-# 生成时间: 2026-03-20 04:49:24
+# 生成时间: 2026-03-21 04:39:53
 # ============================================
 # 
 # 格式说明:
@@ -169,6 +169,7 @@ domain:alonginwind.to
 domain:alonginwind.eu.org
 domain:hezuvip.com
 domain:iosgujian.com
+domain:boxim.online
 domain:zhangleglobal.com
 domain:hongxingdl.love
 domain:hongxingdl.com
@@ -33159,13 +33160,11 @@ domain:esou.biz
 domain:esoua.com
 domain:esound.vip
 domain:esouou.com
-domain:esp8266.com
 domain:espeedpost.com
 domain:esplus.club
 domain:espnlol.com
 domain:esports-console.com
 domain:esportsreg.com
-domain:espressif.com
 domain:esr.com
 domain:essaystar.com
 domain:essca.com

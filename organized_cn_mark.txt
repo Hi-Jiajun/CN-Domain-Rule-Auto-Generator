@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-03-20 04:49:24
+# 生成时间: 2026-03-21 04:39:53
 # ============================================
 
 
@@ -164,6 +164,7 @@ DOMAIN-SUFFIX,alonginwind.to
 DOMAIN-SUFFIX,alonginwind.eu.org
 DOMAIN-SUFFIX,hezuvip.com
 DOMAIN-SUFFIX,iosgujian.com
+DOMAIN-SUFFIX,boxim.online
 DOMAIN-SUFFIX,zhangleglobal.com
 DOMAIN-SUFFIX,hongxingdl.love
 DOMAIN-SUFFIX,hongxingdl.com
@@ -33156,13 +33157,11 @@ esou.biz
 esoua.com
 esound.vip
 esouou.com
-esp8266.com
 espeedpost.com
 esplus.club
 espnlol.com
 esports-console.com
 esportsreg.com
-espressif.com
 esr.com
 essaystar.com
 essca.com
