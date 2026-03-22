@@ -69,6 +69,8 @@ python3 generate_cn_rules.py -g "apple-cn;google-cn"
 python3 generate_cn_rules.py -g "re:.*-cn$"
 ```
 
+By default, the script shows a live download progress bar and transfer rate. For GitHub Actions, redirected logs, or other non-interactive environments, prefer adding `-P` to disable dynamic progress output.
+
 ### Command Line Options
 
 | Option | Description |

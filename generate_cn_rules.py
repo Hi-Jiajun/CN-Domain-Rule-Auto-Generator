@@ -149,6 +149,7 @@ SOURCE_ALIASES = {
 }
 
 LOG_LOCK = threading.Lock()
+ACTIVE_PROGRESS = None
 
 
 def log(message, file_handle=None):
@@ -156,6 +157,9 @@ def log(message, file_handle=None):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     log_message = f"[{timestamp}] {message}"
     with LOG_LOCK:
+        global ACTIVE_PROGRESS
+        if ACTIVE_PROGRESS:
+            ACTIVE_PROGRESS.clear_line()
         print(log_message)
         if file_handle:
             file_handle.write(log_message + "\n")
@@ -193,6 +197,10 @@ class DownloadProgress:
         self.last_line_length = 0
         self.render_thread = None
 
+        global ACTIVE_PROGRESS
+        if self.enabled:
+            ACTIVE_PROGRESS = self
+
         if self.is_tty:
             self.render_thread = threading.Thread(target=self._render_loop, daemon=True)
             self.render_thread.start()
@@ -204,6 +212,7 @@ class DownloadProgress:
             self.stats[label] = {
                 "status": "running",
                 "start_time": time.monotonic(),
+                "last_time": time.monotonic(),
                 "downloaded": 0,
                 "total_bytes": None,
                 "from_cache": False,
@@ -249,6 +258,7 @@ class DownloadProgress:
             stats["total_bytes"] = size_bytes
             stats["from_cache"] = from_cache
             stats["end_time"] = now
+            stats["last_time"] = now
             self.completed += 1
             source = "缓存" if from_cache else "下载"
             elapsed = max(0.001, now - stats["start_time"])
@@ -268,6 +278,7 @@ class DownloadProgress:
                 "status": "failed",
                 "message": message,
                 "start_time": time.monotonic(),
+                "last_time": time.monotonic(),
                 "downloaded": 0,
                 "total_bytes": None,
                 "from_cache": False,
@@ -285,6 +296,15 @@ class DownloadProgress:
         if self.is_tty:
             with self.lock:
                 self._clear_line_locked()
+        global ACTIVE_PROGRESS
+        if ACTIVE_PROGRESS is self:
+            ACTIVE_PROGRESS = None
+
+    def clear_line(self):
+        if not self.enabled or not self.is_tty:
+            return
+        with self.lock:
+            self._clear_line_locked()
 
     def _render_loop(self):
         while not self.stop_event.is_set():
@@ -295,31 +315,48 @@ class DownloadProgress:
             self._clear_line_locked()
 
     def _render_locked(self):
-        active_parts = []
         now = time.monotonic()
-        for label, stats in self.stats.items():
-            if stats.get("status") != "running":
-                continue
+        active_stats = [
+            (label, stats)
+            for label, stats in self.stats.items()
+            if stats.get("status") == "running"
+        ]
+
+        spinner = self.spinner_frames[self.spinner_index % len(self.spinner_frames)]
+        self.spinner_index += 1
+
+        line = f"{spinner} {self.completed}/{self.total_tasks}"
+        if active_stats:
+            label, stats = max(
+                active_stats,
+                key=lambda item: (item[1].get("last_time", 0), item[1].get("downloaded", 0)),
+            )
             downloaded = stats.get("downloaded", 0)
             total_bytes = stats.get("total_bytes")
             elapsed = max(0.001, now - stats.get("start_time", now))
             speed = downloaded / elapsed
-            percent = "?"
+            short_label = label if len(label) <= 24 else f"{label[:21]}..."
+            bar = self._build_bar(downloaded, total_bytes)
             if total_bytes:
-                percent = f"{min(100, int(downloaded * 100 / total_bytes))}%"
-            short_label = label if len(label) <= 28 else f"{label[:25]}..."
-            active_parts.append(
-                f"{short_label} {percent} {format_size(downloaded)} {format_rate(speed)}"
-            )
-            if len(active_parts) >= 3:
-                break
-
-        spinner = self.spinner_frames[self.spinner_index % len(self.spinner_frames)]
-        self.spinner_index += 1
-        line = f"{spinner} {self.completed}/{self.total_tasks}"
-        if active_parts:
-            line += " | " + " | ".join(active_parts)
+                line += (
+                    f" {bar} {short_label} {format_size(downloaded)}/{format_size(total_bytes)} "
+                    f"{format_rate(speed)}"
+                )
+            else:
+                line += f" {bar} {short_label} {format_size(downloaded)} {format_rate(speed)}"
         self._write_line_locked(line)
+
+    def _build_bar(self, downloaded, total_bytes, width=24):
+        if not total_bytes:
+            return "[" + "." * width + "]"
+
+        ratio = max(0.0, min(1.0, downloaded / total_bytes))
+        filled = min(width, int(ratio * width))
+        if filled == width:
+            return "[" + "#" * width + "]"
+        if filled <= 0:
+            return "[" + ">" + "." * (width - 1) + "]"
+        return "[" + "#" * filled + ">" + "." * (width - filled - 1) + "]"
 
     def _write_line_locked(self, line):
         if not self.is_tty:

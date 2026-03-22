@@ -69,6 +69,8 @@ python3 generate_cn_rules.py -g "apple-cn;google-cn"
 python3 generate_cn_rules.py -g "re:.*-cn$"
 ```
 
+默认情况下，脚本会显示实时下载进度条和速率；如果是在 GitHub Actions、日志重定向或不需要动态进度展示的场景，建议追加 `-P` 关闭进度条。
+
 ### 命令行参数
 
 | 参数 | 说明 |
