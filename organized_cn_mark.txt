@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-03-23 05:44:30
+# 生成时间: 2026-03-23 06:09:57
 # ============================================
 
 
@@ -117260,6 +117260,8 @@ domain:nwcddns.cn:@cn
 domain:nwcdinfosec.cn:@cn
 domain:route53.cn:@cn
 domain:sagemaker.com.cn:@cn
+regexp:.+\\.awsdns-cn-[0-9][0-9]\\.(biz|com|net|top)$:@cn
+regexp:.+\\.awsdns-cn-[0-9][a-e0-9]\\.cn$:@cn
 domain:bigmodel.cn
 domain:botvip.cn
 domain:butterfly-static.cn
@@ -117712,6 +117714,7 @@ full:rtlog3-applog.fqnovel.com:@ads
 full:rtlog5-applog-hl.fqnovel.com:@ads
 full:rtlog5-applog.fqnovel.com:@ads
 full:wlog.kuaishou.com:@ads
+regexp:^.+-mihayo\\.akamaized\\.net$:@cn
 domain:100.me
 domain:anlaiye.com.cn
 domain:ccspeed.cn
@@ -117981,6 +117984,7 @@ full:hap.10010.com
 full:hs.wosms.cn
 full:id6.me
 full:opencloud.wostore.cn
+regexp:^nis.+\\.10010\\.com$
 domain:16q.cn
 domain:airitilibrary.cn
 domain:ancientbooks.cn
@@ -119389,6 +119393,20 @@ domain:zvip.cn
 domain:zxsales.cn
 domain:zyhe.com.cn
 domain:zz.bdstatic.com:@ads
+regexp:\\.(.+-)?ap-beijing(-.+)?\\.myqcloud\\.com$
+regexp:\\.(.+-)?ap-beijing(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
+regexp:\\.(.+-)?ap-chengdu(-.+)?\\.myqcloud\\.com$
+regexp:\\.(.+-)?ap-chengdu(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
+regexp:\\.(.+-)?ap-chongqing(-.+)?\\.myqcloud\\.com$
+regexp:\\.(.+-)?ap-chongqing(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
+regexp:\\.(.+-)?ap-guangzhou(-.+)?\\.myqcloud\\.com$
+regexp:\\.(.+-)?ap-guangzhou(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
+regexp:\\.(.+-)?ap-nanjing(-.+)?\\.myqcloud\\.com$
+regexp:\\.(.+-)?ap-nanjing(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
+regexp:\\.(.+-)?ap-shanghai(-.+)?\\.myqcloud\\.com$
+regexp:\\.(.+-)?ap-shanghai(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
+regexp:\\.(.+-)?ap-shenzhen(-.+)?\\.myqcloud\\.com$
+regexp:\\.(.+-)?ap-shenzhen(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
 domain:cn
 domain:xn--1qqw23a
 domain:xn--3bst00m

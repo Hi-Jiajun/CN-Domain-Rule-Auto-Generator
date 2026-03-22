@@ -45,28 +45,28 @@ python3 generate_cn_rules.py -v
 python3 generate_cn_rules.py -v -f
 
 # 生成日志并刷新本地缓存
-python3 generate_cn_rules.py --log
+python3 generate_cn_rules.py -l
 
 # 仅使用本地缓存，不发起网络下载
-python3 generate_cn_rules.py --no-download
+python3 generate_cn_rules.py -n
 
-# 启动交互式自定义规则管理工具
-python3 manage_custom_rules.py
+# 使用 6 线程并发下载
+python3 generate_cn_rules.py -t 6
 
-# 直接通过命令行添加一条自定义规则
-python3 manage_custom_rules.py add-rule domain:example.com
+# 使用下载代理
+python3 generate_cn_rules.py -p http://127.0.0.1:7890
 
-# 查看配置文件中的默认数据源状态
-python3 manage_custom_rules.py list-sources
+# 不使用默认上游规则，仅处理 custom.txt / custom_rule.txt
+python3 generate_cn_rules.py -N
 
-# 切换一个默认数据源的启用状态
-python3 manage_custom_rules.py toggle-source v2fly
+# 只启用指定默认上游（支持逗号或分号分隔多个；分号写法请加引号）
+python3 generate_cn_rules.py -s "Aethersailor;v2fly"
 
-# 通过配置文件批量执行非交互操作
-python3 manage_custom_rules.py run-config manage_custom_rules.toml
+# 提取指定 geosite 分类组（支持逗号或分号分隔多个；分号写法请加引号）
+python3 generate_cn_rules.py -g "apple-cn;google-cn"
 
-# 仅使用缓存重新生成
-python3 manage_custom_rules.py generate --no-download
+# 使用正则提取 geosite 分类组
+python3 generate_cn_rules.py -g "re:.*-cn$"
 ```
 
 ### 命令行参数
@@ -75,9 +75,19 @@ python3 manage_custom_rules.py generate --no-download
 |------|------|
 | `-h`, `--help` | 显示帮助信息 |
 | `-v`, `--verbose` | 显示详细输出 |
-| `--log` | 生成日志文件，并在默认模式下刷新 `.cache/` |
-| `--no-download` | 跳过网络下载，仅使用 `.cache/` 中已缓存的源文件 |
+| `-l`, `--log` | 生成日志文件，并在默认模式下刷新 `.cache/` |
+| `-n`, `--no-download` | 跳过网络下载，仅使用 `.cache/` 中已缓存的源文件 |
 | `-f`, `--use-fallback` | 直接使用备用链接下载（大陆环境） |
+| `-t`, `--threads` | 设置并发下载线程数 |
+| `-p`, `--proxy` | 设置下载代理 |
+| `-T`, `--timeout` | 设置单次请求超时时间 |
+| `-r`, `--retries` | 设置每个镜像地址的重试次数 |
+| `-P`, `--no-progress` | 关闭下载进度展示 |
+| `-N`, `--no-default-sources` | 不使用默认上游规则源 |
+| `-s`, `--source` | 仅启用指定默认上游规则源，支持逗号或分号分隔多个值 |
+| `-x`, `--exclude-source` | 排除指定默认上游规则源，支持逗号或分号分隔多个值 |
+| `-g`, `--geosite-group` | 指定从 `dlc.dat_plain.yml` 提取的 geosite 分类组，支持逗号或分号分隔多个值，也支持 `re:` / `regex:` 正则，默认 `*-cn` |
+| `-L`, `--list-sources` | 列出可用默认上游规则源 |
 
 ---
 
@@ -89,7 +99,6 @@ python3 manage_custom_rules.py generate --no-download
 |------|------|
 | `custom.txt` | 个人自定义域名列表（可选） |
 | `custom_rule.txt` | 第三方规则链接列表（可选） |
-| `manage_custom_rules.toml` | 批量非交互配置文件（可选） |
 
 ### 输出文件
 
@@ -97,29 +106,6 @@ python3 manage_custom_rules.py generate --no-download
 |------|------|
 | `organized_cn_mark.txt` | 合并去重后的原始规则文件 |
 | `custom_cn_mark.txt` | PaoPaoDNS 项目专用最终规则文件 |
-
-### 交互式与配置化管理
-
-如果你不想手动编辑 `custom.txt` / `custom_rule.txt`，可以使用 `manage_custom_rules.py` 进行交互式或命令行管理。
-
-示例：
-
-```bash
-python3 manage_custom_rules.py list-rules
-python3 manage_custom_rules.py add-rule full:api.example.com
-python3 manage_custom_rules.py add-url https://example.com/rules.txt
-python3 manage_custom_rules.py list-sources
-python3 manage_custom_rules.py toggle-source v2fly
-python3 manage_custom_rules.py run-config manage_custom_rules.toml
-python3 manage_custom_rules.py generate --no-download
-```
-
-仓库内也提供了 [manage_custom_rules.toml](./manage_custom_rules.toml) 示例配置，可用于批量非交互操作，例如：
-
-- 添加或删除 `custom.txt` 中的本地规则
-- 添加或删除 `custom_rule.txt` 中的第三方规则链接
-- 选择默认启用哪些上游规则源
-- 在完成增删后按配置决定是否自动重新生成规则
 
 ---
 

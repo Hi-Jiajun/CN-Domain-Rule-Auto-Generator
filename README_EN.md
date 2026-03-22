@@ -45,28 +45,28 @@ python3 generate_cn_rules.py -v
 python3 generate_cn_rules.py -v -f
 
 # Generate log and refresh local cache
-python3 generate_cn_rules.py --log
+python3 generate_cn_rules.py -l
 
 # Use local cache only, without any network download
-python3 generate_cn_rules.py --no-download
+python3 generate_cn_rules.py -n
 
-# Launch the interactive custom rule manager
-python3 manage_custom_rules.py
+# Download with 6 worker threads
+python3 generate_cn_rules.py -t 6
 
-# Add a local custom rule directly from CLI
-python3 manage_custom_rules.py add-rule domain:example.com
+# Use a download proxy
+python3 generate_cn_rules.py -p http://127.0.0.1:7890
 
-# Show default source status in config
-python3 manage_custom_rules.py list-sources
+# Disable default upstream sources
+python3 generate_cn_rules.py -N
 
-# Toggle one default source in config
-python3 manage_custom_rules.py toggle-source v2fly
+# Enable only selected default upstream sources (comma or semicolon separated; quote semicolons in shell)
+python3 generate_cn_rules.py -s "Aethersailor;v2fly"
 
-# Apply a batch config file
-python3 manage_custom_rules.py run-config manage_custom_rules.toml
+# Extract selected geosite groups from dlc.dat_plain.yml (comma or semicolon separated; quote semicolons in shell)
+python3 generate_cn_rules.py -g "apple-cn;google-cn"
 
-# Regenerate using cache only
-python3 manage_custom_rules.py generate --no-download
+# Extract geosite groups by regex
+python3 generate_cn_rules.py -g "re:.*-cn$"
 ```
 
 ### Command Line Options
@@ -75,9 +75,19 @@ python3 manage_custom_rules.py generate --no-download
 |--------|-------------|
 | `-h`, `--help` | Show help information |
 | `-v`, `--verbose` | Show detailed output |
-| `--log` | Generate log file and refresh `.cache/` in normal mode |
-| `--no-download` | Skip network download and use cached source files from `.cache/` only |
+| `-l`, `--log` | Generate log file and refresh `.cache/` in normal mode |
+| `-n`, `--no-download` | Skip network download and use cached source files from `.cache/` only |
 | `-f`, `--use-fallback` | Use fallback CDN links (for China network) |
+| `-t`, `--threads` | Set concurrent download worker count |
+| `-p`, `--proxy` | Set download proxy |
+| `-T`, `--timeout` | Set per-request timeout |
+| `-r`, `--retries` | Set retry count for each mirror URL |
+| `-P`, `--no-progress` | Disable download progress display |
+| `-N`, `--no-default-sources` | Disable default upstream rule sources |
+| `-s`, `--source` | Enable only selected default upstream sources; supports comma- or semicolon-separated values |
+| `-x`, `--exclude-source` | Exclude selected default upstream sources; supports comma- or semicolon-separated values |
+| `-g`, `--geosite-group` | Select geosite groups extracted from `dlc.dat_plain.yml`; supports comma- or semicolon-separated values and `re:` / `regex:` regex expressions, default `*-cn` |
+| `-L`, `--list-sources` | List available default upstream sources |
 
 ---
 
@@ -96,29 +106,6 @@ python3 manage_custom_rules.py generate --no-download
 |------|-------------|
 | `organized_cn_mark.txt` | Merged and deduplicated original rules |
 | `custom_cn_mark.txt` | Final formatted rules for PaoPaoDNS |
-
-### Interactive Management
-
-Use `manage_custom_rules.py` if you want to maintain `custom.txt` / `custom_rule.txt` without editing files manually.
-
-Examples:
-
-```bash
-python3 manage_custom_rules.py list-rules
-python3 manage_custom_rules.py add-rule full:api.example.com
-python3 manage_custom_rules.py add-url https://example.com/rules.txt
-python3 manage_custom_rules.py list-sources
-python3 manage_custom_rules.py toggle-source v2fly
-python3 manage_custom_rules.py run-config manage_custom_rules.toml
-python3 manage_custom_rules.py generate --no-download
-```
-
-The repository also includes [manage_custom_rules.toml](./manage_custom_rules.toml), which can be used for batch non-interactive operations such as:
-
-- add/remove local rules
-- add/remove third-party rule URLs
-- choose which default upstream sources are enabled
-- optionally trigger rule generation after applying the changes
 
 ---
 
@@ -183,13 +170,6 @@ If this project is helpful to you, your donations are greatly appreciated!
 | Alipay | WeChat Pay |
 |:------:|:----------:|
 | <img src="https://Hi-Jiajun.github.io/picx-images-hosting/alipay_qrcode.7p45v27tjq.webp" width="150" /> | <img src="https://Hi-Jiajun.github.io/picx-images-hosting/wechat_qrcode.icohq9bcf.webp" width="150" /> |
-
----
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) for details.
-de.icohq9bcf.webp" width="150" /> |
 
 ---
 
