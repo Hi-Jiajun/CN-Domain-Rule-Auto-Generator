@@ -71,6 +71,9 @@ python3 generate_cn_rules.py -g "re:.*-cn$"
 
 默认情况下，脚本会显示实时下载进度条和速率；如果是在 GitHub Actions、日志重定向或不需要动态进度展示的场景，建议追加 `-P` 关闭进度条。
 
+下载镜像回退逻辑：
+优先使用源地址；对于 `raw.githubusercontent.com` 静态链接，会依次尝试 `cdn.jsdelivr.net`、`fastly.jsdelivr.net`，仍失败才继续切换到其他可用镜像。
+
 ### 命令行参数
 
 | 参数 | 说明 |

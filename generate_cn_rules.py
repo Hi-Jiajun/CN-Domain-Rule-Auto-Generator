@@ -13,6 +13,7 @@ import fnmatch
 import hashlib
 import os
 import re
+import socket
 import ssl
 import sys
 import threading
@@ -482,6 +483,14 @@ def get_jsdelivr_url(url):
     return f"https://cdn.jsdelivr.net/gh/{username}/{repo}@{branch}/{file_path}"
 
 
+def get_fastly_jsdelivr_url(url):
+    """将 jsDelivr 地址替换为 fastly.jsdelivr.net。"""
+    parsed = urllib.parse.urlparse(url)
+    if parsed.netloc != "cdn.jsdelivr.net":
+        return None
+    return urllib.parse.urlunparse(parsed._replace(netloc="fastly.jsdelivr.net"))
+
+
 def get_fallback_urls(url):
     """获取备用 URL 列表。"""
     parsed = urllib.parse.urlparse(url)
@@ -491,7 +500,14 @@ def get_fallback_urls(url):
         jsdelivr_url = get_jsdelivr_url(url)
         if jsdelivr_url:
             urls.append(jsdelivr_url)
+            fastly_url = get_fastly_jsdelivr_url(jsdelivr_url)
+            if fastly_url:
+                urls.append(fastly_url)
         urls.append(f"https://ghfast.top/{url}")
+    elif parsed.netloc == "cdn.jsdelivr.net":
+        fastly_url = get_fastly_jsdelivr_url(url)
+        if fastly_url:
+            urls.append(fastly_url)
     elif parsed.netloc == "github.com":
         urls.append(f"https://ghfast.top/{url}")
 
@@ -519,6 +535,40 @@ def build_url_opener(proxy_url=None):
     return urllib.request.build_opener(*handlers)
 
 
+def apply_socket_timeout(response, timeout):
+    """尽量给底层 socket 设置读取超时。"""
+    stack = [response]
+    seen = set()
+    attrs_to_visit = ("fp", "raw", "_fp", "_sock", "sock", "buffer")
+
+    while stack:
+        current = stack.pop()
+        if current is None:
+            continue
+        identifier = id(current)
+        if identifier in seen:
+            continue
+        seen.add(identifier)
+
+        settimeout = getattr(current, "settimeout", None)
+        if callable(settimeout):
+            try:
+                settimeout(timeout)
+                return True
+            except Exception:
+                pass
+
+        for attr in attrs_to_visit:
+            try:
+                child = getattr(current, attr, None)
+            except Exception:
+                child = None
+            if child is not None:
+                stack.append(child)
+
+    return False
+
+
 def download_file(url, timeout=60, proxy_url=None, progress=None, progress_label=None):
     """下载文件内容。"""
     try:
@@ -529,6 +579,8 @@ def download_file(url, timeout=60, proxy_url=None, progress=None, progress_label
         )
 
         with opener.open(request, timeout=timeout) as response:
+            stall_timeout = min(timeout, 15)
+            apply_socket_timeout(response, stall_timeout)
             total_bytes = response.length
             downloaded = 0
             chunks = []
@@ -544,6 +596,9 @@ def download_file(url, timeout=60, proxy_url=None, progress=None, progress_label
                     progress.update(progress_label, downloaded, total_bytes)
 
             return b"".join(chunks).decode("utf-8", errors="replace")
+    except socket.timeout:
+        log(f"下载失败 {url}: 读取停滞超过超时时间")
+        return None
     except Exception as exc:
         log(f"下载失败 {url}: {exc}")
         return None
@@ -582,11 +637,13 @@ def download_file_with_fallback(
             if content and len(content) > 10 and "404" not in content[:200] and "Not Found" not in content[:200]:
                 return content
 
+            if verbose and retry_index + 1 < retries:
+                log("    当前地址响应异常，准备重试")
             if retry_index + 1 < retries:
                 time.sleep(1)
 
         if url_index + 1 < len(all_urls) and verbose:
-            log("    当前地址下载失败，切换下一个镜像")
+            log("    当前地址多次失败，切换下一个镜像")
 
     return None
 

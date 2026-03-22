@@ -168,7 +168,7 @@ lists:
 
         self.assertEqual(["apple.com", "google.cn"], [rule["domain"] for rule in rules])
 
-    def test_get_fallback_urls_includes_jsdelivr_and_ghfast_for_raw(self):
+    def test_get_fallback_urls_includes_jsdelivr_fastly_and_ghfast_for_raw(self):
         urls = generator.get_fallback_urls(
             "https://raw.githubusercontent.com/user/repo/main/test.txt"
         )
@@ -176,6 +176,7 @@ lists:
         self.assertEqual(
             [
                 "https://cdn.jsdelivr.net/gh/user/repo@main/test.txt",
+                "https://fastly.jsdelivr.net/gh/user/repo@main/test.txt",
                 "https://ghfast.top/https://raw.githubusercontent.com/user/repo/main/test.txt",
             ],
             urls,
