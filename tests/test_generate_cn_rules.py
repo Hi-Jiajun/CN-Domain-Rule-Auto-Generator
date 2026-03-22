@@ -16,6 +16,7 @@ def make_args(**overrides):
         "proxy": None,
         "threads": 2,
         "timeout": 60,
+        "stall_timeout": 8,
         "retries": 1,
         "progress": False,
         "no_default_sources": False,

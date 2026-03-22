@@ -569,7 +569,7 @@ def apply_socket_timeout(response, timeout):
     return False
 
 
-def download_file(url, timeout=60, proxy_url=None, progress=None, progress_label=None):
+def download_file(url, timeout=60, stall_timeout=8, proxy_url=None, progress=None, progress_label=None):
     """下载文件内容。"""
     try:
         opener = build_url_opener(proxy_url)
@@ -579,8 +579,8 @@ def download_file(url, timeout=60, proxy_url=None, progress=None, progress_label
         )
 
         with opener.open(request, timeout=timeout) as response:
-            stall_timeout = min(timeout, 15)
-            apply_socket_timeout(response, stall_timeout)
+            effective_stall_timeout = min(timeout, stall_timeout)
+            apply_socket_timeout(response, effective_stall_timeout)
             total_bytes = response.length
             downloaded = 0
             chunks = []
@@ -597,7 +597,7 @@ def download_file(url, timeout=60, proxy_url=None, progress=None, progress_label
 
             return b"".join(chunks).decode("utf-8", errors="replace")
     except socket.timeout:
-        log(f"下载失败 {url}: 读取停滞超过超时时间")
+        log(f"下载失败 {url}: 读取停滞超过 {stall_timeout}s")
         return None
     except Exception as exc:
         log(f"下载失败 {url}: {exc}")
@@ -610,6 +610,7 @@ def download_file_with_fallback(
     verbose=False,
     use_fallback_direct=False,
     retries=2,
+    stall_timeout=8,
     proxy_url=None,
     progress=None,
     progress_label=None,
@@ -629,6 +630,7 @@ def download_file_with_fallback(
             content = download_file(
                 try_url,
                 timeout=timeout,
+                stall_timeout=stall_timeout,
                 proxy_url=proxy_url,
                 progress=progress,
                 progress_label=progress_label,
@@ -967,6 +969,7 @@ def fetch_job(job, args, progress, log_file=None):
             verbose=args.verbose,
             use_fallback_direct=args.use_fallback,
             retries=args.retries,
+            stall_timeout=args.stall_timeout,
             proxy_url=args.proxy,
             progress=progress,
             progress_label=display_label,
@@ -1021,6 +1024,7 @@ def build_argument_parser():
     parser.add_argument("-p", "--proxy", help="下载代理地址，例如 http://127.0.0.1:7890")
     parser.add_argument("-t", "--threads", type=int, default=6, help="并发下载线程数")
     parser.add_argument("-T", "--timeout", type=int, default=60, help="单次网络请求超时时间（秒）")
+    parser.add_argument("-S", "--stall-timeout", type=int, default=8, help="0B/s 读取停滞超时时间（秒）")
     parser.add_argument("-r", "--retries", type=int, default=2, help="每个镜像地址的重试次数")
     parser.add_argument("-P", "--no-progress", dest="progress", action="store_false", help="关闭下载进度展示")
     parser.set_defaults(progress=True)
@@ -1049,7 +1053,7 @@ def generate_rules(args):
     try:
         log("开始生成 CN 域名规则", log_file)
         log(
-            f"下载设置: 线程={args.threads}, 超时={args.timeout}s, 重试={args.retries}, "
+            f"下载设置: 线程={args.threads}, 超时={args.timeout}s, 停滞超时={args.stall_timeout}s, 重试={args.retries}, "
             f"备用镜像={'开' if args.use_fallback else '关'}, 进度={'开' if args.progress else '关'}",
             log_file,
         )
@@ -1161,6 +1165,8 @@ def main(argv=None):
         parser.error("--threads 必须大于等于 1")
     if args.timeout < 1:
         parser.error("--timeout 必须大于等于 1")
+    if args.stall_timeout < 1:
+        parser.error("--stall-timeout 必须大于等于 1")
     if args.retries < 1:
         parser.error("--retries 必须大于等于 1")
 
