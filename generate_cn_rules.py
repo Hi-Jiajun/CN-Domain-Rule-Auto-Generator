@@ -30,6 +30,17 @@ OUTPUT_CUSTOM_RULE_SRC = os.path.join(BASE_DIR, "custom_rule.txt")
 OUTPUT_LOG = os.path.join(BASE_DIR, "generate.log")
 CACHE_DIR = os.path.join(BASE_DIR, ".cache")
 
+DOWNLOAD_PRIORITY_HINTS = {
+    "Steam_CDN.list": 1,
+    "apple-cn.txt": 1,
+    "google-cn.txt": 1,
+    "Custom_Direct.list": 2,
+    "IPTVMainland_Domain.list": 2,
+    "direct-list.txt": 10,
+    "china-list.txt": 10,
+    "dlc.dat_plain.yml": 20,
+}
+
 SOURCES = {
     "Aethersailor": {
         "display_name": "Custom_OpenClash_Rules",
@@ -161,6 +172,11 @@ def format_size(num_bytes):
     return f"{value:.1f}GB"
 
 
+def format_rate(num_bytes_per_second):
+    """格式化速率。"""
+    return f"{format_size(num_bytes_per_second)}/s"
+
+
 class DownloadProgress:
     """下载进度展示。"""
 
@@ -169,32 +185,159 @@ class DownloadProgress:
         self.enabled = enabled
         self.completed = 0
         self.lock = threading.Lock()
-        self.last_percent = {}
+        self.stats = {}
+        self.stop_event = threading.Event()
+        self.is_tty = enabled and sys.stdout.isatty()
+        self.spinner_frames = ["|", "/", "-", "\\"]
+        self.spinner_index = 0
+        self.last_line_length = 0
+        self.render_thread = None
+
+        if self.is_tty:
+            self.render_thread = threading.Thread(target=self._render_loop, daemon=True)
+            self.render_thread.start()
 
     def start_task(self, label):
         if not self.enabled:
             return
         with self.lock:
-            print(f"[{self.completed}/{self.total_tasks}] 开始 {label}")
+            self.stats[label] = {
+                "status": "running",
+                "start_time": time.monotonic(),
+                "downloaded": 0,
+                "total_bytes": None,
+                "from_cache": False,
+            }
+            if not self.is_tty:
+                print(f"[{self.completed}/{self.total_tasks}] 开始 {label}")
 
     def update(self, label, downloaded, total_bytes):
-        if not self.enabled or not total_bytes:
+        if not self.enabled:
             return
-
-        percent = min(100, int(downloaded * 100 / total_bytes))
         with self.lock:
-            previous = self.last_percent.get(label, -10)
-            if percent == 100 or percent - previous >= 10:
-                self.last_percent[label] = percent
-                print(f"[{self.completed}/{self.total_tasks}] 下载中 {label}: {percent}%")
+            stats = self.stats.setdefault(
+                label,
+                {
+                    "status": "running",
+                    "start_time": time.monotonic(),
+                    "downloaded": 0,
+                    "total_bytes": total_bytes,
+                    "from_cache": False,
+                },
+            )
+            stats["downloaded"] = downloaded
+            stats["total_bytes"] = total_bytes
+            stats["last_time"] = time.monotonic()
 
     def finish_task(self, label, size_bytes, from_cache=False):
         if not self.enabled:
             return
         with self.lock:
+            now = time.monotonic()
+            stats = self.stats.setdefault(
+                label,
+                {
+                    "status": "finished",
+                    "start_time": now,
+                    "downloaded": size_bytes,
+                    "total_bytes": size_bytes,
+                    "from_cache": from_cache,
+                },
+            )
+            stats["status"] = "finished"
+            stats["downloaded"] = size_bytes
+            stats["total_bytes"] = size_bytes
+            stats["from_cache"] = from_cache
+            stats["end_time"] = now
             self.completed += 1
             source = "缓存" if from_cache else "下载"
-            print(f"[{self.completed}/{self.total_tasks}] 完成 {label} ({source}, {format_size(size_bytes)})")
+            elapsed = max(0.001, now - stats["start_time"])
+            speed = size_bytes / elapsed
+            if self.is_tty:
+                self._clear_line_locked()
+            print(
+                f"[{self.completed}/{self.total_tasks}] 完成 {label} "
+                f"({source}, {format_size(size_bytes)}, {elapsed:.1f}s, {format_rate(speed)})"
+            )
+
+    def fail_task(self, label, message):
+        if not self.enabled:
+            return
+        with self.lock:
+            self.stats[label] = {
+                "status": "failed",
+                "message": message,
+                "start_time": time.monotonic(),
+                "downloaded": 0,
+                "total_bytes": None,
+                "from_cache": False,
+            }
+            if self.is_tty:
+                self._clear_line_locked()
+            print(f"[{self.completed}/{self.total_tasks}] 失败 {label}: {message}")
+
+    def stop(self):
+        if not self.enabled:
+            return
+        self.stop_event.set()
+        if self.render_thread:
+            self.render_thread.join(timeout=1)
+        if self.is_tty:
+            with self.lock:
+                self._clear_line_locked()
+
+    def _render_loop(self):
+        while not self.stop_event.is_set():
+            with self.lock:
+                self._render_locked()
+            time.sleep(0.2)
+        with self.lock:
+            self._clear_line_locked()
+
+    def _render_locked(self):
+        active_parts = []
+        now = time.monotonic()
+        for label, stats in self.stats.items():
+            if stats.get("status") != "running":
+                continue
+            downloaded = stats.get("downloaded", 0)
+            total_bytes = stats.get("total_bytes")
+            elapsed = max(0.001, now - stats.get("start_time", now))
+            speed = downloaded / elapsed
+            percent = "?"
+            if total_bytes:
+                percent = f"{min(100, int(downloaded * 100 / total_bytes))}%"
+            short_label = label if len(label) <= 28 else f"{label[:25]}..."
+            active_parts.append(
+                f"{short_label} {percent} {format_size(downloaded)} {format_rate(speed)}"
+            )
+            if len(active_parts) >= 3:
+                break
+
+        spinner = self.spinner_frames[self.spinner_index % len(self.spinner_frames)]
+        self.spinner_index += 1
+        line = f"{spinner} {self.completed}/{self.total_tasks}"
+        if active_parts:
+            line += " | " + " | ".join(active_parts)
+        self._write_line_locked(line)
+
+    def _write_line_locked(self, line):
+        if not self.is_tty:
+            return
+        padded_line = line
+        if len(padded_line) < self.last_line_length:
+            padded_line += " " * (self.last_line_length - len(padded_line))
+        sys.stdout.write("\r" + padded_line)
+        sys.stdout.flush()
+        self.last_line_length = len(line)
+
+    def _clear_line_locked(self):
+        if not self.is_tty:
+            return
+        if self.last_line_length:
+            sys.stdout.write("\r" + " " * self.last_line_length + "\r")
+            sys.stdout.flush()
+            self.last_line_length = 0
 
 
 def flatten_cli_values(values):
@@ -354,7 +497,7 @@ def download_file(url, timeout=60, proxy_url=None, progress=None, progress_label
             chunks = []
 
             while True:
-                chunk = response.read(64 * 1024)
+                chunk = response.read(256 * 1024)
                 if not chunk:
                     break
 
@@ -682,6 +825,7 @@ def build_fetch_jobs(enabled_sources, custom_rule_urls, timeout):
                     "urls": list(urls),
                     "timeout": timeout,
                     "display_label": f"{source_name}/{filename}",
+                    "download_priority": DOWNLOAD_PRIORITY_HINTS.get(filename, 5),
                 }
             )
             order += 1
@@ -697,6 +841,7 @@ def build_fetch_jobs(enabled_sources, custom_rule_urls, timeout):
                 "timeout": timeout,
                 "display_label": f"custom_rule/{cache_name}",
                 "original_url": url,
+                "download_priority": 1,
             }
         )
         order += 1
@@ -714,6 +859,7 @@ def fetch_job(job, args, progress, log_file=None):
     if args.no_download:
         content = load_cache_file(job["source_name"], job["filename"])
         if content is None:
+            progress.fail_task(display_label, "缓存不存在")
             raise RuntimeError(f"错误: {job['filename']} 缓存不存在，无法在 --no-download 模式下继续")
         progress.finish_task(display_label, len(content.encode("utf-8")), from_cache=True)
         return {**job, "content": content}
@@ -736,6 +882,7 @@ def fetch_job(job, args, progress, log_file=None):
             progress.finish_task(display_label, len(content.encode("utf-8")), from_cache=False)
             return {**job, "content": content}
 
+    progress.fail_task(display_label, "所有镜像均失败")
     raise RuntimeError(f"错误: {job['filename']} 下载失败，脚本退出")
 
 
@@ -747,17 +894,24 @@ def fetch_all_jobs(jobs, args, log_file=None):
     progress = DownloadProgress(total_tasks=len(jobs), enabled=args.progress)
     results = [None] * len(jobs)
     max_workers = max(1, min(args.threads, len(jobs)))
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+    ordered_jobs = sorted(jobs, key=lambda job: (job["download_priority"], job["order"]))
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=max_workers)
+    try:
         future_map = {
-            executor.submit(fetch_job, job, args, progress, log_file): job for job in jobs
+            executor.submit(fetch_job, job, args, progress, log_file): job for job in ordered_jobs
         }
         for future in concurrent.futures.as_completed(future_map):
             job = future_map[future]
             result = future.result()
             results[job["order"]] = result
-
-    return [result for result in results if result is not None]
+    except BaseException:
+        executor.shutdown(wait=False, cancel_futures=True)
+        progress.stop()
+        raise
+    else:
+        executor.shutdown(wait=True, cancel_futures=False)
+        progress.stop()
+        return [result for result in results if result is not None]
 
 
 def build_argument_parser():
@@ -771,7 +925,7 @@ def build_argument_parser():
     parser.add_argument("-n", "--no-download", action="store_true", help="跳过网络下载，仅使用缓存")
     parser.add_argument("-f", "--use-fallback", action="store_true", help="优先使用备用镜像下载")
     parser.add_argument("-p", "--proxy", help="下载代理地址，例如 http://127.0.0.1:7890")
-    parser.add_argument("-t", "--threads", type=int, default=4, help="并发下载线程数")
+    parser.add_argument("-t", "--threads", type=int, default=6, help="并发下载线程数")
     parser.add_argument("-T", "--timeout", type=int, default=60, help="单次网络请求超时时间（秒）")
     parser.add_argument("-r", "--retries", type=int, default=2, help="每个镜像地址的重试次数")
     parser.add_argument("-P", "--no-progress", dest="progress", action="store_false", help="关闭下载进度展示")
@@ -800,13 +954,26 @@ def generate_rules(args):
 
     try:
         log("开始生成 CN 域名规则", log_file)
+        log(
+            f"下载设置: 线程={args.threads}, 超时={args.timeout}s, 重试={args.retries}, "
+            f"备用镜像={'开' if args.use_fallback else '关'}, 进度={'开' if args.progress else '关'}",
+            log_file,
+        )
+        if args.proxy:
+            log(f"下载代理: {args.proxy}", log_file)
 
         geosite_groups = resolve_geosite_groups(args)
         enabled_sources = resolve_enabled_sources(args)
+        log(
+            "启用默认上游: " + (", ".join(enabled_sources) if enabled_sources else "无"),
+            log_file,
+        )
         if "v2fly" in enabled_sources:
             log(f"v2fly 提取分类组: {', '.join(geosite_groups)}", log_file)
 
         custom_rule_urls = load_rule_source_urls(OUTPUT_CUSTOM_RULE_SRC)
+        if custom_rule_urls:
+            log(f"第三方规则链接数: {len(custom_rule_urls)}", log_file)
         jobs = build_fetch_jobs(enabled_sources, custom_rule_urls, timeout=args.timeout)
         fetched_results = fetch_all_jobs(jobs, args, log_file)
 
@@ -914,8 +1081,8 @@ def main(argv=None):
     except RuntimeError:
         return 1
     except KeyboardInterrupt:
-        print("\n已取消生成。")
-        return 130
+        print("\n已取消生成。", flush=True)
+        os._exit(130)
 
 
 if __name__ == "__main__":
