@@ -24,13 +24,14 @@ jobs:
         with:
           python-version: '3.11'
           
-      - name: Install dependencies
+      - name: Validate generator
         run: |
-          pip install requests
+          python3 -m py_compile generate_cn_rules.py
+          python3 -m unittest discover -s tests -v
           
       - name: Run generate script
         run: |
-          python3 generate_cn_rules.py -v --log || true
+          python3 generate_cn_rules.py -v --log
           
       - name: Check changes
         id: changes
@@ -51,14 +52,17 @@ jobs:
           git config --local user.name "Hi-Jiajun"
           
           git add custom_cn_mark.txt organized_cn_mark.txt generate.log 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No generated file changes to commit"
+            exit 0
+          fi
           
           # 获取当前日期
           DATE=$(date '+%Y-%m-%d')
-          git commit -m "auto: update rules at $DATE" || echo "No changes to commit"
+          git commit -m "auto: update rules at $DATE"
           
-          git push || echo "Push failed, continuing..."
-        continue-on-error: true
-        
+          git push
       - name: Create tag and Release
         if: env.has_changes == 'true'
         run: |

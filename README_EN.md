@@ -49,6 +49,18 @@ python3 generate_cn_rules.py --log
 
 # Use local cache only, without any network download
 python3 generate_cn_rules.py --no-download
+
+# Launch the interactive custom rule manager
+python3 manage_custom_rules.py
+
+# Add a local custom rule directly from CLI
+python3 manage_custom_rules.py add-rule domain:example.com
+
+# Apply a batch config file
+python3 manage_custom_rules.py run-config manage_custom_rules.toml
+
+# Regenerate using cache only
+python3 manage_custom_rules.py generate --no-download
 ```
 
 ### Command Line Options
@@ -78,6 +90,26 @@ python3 generate_cn_rules.py --no-download
 |------|-------------|
 | `organized_cn_mark.txt` | Merged and deduplicated original rules |
 | `custom_cn_mark.txt` | Final formatted rules for PaoPaoDNS |
+
+### Interactive Management
+
+Use `manage_custom_rules.py` if you want to maintain `custom.txt` / `custom_rule.txt` without editing files manually.
+
+Examples:
+
+```bash
+python3 manage_custom_rules.py list-rules
+python3 manage_custom_rules.py add-rule full:api.example.com
+python3 manage_custom_rules.py add-url https://example.com/rules.txt
+python3 manage_custom_rules.py run-config manage_custom_rules.toml
+python3 manage_custom_rules.py generate --no-download
+```
+
+The repository also includes [manage_custom_rules.toml](./manage_custom_rules.toml), which can be used for batch non-interactive operations such as:
+
+- add/remove local rules
+- add/remove third-party rule URLs
+- optionally trigger rule generation after applying the changes
 
 ---
 

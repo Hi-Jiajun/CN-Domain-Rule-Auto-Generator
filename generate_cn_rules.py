@@ -7,21 +7,22 @@ CN 域名规则自动生成脚本
 版本：1.0.0
 """
 
-import os
-import sys
-import re
 import argparse
-import urllib.request
+import hashlib
+import os
+import re
 import ssl
-import time
+import sys
+import urllib.parse
+import urllib.request
 from datetime import datetime
-from collections import OrderedDict
 
 # ==================== 配置 ====================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_ORGANIZED = os.path.join(BASE_DIR, "organized_cn_mark.txt")
 OUTPUT_CUSTOM = os.path.join(BASE_DIR, "custom_cn_mark.txt")
 OUTPUT_CUSTOM_SRC = os.path.join(BASE_DIR, "custom.txt")
+OUTPUT_CUSTOM_RULE_SRC = os.path.join(BASE_DIR, "custom_rule.txt")
 OUTPUT_LOG = os.path.join(BASE_DIR, "generate.log")
 CACHE_DIR = os.path.join(BASE_DIR, ".cache")
 
@@ -68,10 +69,29 @@ SOURCES = {
     }
 }
 
-# 备用下载策略
-FALLBACK_URLS = {
-    "raw.githubusercontent.com": "https://cdn.jsdelivr.net/gh/{path}",
-    "github.com": "https://ghfast.top/https://github.com/{path}"
+RULE_SOURCE_PRIORITIES = {
+    **{name: config["priority"] for name, config in SOURCES.items()},
+    "custom_rule": 4,
+    "custom": 5,
+}
+
+RULE_MATCH_PRIORITIES = {
+    "full": 1,
+    "domain": 2,
+    "regexp": 3,
+    "keyword": 4,
+}
+
+CUSTOM_OUTPUT_SECTION_PRIORITIES = {
+    "custom": 1,
+    "custom_rule": 2,
+    "generated": 3,
+}
+
+CUSTOM_OUTPUT_SECTION_TITLES = {
+    "custom": "用户自定义规则（编辑 custom.txt）",
+    "custom_rule": "第三方规则链接导入（编辑 custom_rule.txt）",
+    "generated": "自动聚合规则（请勿直接修改）",
 }
 
 # ==================== 工具函数 ====================
@@ -83,6 +103,7 @@ def log(msg, file_handle=None):
     print(log_msg)
     if file_handle:
         file_handle.write(log_msg + "\n")
+        file_handle.flush()
 
 def get_jsdelivr_url(url):
     """将 raw.githubusercontent.com URL 转换为 JsDelivr CDN URL"""
@@ -179,6 +200,21 @@ def download_file(url, timeout=60):
         log(f"下载失败 {url}: {e}")
         return None
 
+def normalize_rule_value(rule_type, value):
+    """根据规则类型规范化值。"""
+    value = value.strip()
+    if not value:
+        return None
+
+    if rule_type == "regexp":
+        return value
+
+    normalized = value.lower()
+    if not re.fullmatch(r"[a-z0-9\-*.]+", normalized):
+        return None
+
+    return normalized
+
 def parse_domain_rule(line, source):
     """解析域名规则"""
     line = line.strip()
@@ -222,12 +258,9 @@ def parse_domain_rule(line, source):
     
     if not domain:
         return None
-    
-    # 清理域名
-    domain = domain.lower().strip()
-    
-    # 跳过无效域名
-    if not re.match(r'^[a-z0-9\-\*\.\*]+$', domain):
+
+    domain = normalize_rule_value(rule_type, domain)
+    if domain is None:
         return None
     
     return {
@@ -297,30 +330,67 @@ def convert_to_paopaodns_format(rule_type, domain):
     else:
         return f"{prefix}{domain}"
 
+def parse_rule_content(content, source_name):
+    """根据来源解析规则内容。"""
+    if source_name == "v2fly":
+        return parse_dlc_yml(content, source_name)
+
+    rules = []
+    for line in content.splitlines():
+        rule = parse_domain_rule(line, source_name)
+        if rule:
+            rules.append(rule)
+
+    return rules
+
 def deduplicate_rules(rules):
     """去重，保留最高优先级"""
-    # 按优先级排序
-    priority_map = {"Aethersailor": 1, "Loyalsoldier": 2, "v2fly": 3, "custom": 4}
-    
-    # 使用 OrderedDict 按域名分组
     seen = {}
     
     for rule in rules:
         domain = rule["domain"]
+        rule_type = rule["type"]
         source = rule["source"]
-        priority = priority_map.get(source, 99)
+        priority = RULE_SOURCE_PRIORITIES.get(source, 99)
         
-        key = domain
+        key = (rule_type, domain)
         
         if key not in seen:
             seen[key] = rule
         else:
             # 比较优先级
-            existing_priority = priority_map.get(seen[key]["source"], 99)
+            existing_priority = RULE_SOURCE_PRIORITIES.get(seen[key]["source"], 99)
             if priority < existing_priority:
                 seen[key] = rule
     
     return list(seen.values())
+
+def get_custom_output_section(source_name):
+    """返回 custom_cn_mark.txt 的输出分组。"""
+    if source_name == "custom":
+        return "custom"
+    if source_name == "custom_rule":
+        return "custom_rule"
+    return "generated"
+
+def sort_rules_for_custom_output(rules):
+    """按 PaoPaoDNS 匹配优先级输出规则。"""
+    indexed_rules = list(enumerate(rules))
+    indexed_rules.sort(
+        key=lambda item: (
+            CUSTOM_OUTPUT_SECTION_PRIORITIES.get(get_custom_output_section(item[1]["source"]), 99),
+            RULE_MATCH_PRIORITIES.get(item[1]["type"], 99),
+            item[0],
+        )
+    )
+    return [rule for _, rule in indexed_rules]
+
+def group_rules_for_custom_output(rules):
+    """按输出分组整理规则。"""
+    grouped = {section: [] for section in CUSTOM_OUTPUT_SECTION_PRIORITIES}
+    for rule in sort_rules_for_custom_output(rules):
+        grouped[get_custom_output_section(rule["source"])].append(rule)
+    return grouped
 
 def load_custom_rules(filepath):
     """加载自定义规则"""
@@ -335,6 +405,26 @@ def load_custom_rules(filepath):
                 rules.append(rule)
     
     return rules
+
+def load_rule_source_urls(filepath):
+    """读取第三方规则链接列表。"""
+    if not os.path.exists(filepath):
+        return []
+
+    urls = []
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line_no, line in enumerate(f, start=1):
+            stripped = line.strip()
+            if not stripped or stripped.startswith('#'):
+                continue
+
+            parsed = urllib.parse.urlparse(stripped)
+            if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+                raise RuntimeError(f"错误: {os.path.basename(filepath)} 第 {line_no} 行不是有效链接: {stripped}")
+
+            urls.append(stripped)
+
+    return urls
 
 def get_cache_file_path(source_name, filename):
     """获取缓存文件路径"""
@@ -357,6 +447,45 @@ def load_cache_file(source_name, filename):
     with open(cache_path, 'r', encoding='utf-8') as f:
         return f.read()
 
+def build_remote_cache_name(url):
+    """为远程规则链接生成稳定的缓存文件名。"""
+    parsed = urllib.parse.urlparse(url)
+    basename = os.path.basename(parsed.path) or "remote_rules.txt"
+    safe_basename = re.sub(r'[^a-zA-Z0-9._-]+', '_', basename)
+    digest = hashlib.sha256(url.encode('utf-8')).hexdigest()[:12]
+    return f"{digest}_{safe_basename}"
+
+def fetch_rule_content(source_name, filename, urls, args, log_file=None, timeout=60):
+    """根据模式下载或读取缓存。"""
+    if args.verbose:
+        action = "读取缓存" if args.no_download else "下载"
+        log(f"  {action}: {filename}", log_file)
+
+    if args.no_download:
+        content = load_cache_file(source_name, filename)
+        if not content:
+            raise RuntimeError(f"错误: {filename} 缓存不存在，无法在 --no-download 模式下继续")
+        return content
+
+    if isinstance(urls, str):
+        urls = [urls]
+
+    for url in urls:
+        if args.verbose:
+            log(f"    尝试: {url[:60]}...", log_file)
+
+        content = download_file_with_fallback(
+            url,
+            timeout=timeout,
+            verbose=args.verbose,
+            use_fallback_direct=args.use_fallback
+        )
+        if content:
+            save_cache_file(source_name, filename, content)
+            return content
+
+    raise RuntimeError(f"错误: {filename} 下载失败，脚本退出")
+
 # ==================== 主流程 ====================
 
 def generate_rules(args):
@@ -365,146 +494,127 @@ def generate_rules(args):
     
     # 创建日志文件
     log_file = open(OUTPUT_LOG, 'w', encoding='utf-8') if args.log else None
-    if log_file:
-        log("开始生成 CN 域名规则", log_file)
-    
-    # 步骤 1-3: 抓取各源规则
-    for source_name, source_config in SOURCES.items():
-        if args.verbose:
-            log(f"正在处理 {source_name} 源...", log_file)
-        
-        priority = source_config["priority"]
-        
-        for filename, urls in source_config["files"]:
+    try:
+        if log_file:
+            log("开始生成 CN 域名规则", log_file)
+
+        # 步骤 1-3: 抓取各源规则
+        for source_name, source_config in SOURCES.items():
             if args.verbose:
-                action = "读取缓存" if args.no_download else "下载"
-                log(f"  {action}: {filename}", log_file)
-            
-            content = None
-            
-            if args.no_download:
-                content = load_cache_file(source_name, filename)
-                if not content:
-                    error_msg = f"错误: {filename} 缓存不存在，无法在 --no-download 模式下继续"
-                    log(error_msg, log_file)
-                    if log_file:
-                        log_file.close()
-                    print(error_msg)
-                    sys.exit(1)
-            else:
-                if isinstance(urls, str):
-                    urls = [urls]  # 兼容旧格式
-                
-                for url in urls:
-                    if args.verbose:
-                        log(f"    尝试: {url[:60]}...", log_file)
-                    content = download_file_with_fallback(
-                        url, 
-                        timeout=180 if source_name == "v2fly" else 60, 
-                        verbose=args.verbose,
-                        use_fallback_direct=args.use_fallback
-                    )
-                    if content:
-                        save_cache_file(source_name, filename, content)
-                        break
-                
-                if not content:
-                    error_msg = f"错误: {filename} 下载失败，脚本退出"
-                    log(error_msg, log_file)
-                    if log_file:
-                        log_file.close()
-                    print(error_msg)
-                    sys.exit(1)
-            
-            # 解析内容
-            if source_name == "v2fly":
-                # 特殊处理 v2fly yml
-                rules = parse_dlc_yml(content, source_name)
-            else:
-                rules = []
-                for line in content.split('\n'):
-                    rule = parse_domain_rule(line, source_name)
-                    if rule:
-                        rules.append(rule)
-            
-            # 检查规则数量
-            if len(rules) == 0:
-                error_msg = f"错误: {filename} 解析规则为0，可能网络错误或链接无效，脚本退出"
-                log(error_msg, log_file)
-                if log_file:
-                    log_file.close()
-                print(error_msg)
-                sys.exit(1)
-            
-            all_rules.extend(rules)
-            log(f"  获取 {len(rules)} 条规则: {filename}", log_file)
-    
-    # 步骤 4: 本地自定义规则
-    if os.path.exists(OUTPUT_CUSTOM_SRC):
-        log(f"加载本地自定义规则: {OUTPUT_CUSTOM_SRC}", log_file)
-        custom_rules = load_custom_rules(OUTPUT_CUSTOM_SRC)
-        all_rules.extend(custom_rules)
-        log(f"  添加 {len(custom_rules)} 条自定义规则", log_file)
-    
-    # 步骤 5: 全局去重
-    log(f"去重前共 {len(all_rules)} 条规则", log_file)
-    all_rules = deduplicate_rules(all_rules)
-    log(f"去重后共 {len(all_rules)} 条规则", log_file)
-    
-    # 步骤 6: 清理失效规则 (已在上一步处理)
-    
-    # 步骤 7: 合并自定义域名
-    # 已经在步骤4处理
-    
-    # 步骤 8: 生成输出文件
-    
-    # 生成 organized_cn_mark.txt (原始规则)
-    with open(OUTPUT_ORGANIZED, 'w', encoding='utf-8') as f:
-        f.write("# ============================================\n")
-        f.write("# CN 域名规则列表 (原始格式)\n")
-        f.write(f"# 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write("# ============================================\n")
-        f.write("\n")
-        
-        # 按来源分组
-        current_source = None
-        for rule in all_rules:
-            if rule["source"] != current_source:
-                current_source = rule["source"]
-                f.write(f"\n# --- {current_source} ---\n")
-            
-            f.write(f"{rule['original']}\n")
-    
-    log(f"生成原始规则文件: {OUTPUT_ORGANIZED}", log_file)
-    
-    # 生成 custom_cn_mark.txt (格式化)
-    with open(OUTPUT_CUSTOM, 'w', encoding='utf-8') as f:
-        f.write("# ============================================\n")
-        f.write("# PaoPaoDNS CN 标记域名列表\n")
-        f.write(f"# 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write("# ============================================\n")
-        f.write("# \n")
-        f.write("# 格式说明:\n")
-        f.write("#   domain:xxx - 域名后缀匹配 (包含子域名)\n")
-        f.write("#   full:xxx  - 完整精确匹配\n")
-        f.write("#   keyword:xxx - 关键字匹配\n")
-        f.write("#   regexp:xxx - 正则匹配\n")
-        f.write("# ============================================\n")
-        f.write("\n")
-        
-        for rule in all_rules:
-            formatted = convert_to_paopaodns_format(rule["type"], rule["domain"])
-            f.write(f"{formatted}\n")
-    
-    log(f"生成格式化规则文件: {OUTPUT_CUSTOM}", log_file)
-    
-    if log_file:
-        log_file.close()
-    
-    print(f"\n完成！")
-    print(f"  原始规则: {OUTPUT_ORGANIZED}")
-    print(f"  格式化规则: {OUTPUT_CUSTOM}")
-    print(f"  总规则数: {len(all_rules)}")
+                log(f"正在处理 {source_name} 源...", log_file)
+
+            for filename, urls in source_config["files"]:
+                content = fetch_rule_content(
+                    source_name,
+                    filename,
+                    urls,
+                    args,
+                    log_file,
+                    timeout=180 if source_name == "v2fly" else 60
+                )
+
+                rules = parse_rule_content(content, source_name)
+                if len(rules) == 0:
+                    raise RuntimeError(f"错误: {filename} 解析规则为0，可能网络错误或链接无效，脚本退出")
+
+                all_rules.extend(rules)
+                log(f"  获取 {len(rules)} 条规则: {filename}", log_file)
+
+        # 步骤 4: 第三方规则链接
+        custom_rule_urls = load_rule_source_urls(OUTPUT_CUSTOM_RULE_SRC)
+        if custom_rule_urls:
+            log(f"加载第三方规则链接: {OUTPUT_CUSTOM_RULE_SRC}", log_file)
+            for url in custom_rule_urls:
+                cache_name = build_remote_cache_name(url)
+                content = fetch_rule_content(
+                    "custom_rule",
+                    cache_name,
+                    [url],
+                    args,
+                    log_file
+                )
+                rules = parse_rule_content(content, "custom_rule")
+                if len(rules) == 0:
+                    raise RuntimeError(f"错误: 第三方规则链接未解析出有效规则: {url}")
+
+                all_rules.extend(rules)
+                log(f"  添加 {len(rules)} 条第三方规则: {url}", log_file)
+
+        # 步骤 5: 本地自定义规则
+        if os.path.exists(OUTPUT_CUSTOM_SRC):
+            log(f"加载本地自定义规则: {OUTPUT_CUSTOM_SRC}", log_file)
+            custom_rules = load_custom_rules(OUTPUT_CUSTOM_SRC)
+            all_rules.extend(custom_rules)
+            log(f"  添加 {len(custom_rules)} 条自定义规则", log_file)
+
+        # 步骤 6: 全局去重
+        log(f"去重前共 {len(all_rules)} 条规则", log_file)
+        all_rules = deduplicate_rules(all_rules)
+        log(f"去重后共 {len(all_rules)} 条规则", log_file)
+
+        # 步骤 7: 生成输出文件
+        with open(OUTPUT_ORGANIZED, 'w', encoding='utf-8') as f:
+            f.write("# ============================================\n")
+            f.write("# CN 域名规则列表 (原始格式)\n")
+            f.write(f"# 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write("# ============================================\n")
+            f.write("\n")
+
+            current_source = None
+            for rule in all_rules:
+                if rule["source"] != current_source:
+                    current_source = rule["source"]
+                    f.write(f"\n# --- {current_source} ---\n")
+
+                f.write(f"{rule['original']}\n")
+
+        log(f"生成原始规则文件: {OUTPUT_ORGANIZED}", log_file)
+
+        grouped_custom_output_rules = group_rules_for_custom_output(all_rules)
+
+        with open(OUTPUT_CUSTOM, 'w', encoding='utf-8') as f:
+            f.write("# ============================================\n")
+            f.write("# PaoPaoDNS CN 标记域名列表\n")
+            f.write(f"# 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write("# ============================================\n")
+            f.write("# 此文件由 generate_cn_rules.py 自动生成，请勿直接修改\n")
+            f.write("# 自定义规则请编辑 custom.txt 或 custom_rule.txt 后重新生成\n")
+            f.write("# \n")
+            f.write("# 格式说明:\n")
+            f.write("#   full:xxx  - 完整精确匹配\n")
+            f.write("#   domain:xxx - 域名后缀匹配 (包含子域名)\n")
+            f.write("#   regexp:xxx - 正则匹配\n")
+            f.write("#   keyword:xxx - 关键字匹配\n")
+            f.write("#   省略前缀时按 domain: 处理\n")
+            f.write("#   同一文本匹配优先级: full > domain > regexp > keyword\n")
+            f.write("# ============================================\n")
+            f.write("\n")
+
+            for section_key in ("custom", "custom_rule", "generated"):
+                section_rules = grouped_custom_output_rules[section_key]
+                f.write(f"# --- {CUSTOM_OUTPUT_SECTION_TITLES[section_key]} ---\n")
+                f.write(f"# 共 {len(section_rules)} 条\n")
+                if not section_rules:
+                    f.write("# 无\n\n")
+                    continue
+
+                for rule in section_rules:
+                    formatted = convert_to_paopaodns_format(rule["type"], rule["domain"])
+                    f.write(f"{formatted}\n")
+                f.write("\n")
+
+        log(f"生成格式化规则文件: {OUTPUT_CUSTOM}", log_file)
+
+        print(f"\n完成！")
+        print(f"  原始规则: {OUTPUT_ORGANIZED}")
+        print(f"  格式化规则: {OUTPUT_CUSTOM}")
+        print(f"  总规则数: {len(all_rules)}")
+    except RuntimeError as exc:
+        log(str(exc), log_file)
+        raise
+    finally:
+        if log_file:
+            log_file.close()
 
 def show_help():
     """显示帮助信息"""
@@ -526,7 +636,8 @@ def show_help():
   1. Aethersailor (最高优先级)
   2. Loyalsoldier
   3. v2fly
-  4. 本地自定义 (custom.txt)
+  4. 第三方规则链接 (custom_rule.txt)
+  5. 本地自定义 (custom.txt)
 
 【命令行参数】
   --help, -h       显示帮助信息
@@ -538,6 +649,7 @@ def show_help():
 【输出文件】
   organized_cn_mark.txt  - 合并去重后的原始规则文件
   custom_cn_mark.txt     - 格式化后的最终规则文件 (PaoPaoDNS 使用)
+  custom_rule.txt        - 第三方规则链接列表 (可选)
   custom.txt             - 个人自定义规则文件 (可选)
   generate.log           - 日志文件 (可选)
   .cache/                - 已下载源文件缓存目录
@@ -548,6 +660,7 @@ def show_help():
   - DOMAIN,example.com
   - full:example.com
   - domain:example.com
+  - regexp:.*\\.example\\.com$
   - example.com (裸域名)
 
 【注意事项】
@@ -582,4 +695,7 @@ if __name__ == "__main__":
     if args.help:
         show_help()
     else:
-        generate_rules(args)
+        try:
+            generate_rules(args)
+        except RuntimeError:
+            sys.exit(1)

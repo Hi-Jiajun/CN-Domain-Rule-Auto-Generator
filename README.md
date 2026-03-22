@@ -49,6 +49,18 @@ python3 generate_cn_rules.py --log
 
 # 仅使用本地缓存，不发起网络下载
 python3 generate_cn_rules.py --no-download
+
+# 启动交互式自定义规则管理工具
+python3 manage_custom_rules.py
+
+# 直接通过命令行添加一条自定义规则
+python3 manage_custom_rules.py add-rule domain:example.com
+
+# 通过配置文件批量执行非交互操作
+python3 manage_custom_rules.py run-config manage_custom_rules.toml
+
+# 仅使用缓存重新生成
+python3 manage_custom_rules.py generate --no-download
 ```
 
 ### 命令行参数
@@ -71,6 +83,7 @@ python3 generate_cn_rules.py --no-download
 |------|------|
 | `custom.txt` | 个人自定义域名列表（可选） |
 | `custom_rule.txt` | 第三方规则链接列表（可选） |
+| `manage_custom_rules.toml` | 批量非交互配置文件（可选） |
 
 ### 输出文件
 
@@ -78,6 +91,26 @@ python3 generate_cn_rules.py --no-download
 |------|------|
 | `organized_cn_mark.txt` | 合并去重后的原始规则文件 |
 | `custom_cn_mark.txt` | PaoPaoDNS 项目专用最终规则文件 |
+
+### 交互式与配置化管理
+
+如果你不想手动编辑 `custom.txt` / `custom_rule.txt`，可以使用 `manage_custom_rules.py` 进行交互式或命令行管理。
+
+示例：
+
+```bash
+python3 manage_custom_rules.py list-rules
+python3 manage_custom_rules.py add-rule full:api.example.com
+python3 manage_custom_rules.py add-url https://example.com/rules.txt
+python3 manage_custom_rules.py run-config manage_custom_rules.toml
+python3 manage_custom_rules.py generate --no-download
+```
+
+仓库内也提供了 [manage_custom_rules.toml](./manage_custom_rules.toml) 示例配置，可用于批量非交互操作，例如：
+
+- 添加或删除 `custom.txt` 中的本地规则
+- 添加或删除 `custom_rule.txt` 中的第三方规则链接
+- 在完成增删后按配置决定是否自动重新生成规则
 
 ---
 

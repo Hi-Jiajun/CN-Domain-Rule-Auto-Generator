@@ -1,15 +1,21 @@
-# 个人自定义直连域名列表
-# 
-# 格式：支持以下格式（每行一条规则）
-#   domain:example.com      - 域名后缀匹配（包含子域名）
-#   full:example.com       - 完整精确匹配
-#   regexp:.*\.example\.com$ - 正则匹配
-#   keyword:example       - 关键字匹配
+# 用户自定义规则
+# 每行一条规则，重新生成后会优先显示在 custom_cn_mark.txt 最前面。
 #
-# 重复域名会自动跳过并标注注释「下载规则已存在该域名」
-# 自定义域名会标记为「个人自定义标记CN域名」
+# 支持格式：
+#   domain:example.com
+#   full:example.com
+#   regexp:.+\.example\.com$
+#   keyword:example
+#   example.com
+#
+# 说明：
+#   1. 省略前缀时按 domain: 处理。
+#   2. 同一文本匹配优先级：full > domain > regexp > keyword。
+#   3. regexp 使用 Go 标准正则；regexp/keyword 会消耗更多资源，建议优先用 full/domain。
+#   4. 如果和上游规则重复，生成时会自动去重，但这里的规则仍会单独归到“用户自定义规则”分组。
 #
 # 示例：
 # domain:example.com
-# full:example.org
-# keyword:google
+# full:api.example.com
+# regexp:^.+\.internal\.example\.com$
+# keyword:example-cdn

@@ -1,16 +1,19 @@
-# 第三方规则链接列表
-# 
-# 每行填写一个规则链接，脚本会自动抓取此处链接中的域名规则
-# 统一标记为「其他域名」
+# 第三方规则链接
+# 每行一个 http/https 链接，脚本会下载并解析其中的域名规则。
+# 重新生成后，这些规则会显示在 custom_cn_mark.txt 的“第三方规则链接导入”分组。
 #
-# 优先级顺序：Aethersailor > Loyalsoldier > v2fly > 本文件规则 > 个人自定义
-#
-# 支持的格式：
+# 支持的规则格式：
 #   DOMAIN-SUFFIX,example.com
 #   DOMAIN,example.com
 #   full:example.com
 #   domain:example.com
-#   example.com (裸域名)
+#   regexp:.+\.example\.com$
+#   keyword:example
+#   example.com
+#
+# 说明：
+#   1. 第三方规则优先级低于 custom.txt，本地自定义会覆盖它们。
+#   2. 链接内容会缓存到 .cache/，可配合 --no-download 使用。
 #
 # 示例：
 # https://raw.githubusercontent.com/username/repo/main/rules.txt
