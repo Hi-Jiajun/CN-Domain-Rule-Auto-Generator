@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-03-21 04:39:53
+# 生成时间: 2026-03-22 04:55:11
 # ============================================
 
 
@@ -164,6 +164,10 @@ DOMAIN-SUFFIX,alonginwind.to
 DOMAIN-SUFFIX,alonginwind.eu.org
 DOMAIN-SUFFIX,hezuvip.com
 DOMAIN-SUFFIX,iosgujian.com
+DOMAIN-SUFFIX,openkylin.top
+DOMAIN-SUFFIX,chessease.net
+DOMAIN-SUFFIX,wildfirechat.net
+DOMAIN-SUFFIX,xgzb.top
 DOMAIN-SUFFIX,boxim.online
 DOMAIN-SUFFIX,zhangleglobal.com
 DOMAIN-SUFFIX,hongxingdl.love
@@ -117383,7 +117387,6 @@ domain:linglong.space
 domain:linyaps.org.cn
 domain:mindspore.cn
 domain:mysxl.cn
-domain:openkylin.top
 domain:pingcap.cn
 domain:programmer.com.cn
 domain:programmer.net.cn

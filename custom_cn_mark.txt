@@ -1,6 +1,6 @@
 # ============================================
 # PaoPaoDNS CN 标记域名列表
-# 生成时间: 2026-03-21 04:39:53
+# 生成时间: 2026-03-22 04:55:11
 # ============================================
 # 
 # 格式说明:
@@ -169,6 +169,10 @@ domain:alonginwind.to
 domain:alonginwind.eu.org
 domain:hezuvip.com
 domain:iosgujian.com
+domain:openkylin.top
+domain:chessease.net
+domain:wildfirechat.net
+domain:xgzb.top
 domain:boxim.online
 domain:zhangleglobal.com
 domain:hongxingdl.love
@@ -117384,7 +117388,6 @@ domain:linglong.space
 domain:linyaps.org.cn
 domain:mindspore.cn
 domain:mysxl.cn
-domain:openkylin.top
 domain:pingcap.cn
 domain:programmer.com.cn
 domain:programmer.net.cn
