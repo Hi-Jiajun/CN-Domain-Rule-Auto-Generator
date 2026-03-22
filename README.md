@@ -164,6 +164,12 @@ python3 manage_custom_rules.py generate --no-download
 
 ---
 
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Hi-Jiajun/CN-Domain-Rule-Auto-Generator&type=Date)](https://star-history.com/#Hi-Jiajun/CN-Domain-Rule-Auto-Generator&Date)
+
+---
+
 ## 💖 赞赏支持
 
 如果本项目对你有帮助，欢迎赞赏支持，感谢你的鼓励！

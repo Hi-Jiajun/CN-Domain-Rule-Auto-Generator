@@ -163,6 +163,12 @@ Thanks to the contributors of the following open source projects:
 
 ---
 
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Hi-Jiajun/CN-Domain-Rule-Auto-Generator&type=Date)](https://star-history.com/#Hi-Jiajun/CN-Domain-Rule-Auto-Generator&Date)
+
+---
+
 ## 💖 Donation Support
 
 If this project is helpful to you, your donations are greatly appreciated!
