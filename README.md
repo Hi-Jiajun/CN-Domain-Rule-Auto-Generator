@@ -56,6 +56,12 @@ python3 manage_custom_rules.py
 # 直接通过命令行添加一条自定义规则
 python3 manage_custom_rules.py add-rule domain:example.com
 
+# 查看配置文件中的默认数据源状态
+python3 manage_custom_rules.py list-sources
+
+# 切换一个默认数据源的启用状态
+python3 manage_custom_rules.py toggle-source v2fly
+
 # 通过配置文件批量执行非交互操作
 python3 manage_custom_rules.py run-config manage_custom_rules.toml
 
@@ -102,6 +108,8 @@ python3 manage_custom_rules.py generate --no-download
 python3 manage_custom_rules.py list-rules
 python3 manage_custom_rules.py add-rule full:api.example.com
 python3 manage_custom_rules.py add-url https://example.com/rules.txt
+python3 manage_custom_rules.py list-sources
+python3 manage_custom_rules.py toggle-source v2fly
 python3 manage_custom_rules.py run-config manage_custom_rules.toml
 python3 manage_custom_rules.py generate --no-download
 ```
@@ -110,6 +118,7 @@ python3 manage_custom_rules.py generate --no-download
 
 - 添加或删除 `custom.txt` 中的本地规则
 - 添加或删除 `custom_rule.txt` 中的第三方规则链接
+- 选择默认启用哪些上游规则源
 - 在完成增删后按配置决定是否自动重新生成规则
 
 ---
@@ -123,7 +132,6 @@ python3 manage_custom_rules.py generate --no-download
 | Custom_OpenClash_Rules | [Aethersailor/Custom_OpenClash_Rules](https://github.com/Aethersailor/Custom_OpenClash_Rules) |
 | v2ray-rules-dat | [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) |
 | domain-list-community | [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) |
-| dnsmasq-china-list | [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list) |
 
 ---
 
@@ -160,7 +168,6 @@ python3 manage_custom_rules.py generate --no-download
 - **[Aethersailor](https://github.com/Aethersailor)** - Custom_OpenClash_Rules
 - **[Loyalsoldier](https://github.com/Loyalsoldier)** - v2ray-rules-dat
 - **[v2fly](https://github.com/v2fly)** - domain-list-community
-- **[felixonmars](https://github.com/felixonmars)** - dnsmasq-china-list
 
 ---
 

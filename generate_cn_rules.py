@@ -13,6 +13,7 @@ import os
 import re
 import ssl
 import sys
+import time
 import urllib.parse
 import urllib.request
 from datetime import datetime
@@ -29,6 +30,7 @@ CACHE_DIR = os.path.join(BASE_DIR, ".cache")
 # 数据源配置
 SOURCES = {
     "Aethersailor": {
+        "display_name": "Custom_OpenClash_Rules",
         "priority": 1,
         "files": [
             ("Custom_Direct.list", [
@@ -43,6 +45,7 @@ SOURCES = {
         ]
     },
     "Loyalsoldier": {
+        "display_name": "v2ray-rules-dat",
         "priority": 2,
         "files": [
             ("direct-list.txt", [
@@ -60,9 +63,11 @@ SOURCES = {
         ]
     },
     "v2fly": {
+        "display_name": "domain-list-community",
         "priority": 3,
         "files": [
             ("dlc.dat_plain.yml", [
+                "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat_plain.yml",
                 "https://raw.githubusercontent.com/v2fly/domain-list-community/release/dlc.dat_plain.yml"
             ]),
         ]
@@ -92,6 +97,18 @@ CUSTOM_OUTPUT_SECTION_TITLES = {
     "custom": "用户自定义规则（编辑 custom.txt）",
     "custom_rule": "第三方规则链接导入（编辑 custom_rule.txt）",
     "generated": "自动聚合规则（请勿直接修改）",
+}
+
+SOURCE_ALIASES = {
+    "aethersailor": "Aethersailor",
+    "custom_openclash_rules": "Aethersailor",
+    "custom-openclash-rules": "Aethersailor",
+    "loyalsoldier": "Loyalsoldier",
+    "v2ray_rules_dat": "Loyalsoldier",
+    "v2ray-rules-dat": "Loyalsoldier",
+    "v2fly": "v2fly",
+    "domain_list_community": "v2fly",
+    "domain-list-community": "v2fly",
 }
 
 # ==================== 工具函数 ====================
@@ -132,18 +149,17 @@ def get_fallback_urls(url):
     parsed = urllib.parse.urlparse(url)
     
     if parsed.netloc == "raw.githubusercontent.com":
-        # JsDelivr CDN
         jsdelivr_url = get_jsdelivr_url(url)
         if jsdelivr_url:
             urls.append(jsdelivr_url)
+        urls.append(f"https://ghfast.top/{url}")
     
     elif parsed.netloc == "github.com":
-        # ghfast.top 代理
         urls.append(f"https://ghfast.top/{url}")
     
     return urls
 
-def download_file_with_fallback(url, timeout=60, verbose=False, use_fallback_direct=False, max_retries=3):
+def download_file_with_fallback(url, timeout=60, verbose=False, use_fallback_direct=False, max_retries=2):
     """下载文件，支持备用URL
     
     Args:
@@ -162,24 +178,29 @@ def download_file_with_fallback(url, timeout=60, verbose=False, use_fallback_dir
     else:
         all_urls = [url] + get_fallback_urls(url)
     
-    for attempt, try_url in enumerate(all_urls):
-        if verbose:
-            retry_msg = f" (重试 {attempt + 1}/{max_retries})" if attempt > 0 else ""
-            log(f"    尝试: {try_url[:60]}...{retry_msg}")
-        
-        content = download_file(try_url, timeout)
-        
-        # 检查下载是否正常
-        if content and len(content) > 10:
-            # 检查是否包含有效内容（不是错误页面）
-            if "404" not in content[:200] and "Not Found" not in content[:200]:
-                return content
-            else:
-                if verbose:
-                    log(f"    下载返回404，跳过")
-        elif content:
+    for url_index, try_url in enumerate(all_urls):
+        for retry_index in range(max_retries):
             if verbose:
-                log(f"    下载内容过短，可能失败")
+                retry_msg = f" (重试 {retry_index + 1}/{max_retries})" if retry_index > 0 else ""
+                log(f"    尝试: {try_url[:80]}...{retry_msg}")
+
+            content = download_file(try_url, timeout)
+
+            if content and len(content) > 10:
+                if "404" not in content[:200] and "Not Found" not in content[:200]:
+                    return content
+                if verbose:
+                    log("    下载返回404，跳过")
+                break
+
+            if content and verbose:
+                log("    下载内容过短，可能失败")
+
+            if retry_index + 1 < max_retries:
+                time.sleep(1)
+
+        if url_index + 1 < len(all_urls) and verbose:
+            log("    当前地址下载失败，切换下一个镜像")
     
     return None
 
@@ -199,6 +220,40 @@ def download_file(url, timeout=60):
     except Exception as e:
         log(f"下载失败 {url}: {e}")
         return None
+
+def normalize_source_name(source_name):
+    """标准化数据源名称。"""
+    if source_name in SOURCES:
+        return source_name
+
+    normalized = source_name.strip().lower().replace(" ", "_")
+    if normalized in SOURCE_ALIASES:
+        return SOURCE_ALIASES[normalized]
+
+    raise RuntimeError(f"错误: 未知数据源 {source_name}")
+
+def resolve_enabled_sources(args):
+    """根据参数确定启用的数据源。"""
+    if getattr(args, "list_sources", False):
+        for source_name, source_config in SOURCES.items():
+            print(f"{source_name} ({source_config['display_name']})")
+        raise SystemExit(0)
+
+    enabled_sources = list(SOURCES.keys())
+
+    if getattr(args, "sources", None):
+        enabled_sources = [normalize_source_name(source) for source in args.sources]
+
+    if getattr(args, "exclude_sources", None):
+        excluded = {normalize_source_name(source) for source in args.exclude_sources}
+        enabled_sources = [source for source in enabled_sources if source not in excluded]
+
+    deduplicated_sources = []
+    for source in enabled_sources:
+        if source not in deduplicated_sources:
+            deduplicated_sources.append(source)
+
+    return deduplicated_sources
 
 def normalize_rule_value(rule_type, value):
     """根据规则类型规范化值。"""
@@ -471,9 +526,6 @@ def fetch_rule_content(source_name, filename, urls, args, log_file=None, timeout
         urls = [urls]
 
     for url in urls:
-        if args.verbose:
-            log(f"    尝试: {url[:60]}...", log_file)
-
         content = download_file_with_fallback(
             url,
             timeout=timeout,
@@ -498,10 +550,13 @@ def generate_rules(args):
         if log_file:
             log("开始生成 CN 域名规则", log_file)
 
+        enabled_sources = resolve_enabled_sources(args)
+        enabled_source_configs = [(name, SOURCES[name]) for name in enabled_sources]
+
         # 步骤 1-3: 抓取各源规则
-        for source_name, source_config in SOURCES.items():
+        for source_name, source_config in enabled_source_configs:
             if args.verbose:
-                log(f"正在处理 {source_name} 源...", log_file)
+                log(f"正在处理 {source_name} 源 ({source_config['display_name']})...", log_file)
 
             for filename, urls in source_config["files"]:
                 content = fetch_rule_content(
@@ -645,6 +700,9 @@ def show_help():
   --log            生成日志文件
   --no-download    跳过下载，仅处理缓存文件
   -f, --use-fallback  直接使用备用链接下载（大陆环境）
+  --source         仅启用指定默认数据源，可重复传入
+  --exclude-source 排除指定默认数据源，可重复传入
+  --list-sources   列出可用默认数据源并退出
 
 【输出文件】
   organized_cn_mark.txt  - 合并去重后的原始规则文件
@@ -689,6 +747,9 @@ if __name__ == "__main__":
     parser.add_argument("--log", action="store_true")
     parser.add_argument("--no-download", action="store_true")
     parser.add_argument("-f", "--use-fallback", action="store_true", help="直接使用备用链接下载（大陆环境）")
+    parser.add_argument("--source", dest="sources", action="append", help="仅启用指定默认数据源，可重复传入")
+    parser.add_argument("--exclude-source", dest="exclude_sources", action="append", help="排除指定默认数据源，可重复传入")
+    parser.add_argument("--list-sources", action="store_true", help="列出可用默认数据源并退出")
 
     args = parser.parse_args()
 
@@ -699,3 +760,6 @@ if __name__ == "__main__":
             generate_rules(args)
         except RuntimeError:
             sys.exit(1)
+        except KeyboardInterrupt:
+            print("\n已取消生成。")
+            sys.exit(130)

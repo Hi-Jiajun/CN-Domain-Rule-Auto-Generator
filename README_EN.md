@@ -56,6 +56,12 @@ python3 manage_custom_rules.py
 # Add a local custom rule directly from CLI
 python3 manage_custom_rules.py add-rule domain:example.com
 
+# Show default source status in config
+python3 manage_custom_rules.py list-sources
+
+# Toggle one default source in config
+python3 manage_custom_rules.py toggle-source v2fly
+
 # Apply a batch config file
 python3 manage_custom_rules.py run-config manage_custom_rules.toml
 
@@ -101,6 +107,8 @@ Examples:
 python3 manage_custom_rules.py list-rules
 python3 manage_custom_rules.py add-rule full:api.example.com
 python3 manage_custom_rules.py add-url https://example.com/rules.txt
+python3 manage_custom_rules.py list-sources
+python3 manage_custom_rules.py toggle-source v2fly
 python3 manage_custom_rules.py run-config manage_custom_rules.toml
 python3 manage_custom_rules.py generate --no-download
 ```
@@ -109,6 +117,7 @@ The repository also includes [manage_custom_rules.toml](./manage_custom_rules.to
 
 - add/remove local rules
 - add/remove third-party rule URLs
+- choose which default upstream sources are enabled
 - optionally trigger rule generation after applying the changes
 
 ---
@@ -122,7 +131,6 @@ Domain rules are aggregated from the following open source projects:
 | Custom_OpenClash_Rules | [Aethersailor/Custom_OpenClash_Rules](https://github.com/Aethersailor/Custom_OpenClash_Rules) |
 | v2ray-rules-dat | [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) |
 | domain-list-community | [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) |
-| dnsmasq-china-list | [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list) |
 
 ---
 
@@ -159,7 +167,6 @@ Thanks to the contributors of the following open source projects:
 - **[Aethersailor](https://github.com/Aethersailor)** - Custom_OpenClash_Rules
 - **[Loyalsoldier](https://github.com/Loyalsoldier)** - v2ray-rules-dat
 - **[v2fly](https://github.com/v2fly)** - domain-list-community
-- **[felixonmars](https://github.com/felixonmars)** - dnsmasq-china-list
 
 ---
 

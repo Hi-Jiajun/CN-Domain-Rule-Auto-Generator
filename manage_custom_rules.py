@@ -16,6 +16,13 @@ CUSTOM_RULES_FILE = os.path.join(BASE_DIR, "custom.txt")
 CUSTOM_RULE_URLS_FILE = os.path.join(BASE_DIR, "custom_rule.txt")
 DEFAULT_CONFIG_FILE = os.path.join(BASE_DIR, "manage_custom_rules.toml")
 
+DEFAULT_CONFIG = {
+    "rules": {"remove": [], "add": []},
+    "rule_urls": {"remove": [], "add": []},
+    "sources": {"enabled": list(generator.SOURCES.keys())},
+    "generate": {"run": False, "no_download": True, "use_fallback": True},
+}
+
 
 def read_entries(filepath):
     """读取文件中的非注释条目。"""
@@ -122,7 +129,7 @@ def prompt_entry_index(entries, prompt_text_value):
     return index - 1
 
 
-def run_generator(no_download=False, use_fallback=False):
+def run_generator(no_download=False, use_fallback=False, sources=None, exclude_sources=None):
     """调用主生成脚本。"""
     args = SimpleNamespace(
         help=False,
@@ -130,6 +137,9 @@ def run_generator(no_download=False, use_fallback=False):
         log=True,
         no_download=no_download,
         use_fallback=use_fallback,
+        sources=sources,
+        exclude_sources=exclude_sources,
+        list_sources=False,
     )
     generator.generate_rules(args)
 
@@ -190,6 +200,34 @@ def remove_rule_url(url):
     return 1
 
 
+def merge_config_with_defaults(config):
+    """将用户配置与默认配置合并。"""
+    merged = {
+        "rules": {
+            "remove": list(DEFAULT_CONFIG["rules"]["remove"]),
+            "add": list(DEFAULT_CONFIG["rules"]["add"]),
+        },
+        "rule_urls": {
+            "remove": list(DEFAULT_CONFIG["rule_urls"]["remove"]),
+            "add": list(DEFAULT_CONFIG["rule_urls"]["add"]),
+        },
+        "sources": {
+            "enabled": list(DEFAULT_CONFIG["sources"]["enabled"]),
+        },
+        "generate": {
+            "run": DEFAULT_CONFIG["generate"]["run"],
+            "no_download": DEFAULT_CONFIG["generate"]["no_download"],
+            "use_fallback": DEFAULT_CONFIG["generate"]["use_fallback"],
+        },
+    }
+
+    for section_name, section_value in config.items():
+        if isinstance(section_value, dict) and section_name in merged:
+            merged[section_name].update(section_value)
+
+    return merged
+
+
 def load_config_file(config_path):
     """读取 TOML 配置文件。"""
     with open(config_path, "rb") as f:
@@ -198,7 +236,68 @@ def load_config_file(config_path):
     if not isinstance(data, dict):
         raise RuntimeError("配置文件内容无效，顶层必须是 TOML 表。")
 
-    return data
+    return merge_config_with_defaults(data)
+
+
+def dump_string_list(values):
+    """将字符串列表格式化为 TOML 数组。"""
+    if not values:
+        return "[]"
+
+    lines = ["["]
+    for value in values:
+        escaped_value = value.replace("\\", "\\\\").replace('"', '\\"')
+        lines.append(f'  "{escaped_value}",')
+    lines.append("]")
+    return "\n".join(lines)
+
+
+def write_config_file(config_path, config):
+    """写回 TOML 配置文件。"""
+    lines = [
+        "# manage_custom_rules.py 配置文件",
+        "# 用法：",
+        "#   python manage_custom_rules.py run-config",
+        f"#   python manage_custom_rules.py run-config {os.path.basename(config_path)}",
+        "#",
+        "# 执行顺序：",
+        "#   1. 先删除 rules.remove / rule_urls.remove",
+        "#   2. 再添加 rules.add / rule_urls.add",
+        "#   3. 根据 [sources] 选择启用的默认数据源",
+        "#   4. 最后按 [generate] 配置决定是否重新生成",
+        "",
+        "[rules]",
+        "# 要从 custom.txt 删除的规则",
+        f"remove = {dump_string_list(config['rules']['remove'])}",
+        "",
+        "# 要追加到 custom.txt 的规则",
+        f"add = {dump_string_list(config['rules']['add'])}",
+        "",
+        "[rule_urls]",
+        "# 要从 custom_rule.txt 删除的链接",
+        f"remove = {dump_string_list(config['rule_urls']['remove'])}",
+        "",
+        "# 要追加到 custom_rule.txt 的链接",
+        f"add = {dump_string_list(config['rule_urls']['add'])}",
+        "",
+        "[sources]",
+        "# 启用的默认数据源，可选值：Aethersailor、Loyalsoldier、v2fly",
+        f"enabled = {dump_string_list(config['sources']['enabled'])}",
+        "",
+        "[generate]",
+        "# true 时会在完成增删后调用 generate_cn_rules.py",
+        f"run = {'true' if config['generate']['run'] else 'false'}",
+        "",
+        "# run=true 时是否仅使用缓存",
+        f"no_download = {'true' if config['generate']['no_download'] else 'false'}",
+        "",
+        "# run=true 时是否优先使用备用下载链接",
+        f"use_fallback = {'true' if config['generate']['use_fallback'] else 'false'}",
+        "",
+    ]
+
+    with open(config_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
 
 
 def validate_config_list(config, section_name, field_name):
@@ -233,6 +332,12 @@ def validate_config_bool(config, section_name, field_name, default_value=False):
     return value
 
 
+def validate_config_sources(config):
+    """读取并校验启用的数据源列表。"""
+    sources = validate_config_list(config, "sources", "enabled")
+    return [generator.normalize_source_name(source) for source in sources]
+
+
 def apply_config_file(config_path):
     """按配置文件批量执行规则维护和生成。"""
     config = load_config_file(config_path)
@@ -250,18 +355,79 @@ def apply_config_file(config_path):
     for url in validate_config_list(config, "rule_urls", "add"):
         exit_code = max(exit_code, add_rule_url(url))
 
+    enabled_sources = validate_config_sources(config)
     should_generate = validate_config_bool(config, "generate", "run", default_value=False)
     no_download = validate_config_bool(config, "generate", "no_download", default_value=False)
     use_fallback = validate_config_bool(config, "generate", "use_fallback", default_value=False)
 
     if should_generate:
         try:
-            run_generator(no_download=no_download, use_fallback=use_fallback)
+            run_generator_with_sources(
+                enabled_sources=enabled_sources,
+                no_download=no_download,
+                use_fallback=use_fallback,
+            )
         except RuntimeError as exc:
             print(f"生成失败: {exc}")
             return 1
 
     return exit_code
+
+
+def run_generator_with_sources(enabled_sources, no_download=False, use_fallback=False):
+    """调用主生成脚本，并显式指定启用的数据源。"""
+    args = SimpleNamespace(
+        help=False,
+        verbose=True,
+        log=True,
+        no_download=no_download,
+        use_fallback=use_fallback,
+        sources=list(enabled_sources),
+        exclude_sources=None,
+        list_sources=False,
+    )
+    generator.generate_rules(args)
+
+
+def load_or_initialize_config(config_path=DEFAULT_CONFIG_FILE):
+    """读取配置文件；不存在则创建默认配置。"""
+    if not os.path.exists(config_path):
+        write_config_file(config_path, merge_config_with_defaults({}))
+    return load_config_file(config_path)
+
+
+def list_source_status(config_path=DEFAULT_CONFIG_FILE):
+    """显示默认数据源启用状态。"""
+    config = load_or_initialize_config(config_path)
+    enabled_sources = set(validate_config_sources(config))
+
+    print_entries(
+        f"默认数据源状态（配置文件: {config_path}）",
+        [
+            f"{source_name} ({source_config['display_name']}) - {'启用' if source_name in enabled_sources else '禁用'}"
+            for source_name, source_config in generator.SOURCES.items()
+        ],
+    )
+    return 0
+
+
+def toggle_source_in_config(source_name, config_path=DEFAULT_CONFIG_FILE):
+    """在配置文件中切换默认数据源状态。"""
+    normalized_source = generator.normalize_source_name(source_name)
+    config = load_or_initialize_config(config_path)
+    enabled_sources = validate_config_sources(config)
+
+    if normalized_source in enabled_sources:
+        enabled_sources = [source for source in enabled_sources if source != normalized_source]
+        action = "禁用"
+    else:
+        enabled_sources.append(normalized_source)
+        action = "启用"
+
+    config["sources"]["enabled"] = enabled_sources
+    write_config_file(config_path, config)
+    print(f"已{action}数据源 {normalized_source}，配置文件已更新。")
+    return 0
 
 
 def show_menu():
@@ -275,8 +441,9 @@ def show_menu():
     print("4. 查看 custom_rule.txt 链接")
     print("5. 添加 custom_rule.txt 链接")
     print("6. 删除 custom_rule.txt 链接")
-    print("7. 在线重新生成规则")
-    print("8. 使用缓存重新生成规则 (--no-download)")
+    print("7. 查看默认数据源状态")
+    print("8. 切换默认数据源状态")
+    print("9. 按配置文件执行（含生成）")
     print("0. 退出")
 
 
@@ -319,15 +486,17 @@ def run_interactive():
             if index is not None:
                 remove_rule_url(entries[index])
         elif choice == "7":
-            try:
-                run_generator(no_download=False)
-            except RuntimeError as exc:
-                print(f"生成失败: {exc}")
+            list_source_status()
         elif choice == "8":
+            list_source_status()
+            source_name = prompt_text("请输入要切换的数据源名称: ")
+            if source_name:
+                toggle_source_in_config(source_name)
+        elif choice == "9":
             try:
-                run_generator(no_download=True)
+                apply_config_file(DEFAULT_CONFIG_FILE)
             except RuntimeError as exc:
-                print(f"生成失败: {exc}")
+                print(f"执行失败: {exc}")
         elif choice == "0":
             print("已退出。")
             return 0
@@ -367,9 +536,21 @@ def build_parser():
         help=f"TOML 配置文件路径，默认: {os.path.basename(DEFAULT_CONFIG_FILE)}",
     )
 
+    subparsers.add_parser("list-sources", help="查看配置文件中的默认数据源状态")
+
+    toggle_source_parser = subparsers.add_parser("toggle-source", help="切换配置文件中的默认数据源状态")
+    toggle_source_parser.add_argument("source", help="数据源名称，如 Aethersailor / Loyalsoldier / v2fly")
+    toggle_source_parser.add_argument(
+        "--config",
+        default=DEFAULT_CONFIG_FILE,
+        help=f"TOML 配置文件路径，默认: {os.path.basename(DEFAULT_CONFIG_FILE)}",
+    )
+
     generate_parser = subparsers.add_parser("generate", help="调用 generate_cn_rules.py 重新生成规则")
     generate_parser.add_argument("--no-download", action="store_true", help="仅使用缓存生成")
     generate_parser.add_argument("-f", "--use-fallback", action="store_true", help="优先使用备用下载链接")
+    generate_parser.add_argument("--source", dest="sources", action="append", help="仅启用指定默认数据源，可重复传入")
+    generate_parser.add_argument("--exclude-source", dest="exclude_sources", action="append", help="排除指定默认数据源，可重复传入")
 
     return parser
 
@@ -398,9 +579,37 @@ def execute_command(args):
         except (OSError, tomllib.TOMLDecodeError, RuntimeError) as exc:
             print(f"配置执行失败: {exc}")
             return 1
+    if args.command == "list-sources":
+        try:
+            return list_source_status()
+        except (OSError, tomllib.TOMLDecodeError, RuntimeError) as exc:
+            print(f"读取数据源状态失败: {exc}")
+            return 1
+    if args.command == "toggle-source":
+        try:
+            return toggle_source_in_config(args.source, config_path=args.config)
+        except (OSError, tomllib.TOMLDecodeError, RuntimeError) as exc:
+            print(f"切换数据源失败: {exc}")
+            return 1
     if args.command == "generate":
         try:
-            run_generator(no_download=args.no_download, use_fallback=args.use_fallback)
+            if args.sources:
+                enabled_sources = [generator.normalize_source_name(source) for source in args.sources]
+                if args.exclude_sources:
+                    excluded_sources = {generator.normalize_source_name(source) for source in args.exclude_sources}
+                    enabled_sources = [source for source in enabled_sources if source not in excluded_sources]
+                run_generator_with_sources(
+                    enabled_sources=enabled_sources,
+                    no_download=args.no_download,
+                    use_fallback=args.use_fallback,
+                )
+            else:
+                run_generator(
+                    no_download=args.no_download,
+                    use_fallback=args.use_fallback,
+                    sources=args.sources,
+                    exclude_sources=args.exclude_sources,
+                )
         except RuntimeError as exc:
             print(f"生成失败: {exc}")
             return 1
@@ -413,8 +622,12 @@ def execute_command(args):
 def main(argv=None):
     """脚本入口。"""
     parser = build_parser()
-    args = parser.parse_args(argv)
-    return execute_command(args)
+    try:
+        args = parser.parse_args(argv)
+        return execute_command(args)
+    except KeyboardInterrupt:
+        print("\n已取消操作。")
+        return 130
 
 
 if __name__ == "__main__":

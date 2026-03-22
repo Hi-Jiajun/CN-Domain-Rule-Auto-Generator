@@ -6,7 +6,8 @@
 # 执行顺序：
 #   1. 先删除 rules.remove / rule_urls.remove
 #   2. 再添加 rules.add / rule_urls.add
-#   3. 最后按 [generate] 配置决定是否重新生成
+#   3. 根据 [sources] 选择启用的默认数据源
+#   4. 最后按 [generate] 配置决定是否重新生成
 
 [rules]
 # 要从 custom.txt 删除的规则
@@ -28,6 +29,17 @@ add = [
   # "https://example.com/rules.txt",
 ]
 
+[sources]
+# 启用的默认数据源，可选值：
+#   Aethersailor  -> Custom_OpenClash_Rules
+#   Loyalsoldier  -> v2ray-rules-dat
+#   v2fly         -> domain-list-community
+enabled = [
+  "Aethersailor",
+  "Loyalsoldier",
+  "v2fly",
+]
+
 [generate]
 # true 时会在完成增删后调用 generate_cn_rules.py
 run = false
@@ -36,4 +48,4 @@ run = false
 no_download = true
 
 # run=true 时是否优先使用备用下载链接
-use_fallback = false
+use_fallback = true

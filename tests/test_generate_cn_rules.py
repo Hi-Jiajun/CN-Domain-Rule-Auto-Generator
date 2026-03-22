@@ -45,6 +45,17 @@ class GenerateCnRulesTests(unittest.TestCase):
         self.assertEqual(1, len(deduplicated))
         self.assertEqual("Aethersailor", deduplicated[0]["source"])
 
+    def test_resolve_enabled_sources_supports_aliases(self):
+        args = SimpleNamespace(
+            list_sources=False,
+            sources=["Custom_OpenClash_Rules", "domain-list-community"],
+            exclude_sources=None,
+        )
+
+        enabled_sources = generator.resolve_enabled_sources(args)
+
+        self.assertEqual(["Aethersailor", "v2fly"], enabled_sources)
+
     def test_load_rule_source_urls_skips_comments(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             filepath = os.path.join(temp_dir, "custom_rule.txt")
@@ -158,12 +169,17 @@ class GenerateCnRulesTests(unittest.TestCase):
         self.assertEqual(0, exit_code)
 
     def test_execute_command_generate(self):
-        args = Namespace(command="generate", no_download=True, use_fallback=False)
+        args = Namespace(command="generate", no_download=True, use_fallback=False, sources=None, exclude_sources=["v2fly"])
 
         with mock.patch.object(manager, "run_generator") as mocked_generate:
             exit_code = manager.execute_command(args)
 
-        mocked_generate.assert_called_once_with(no_download=True, use_fallback=False)
+        mocked_generate.assert_called_once_with(
+            no_download=True,
+            use_fallback=False,
+            sources=None,
+            exclude_sources=["v2fly"],
+        )
         self.assertEqual(0, exit_code)
 
     def test_main_add_url_command(self):
@@ -194,6 +210,9 @@ add = ["domain:new.example.com"]
 remove = ["https://old.example.com/rules.txt"]
 add = ["https://new.example.com/rules.txt"]
 
+[sources]
+enabled = ["Aethersailor", "v2fly"]
+
 [generate]
 run = true
 no_download = true
@@ -203,13 +222,17 @@ use_fallback = false
 
             with mock.patch.object(manager, "CUSTOM_RULES_FILE", rules_file), \
                  mock.patch.object(manager, "CUSTOM_RULE_URLS_FILE", urls_file), \
-                 mock.patch.object(manager, "run_generator") as mocked_generate:
+                 mock.patch.object(manager, "run_generator_with_sources") as mocked_generate:
                 exit_code = manager.apply_config_file(config_file)
 
             self.assertEqual(0, exit_code)
             self.assertEqual(["domain:new.example.com"], manager.read_entries(rules_file))
             self.assertEqual(["https://new.example.com/rules.txt"], manager.read_entries(urls_file))
-            mocked_generate.assert_called_once_with(no_download=True, use_fallback=False)
+            mocked_generate.assert_called_once_with(
+                enabled_sources=["Aethersailor", "v2fly"],
+                no_download=True,
+                use_fallback=False,
+            )
 
     def test_execute_command_run_config(self):
         args = Namespace(command="run-config", config="manage_custom_rules.toml")
@@ -219,6 +242,17 @@ use_fallback = false
 
         mocked_apply.assert_called_once_with("manage_custom_rules.toml")
         self.assertEqual(0, exit_code)
+
+    def test_toggle_source_in_config_updates_enabled_sources(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            config_file = os.path.join(temp_dir, "manage_custom_rules.toml")
+            manager.write_config_file(config_file, manager.merge_config_with_defaults({}))
+
+            exit_code = manager.toggle_source_in_config("v2fly", config_path=config_file)
+            config = manager.load_config_file(config_file)
+
+        self.assertEqual(0, exit_code)
+        self.assertNotIn("v2fly", config["sources"]["enabled"])
 
 
 if __name__ == "__main__":
