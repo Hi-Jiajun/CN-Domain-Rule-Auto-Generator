@@ -56,8 +56,8 @@ python3 generate_cn_rules.py -t 6
 # 使用下载代理
 python3 generate_cn_rules.py -p http://127.0.0.1:7890
 
-# 将 0B/s 停滞超时设为 5 秒
-python3 generate_cn_rules.py -S 5
+# 将网络超时和 0B/s 停滞判定都设为 5 秒
+python3 generate_cn_rules.py -T 5
 
 # 不使用默认上游规则，仅处理 custom.txt / custom_rule.txt
 python3 generate_cn_rules.py -N
@@ -88,8 +88,7 @@ python3 generate_cn_rules.py -g "re:.*-cn$"
 | `-f`, `--use-fallback` | 直接使用备用链接下载（大陆环境） |
 | `-t`, `--threads` | 设置并发下载线程数 |
 | `-p`, `--proxy` | 设置下载代理 |
-| `-T`, `--timeout` | 设置单次请求超时时间 |
-| `-S`, `--stall-timeout` | 设置 0B/s 读取停滞超时时间 |
+| `-T`, `--timeout` | 设置网络超时时间，也用于判定长时间 0B/s |
 | `-r`, `--retries` | 设置每个镜像地址的重试次数 |
 | `-P`, `--no-progress` | 关闭下载进度展示 |
 | `-N`, `--no-default-sources` | 不使用默认上游规则源 |

@@ -56,8 +56,8 @@ python3 generate_cn_rules.py -t 6
 # Use a download proxy
 python3 generate_cn_rules.py -p http://127.0.0.1:7890
 
-# Set 0B/s stall timeout to 5 seconds
-python3 generate_cn_rules.py -S 5
+# Set both network timeout and 0B/s stall detection to 5 seconds
+python3 generate_cn_rules.py -T 5
 
 # Disable default upstream sources
 python3 generate_cn_rules.py -N
@@ -88,8 +88,7 @@ the script tries the original URL first; for `raw.githubusercontent.com` static 
 | `-f`, `--use-fallback` | Use fallback CDN links (for China network) |
 | `-t`, `--threads` | Set concurrent download worker count |
 | `-p`, `--proxy` | Set download proxy |
-| `-T`, `--timeout` | Set per-request timeout |
-| `-S`, `--stall-timeout` | Set 0B/s read stall timeout |
+| `-T`, `--timeout` | Set network timeout; also used for long 0B/s stall detection |
 | `-r`, `--retries` | Set retry count for each mirror URL |
 | `-P`, `--no-progress` | Disable download progress display |
 | `-N`, `--no-default-sources` | Disable default upstream rule sources |
