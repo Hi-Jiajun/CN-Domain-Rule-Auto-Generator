@@ -1,6 +1,6 @@
 # ============================================
 # PaoPaoDNS CN 标记域名列表
-# 生成时间: 2026-03-23 06:49:18
+# 生成时间: 2026-03-23 05:06:13
 # ============================================
 # 此文件由 generate_cn_rules.py 自动生成，请勿直接修改
 # 自定义规则请编辑 custom.txt 或 custom_rule.txt 后重新生成
@@ -23,7 +23,7 @@
 # 无
 
 # --- 自动聚合规则（请勿直接修改） ---
-# 共 119429 条
+# 共 119421 条
 full:1-fss24-s0.streamhoster.com
 full:1.cache.applinzi.com
 full:12371alic.v.myalicdn.com
@@ -1552,6 +1552,11 @@ domain:alonginwind.to
 domain:alonginwind.eu.org
 domain:hezuvip.com
 domain:iosgujian.com
+domain:openkylin.top
+domain:chessease.net
+domain:wildfirechat.net
+domain:xgzb.top
+domain:boxim.online
 domain:zhangleglobal.com
 domain:hongxingdl.love
 domain:hongxingdl.com
@@ -33803,13 +33808,11 @@ domain:esou.biz
 domain:esoua.com
 domain:esound.vip
 domain:esouou.com
-domain:esp8266.com
 domain:espeedpost.com
 domain:esplus.club
 domain:espnlol.com
 domain:esports-console.com
 domain:esportsreg.com
-domain:espressif.com
 domain:esr.com
 domain:essaystar.com
 domain:essca.com
@@ -117470,7 +117473,6 @@ domain:linglong.space
 domain:linyaps.org.cn
 domain:mindspore.cn
 domain:mysxl.cn
-domain:openkylin.top
 domain:pingcap.cn
 domain:programmer.com.cn
 domain:programmer.net.cn
@@ -117845,6 +117847,7 @@ domain:0033.cn
 domain:10jqka.com.cn
 domain:56.com
 domain:6655.com
+domain:8531.cn
 domain:ad.cctv.com:@ads
 domain:adnet.sohu.com:@ads
 domain:ads.sohu.com:@ads
@@ -117931,6 +117934,7 @@ domain:thecover.cn
 domain:thepaper.cn
 domain:theta.sogoucdn.com:@ads
 domain:thsi.cn
+domain:tidenews.com.cn
 domain:tigeek.net.cn
 domain:track.sohu.com:@ads
 domain:tvcc.cn
@@ -118500,6 +118504,7 @@ domain:cmicvip.cn
 domain:cmvideo.cn
 domain:cnlogs.umeng.com:@ads
 domain:cnlogs.umengcloud.com:@ads
+domain:conac.cn
 domain:coolab.top
 domain:cpro.baidu.com:@ads
 domain:cpro.baidustatic.com:@ads
@@ -119047,6 +119052,7 @@ domain:pimlog.baidu.com:@ads
 domain:pingan.com.cn
 domain:pingjs.qq.com:@ads
 domain:pipixiaha.com
+domain:piyao.org.cn
 domain:plbslog.umeng.com:@ads
 domain:pmir.3g.qq.com:@ads
 domain:poizon-inner.com
@@ -119436,20 +119442,6 @@ regexp:.+\\.awsdns-cn-[0-9][0-9]\\.(biz|com|net|top)$:@cn
 regexp:.+\\.awsdns-cn-[0-9][a-e0-9]\\.cn$:@cn
 regexp:^.+-mihayo\\.akamaized\\.net$:@cn
 regexp:^nis.+\\.10010\\.com$
-regexp:\\.(.+-)?ap-beijing(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-beijing(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-chengdu(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-chengdu(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-chongqing(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-chongqing(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-guangzhou(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-guangzhou(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-nanjing(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-nanjing(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-shanghai(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-shanghai(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-shenzhen(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-shenzhen(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
 keyword:synology
 keyword:quickconnect
 keyword:m-team

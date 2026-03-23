@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-03-23 06:49:18
+# 生成时间: 2026-03-23 05:06:13
 # ============================================
 
 
@@ -164,6 +164,11 @@ DOMAIN-SUFFIX,alonginwind.to
 DOMAIN-SUFFIX,alonginwind.eu.org
 DOMAIN-SUFFIX,hezuvip.com
 DOMAIN-SUFFIX,iosgujian.com
+DOMAIN-SUFFIX,openkylin.top
+DOMAIN-SUFFIX,chessease.net
+DOMAIN-SUFFIX,wildfirechat.net
+DOMAIN-SUFFIX,xgzb.top
+DOMAIN-SUFFIX,boxim.online
 DOMAIN-SUFFIX,zhangleglobal.com
 DOMAIN-SUFFIX,hongxingdl.love
 DOMAIN-SUFFIX,hongxingdl.com
@@ -33156,13 +33161,11 @@ esou.biz
 esoua.com
 esound.vip
 esouou.com
-esp8266.com
 espeedpost.com
 esplus.club
 espnlol.com
 esports-console.com
 esportsreg.com
-espressif.com
 esr.com
 essaystar.com
 essca.com
@@ -117431,7 +117434,6 @@ domain:linglong.space
 domain:linyaps.org.cn
 domain:mindspore.cn
 domain:mysxl.cn
-domain:openkylin.top
 domain:pingcap.cn
 domain:programmer.com.cn
 domain:programmer.net.cn
@@ -117825,6 +117827,7 @@ domain:0033.cn
 domain:10jqka.com.cn
 domain:56.com
 domain:6655.com
+domain:8531.cn
 domain:ad.cctv.com:@ads
 domain:adnet.sohu.com:@ads
 domain:ads.sohu.com:@ads
@@ -117911,6 +117914,7 @@ domain:thecover.cn
 domain:thepaper.cn
 domain:theta.sogoucdn.com:@ads
 domain:thsi.cn
+domain:tidenews.com.cn
 domain:tigeek.net.cn
 domain:track.sohu.com:@ads
 domain:tvcc.cn
@@ -118503,6 +118507,7 @@ domain:cmicvip.cn
 domain:cmvideo.cn
 domain:cnlogs.umeng.com:@ads
 domain:cnlogs.umengcloud.com:@ads
+domain:conac.cn
 domain:coolab.top
 domain:cpro.baidu.com:@ads
 domain:cpro.baidustatic.com:@ads
@@ -119050,6 +119055,7 @@ domain:pimlog.baidu.com:@ads
 domain:pingan.com.cn
 domain:pingjs.qq.com:@ads
 domain:pipixiaha.com
+domain:piyao.org.cn
 domain:plbslog.umeng.com:@ads
 domain:pmir.3g.qq.com:@ads
 domain:poizon-inner.com
@@ -119393,20 +119399,6 @@ domain:zvip.cn
 domain:zxsales.cn
 domain:zyhe.com.cn
 domain:zz.bdstatic.com:@ads
-regexp:\\.(.+-)?ap-beijing(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-beijing(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-chengdu(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-chengdu(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-chongqing(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-chongqing(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-guangzhou(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-guangzhou(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-nanjing(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-nanjing(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-shanghai(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-shanghai(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
-regexp:\\.(.+-)?ap-shenzhen(-.+)?\\.myqcloud\\.com$
-regexp:\\.(.+-)?ap-shenzhen(-.+)?\\.tencentcos\\.(cn|com(\\.cn)?)$
 domain:cn
 domain:xn--1qqw23a
 domain:xn--3bst00m
