@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-03-24 04:56:42
+# 生成时间: 2026-03-25 04:56:52
 # ============================================
 
 
@@ -164,6 +164,8 @@ DOMAIN-SUFFIX,alonginwind.to
 DOMAIN-SUFFIX,alonginwind.eu.org
 DOMAIN-SUFFIX,hezuvip.com
 DOMAIN-SUFFIX,iosgujian.com
+DOMAIN-SUFFIX,anytocopy.com
+DOMAIN-SUFFIX,talk-cloud.net
 DOMAIN-SUFFIX,openkylin.top
 DOMAIN-SUFFIX,chessease.net
 DOMAIN-SUFFIX,wildfirechat.net
@@ -102593,7 +102595,6 @@ xiaomicp.com
 xiaomidns.com
 xiaomidns.net
 xiaomiev.com
-xiaomiflash.com
 xiaomiinc.net
 xiaomimimo.com
 xiaomimobile.com
