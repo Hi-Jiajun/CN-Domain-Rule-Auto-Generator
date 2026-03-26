@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-03-25 04:56:52
+# 生成时间: 2026-03-26 05:09:12
 # ============================================
 
 
@@ -11421,6 +11421,7 @@ anhuiry.com
 anhuisjx.com
 anhuisuya.com
 anhuiwine.com
+anhuiyun.com
 anhuizk.com
 ani-sh.com
 aniccw.net
@@ -116261,6 +116262,7 @@ full:crls.pki.goog
 full:csi.gstatic.com
 full:cstat.apple.com
 full:cstat.cdn-apple.com
+full:ctdsb.clouddiffuse.xyz
 full:ctldl.windowsupdate.com
 full:cueme-api.quark.cn
 full:customization-cdn.dell.com
@@ -117866,6 +117868,7 @@ domain:fpb.sohu.com:@ads
 domain:gjgbdszt.cn
 domain:gjgbdszt.com.cn
 domain:gjgbdszt.net.cn
+domain:guancha.cn
 domain:gw.com.cn
 domain:hexin.cn
 domain:hexin.com.cn
@@ -117880,8 +117883,10 @@ domain:ipanda.com.cn
 domain:iresearch.cn
 domain:itc.cn
 domain:jiemian.com.cn
+domain:jinantimes.com.cn
 domain:jrj.com.cn
 domain:jrjimg.cn
+domain:jxnews.com.cn
 domain:livechina.cn
 domain:lu.sogou.com:@ads
 domain:lu.sogoucdn.com:@ads
@@ -117891,6 +117896,8 @@ domain:news.cn
 domain:olympicchannelchina.cn
 domain:p.aty.sohu.com:@ads
 domain:pb.i.sogou.com:@ads
+domain:pcauto.com.cn
+domain:pchouse.com.cn
 domain:pconline.com.cn
 domain:people.cn
 domain:people.com.cn
@@ -117936,6 +117943,7 @@ domain:ynet.com.cn
 domain:zggbdszt.cn
 domain:zggbdszt.com.cn
 domain:zggbdszt.net.cn
+domain:zhiding.cn
 domain:zol-img.com.cn
 domain:zol.com.cn
 domain:zqrb.cn
@@ -117967,6 +117975,7 @@ domain:cn.pool.ntp.org:@cn
 domain:ntp.neu.edu.cn:@cn
 domain:ntp.ntsc.ac.cn:@cn
 domain:ntp.org.cn:@cn
+full:izattime.qcomgeo2.com:@cn
 full:ntp.aliyun.com:@cn
 full:ntp.tencent.com:@cn
 full:ntp1.aliyun.com:@cn
@@ -117984,6 +117993,7 @@ full:ntp7.aliyun.com:@cn
 full:time.amazonaws.cn:@cn
 full:time.izatcloud.net:@cn
 full:time.xtracloud.net:@cn
+full:xtratime.qcomgeo2.com:@cn
 full:enrichgw.10010.com
 full:hap.10010.com
 full:hs.wosms.cn
@@ -118213,6 +118223,7 @@ domain:40407.com
 domain:42r.cn
 domain:500.com
 domain:51.com
+domain:51ctocdn.cn
 domain:5253.com
 domain:52pojie.cn
 domain:55.com
@@ -118236,6 +118247,7 @@ domain:84399.com
 domain:885.com
 domain:8gcdp.cn
 domain:8n82b.cn
+domain:8uri.cn
 domain:900.la
 domain:91.com
 domain:917.com
