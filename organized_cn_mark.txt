@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-03-26 05:09:12
+# 生成时间: 2026-03-27 05:09:58
 # ============================================
 
 
@@ -165,11 +165,13 @@ DOMAIN-SUFFIX,alonginwind.eu.org
 DOMAIN-SUFFIX,hezuvip.com
 DOMAIN-SUFFIX,iosgujian.com
 DOMAIN-SUFFIX,anytocopy.com
-DOMAIN-SUFFIX,talk-cloud.net
 DOMAIN-SUFFIX,openkylin.top
-DOMAIN-SUFFIX,chessease.net
 DOMAIN-SUFFIX,wildfirechat.net
 DOMAIN-SUFFIX,xgzb.top
+DOMAIN-SUFFIX,cmhk.com
+DOMAIN-SUFFIX,kaipanhong.com
+DOMAIN-SUFFIX,talk-cloud.net
+DOMAIN-SUFFIX,chessease.net
 DOMAIN-SUFFIX,boxim.online
 DOMAIN-SUFFIX,zhangleglobal.com
 DOMAIN-SUFFIX,hongxingdl.love
