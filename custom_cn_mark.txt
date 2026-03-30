@@ -1,6 +1,6 @@
 # ============================================
 # PaoPaoDNS CN 标记域名列表
-# 生成时间: 2026-03-29 05:13:52
+# 生成时间: 2026-03-30 05:28:45
 # ============================================
 # 此文件由 generate_cn_rules.py 自动生成，请勿直接修改
 # 自定义规则请编辑 custom.txt 或 custom_rule.txt 后重新生成
@@ -23,7 +23,7 @@
 # 无
 
 # --- 自动聚合规则（请勿直接修改） ---
-# 共 119438 条
+# 共 119439 条
 full:1-fss24-s0.streamhoster.com
 full:1.cache.applinzi.com
 full:12371alic.v.myalicdn.com
@@ -1561,6 +1561,7 @@ domain:anytocopy.com
 domain:openkylin.top
 domain:wildfirechat.net
 domain:xgzb.top
+domain:cangjie-lang.net
 domain:cmhk.com
 domain:kaipanhong.com
 domain:talk-cloud.net
