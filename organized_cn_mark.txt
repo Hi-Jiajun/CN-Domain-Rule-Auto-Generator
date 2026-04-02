@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-04-01 05:27:21
+# 生成时间: 2026-04-02 05:05:50
 # ============================================
 
 
@@ -8,6 +8,7 @@
 DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,tailscale.com
 DOMAIN-SUFFIX,argotunnel.com
+DOMAIN-SUFFIX,cftunnel.com
 DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
 DOMAIN-SUFFIX,gh.ddlc.top
