@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-04-04 04:53:03
+# 生成时间: 2026-04-05 05:15:32
 # ============================================
 
 
@@ -169,6 +169,7 @@ DOMAIN-SUFFIX,anytocopy.com
 DOMAIN-SUFFIX,openkylin.top
 DOMAIN-SUFFIX,wildfirechat.net
 DOMAIN-SUFFIX,xgzb.top
+DOMAIN-SUFFIX,daocloud.vip
 DOMAIN-SUFFIX,66990000.xyz
 DOMAIN-SUFFIX,emby.yun
 DOMAIN-SUFFIX,fuyinkeji.top
