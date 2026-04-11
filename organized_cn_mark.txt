@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-04-10 05:28:07
+# 生成时间: 2026-04-11 04:57:40
 # ============================================
 
 
@@ -147,6 +147,9 @@ DOMAIN-SUFFIX,xn--4kq62z5rby2qupq9ub.top
 DOMAIN-SUFFIX,afuns.me
 DOMAIN-SUFFIX,sanligu.top
 DOMAIN-SUFFIX,vbkr.com
+DOMAIN-SUFFIX,jsj.top
+DOMAIN-SUFFIX,meloong.com
+DOMAIN-SUFFIX,xn--mmz.cc
 DOMAIN-SUFFIX,bjssjsyy.com
 DOMAIN-SUFFIX,batchat.com
 DOMAIN-SUFFIX,tianlala.com
@@ -3307,7 +3310,6 @@ com.mo
 196b7adb23969e39.com
 196g.com
 196r.gg
-19809844e27095b4.com
 1985cd.com
 1985qg.com
 1987cn.com
@@ -4105,7 +4107,6 @@ com.mo
 301mba.com
 301pk.com
 302423a641021.beer
-303b4b97071880b4.com
 303c.com
 30583a8b910261.beer
 306t.com
@@ -4174,7 +4175,6 @@ com.mo
 31ml.com
 31mold.com
 31ns.info
-31ppt.com
 31pump.com
 31rent.com
 31sf.com
@@ -5270,7 +5270,6 @@ com.mo
 503b2f379abaf979.com
 503error.com
 505uu.com
-506fhq.com
 506u5nf5j5.com
 507c7d240b2eae97.com
 508hdsys.com
@@ -7170,7 +7169,6 @@ com.mo
 6ds.me
 6du.in
 6duoyu.com
-6e22d5e666c6dbf2.com
 6e8a225320471153.com
 6e8fe57151019.beer
 6eat.com
@@ -7188,7 +7186,6 @@ com.mo
 6glz.com
 6h979.com
 6hd0hoc.com
-6hezb.com
 6hgame.com
 6hudong.com
 6huo.com
@@ -7353,7 +7350,6 @@ com.mo
 72535276268b14e0.com
 7265a5ef31011.beer
 726p.com
-7299tu75.cc
 72byte.com
 72ce.com
 72crm.com
@@ -7393,7 +7389,6 @@ com.mo
 73d1708e01022.beer
 73so.com
 73zw8.com
-740863d6d4d1a15e.com
 741b0fca410271.beer
 743forever.com
 7441a334d13a0000.com
@@ -7441,7 +7436,6 @@ com.mo
 7722wx.com
 7723img.com
 7724yx.com
-772it.com
 77304y.com
 77381v.com
 7744wan.com
@@ -9571,7 +9565,6 @@ adtchrome.com
 adtianmai.com
 adtime.com
 adtmm.com
-adttt.com
 aduan.cc
 adubest.com
 aduer.com
@@ -10436,6 +10429,7 @@ airshipads.ru
 airspa.net
 airstar-finance.com
 airstar.com
+airstarfinance.com
 airstarfinance.net
 airtac.com
 airtofly.com
@@ -10480,6 +10474,7 @@ aisojie.com
 aisou.club
 aisoutv.com
 aispeech.com
+aisportsapp.com
 aispreadtech.com
 aistar.site
 aistar666.com
@@ -11161,7 +11156,6 @@ allyvn.com
 alminecn.com
 almondoy.com
 alnan.com
-alnanaluminium.com
 alo7.com
 aloha-ukulele.com
 alonemonkey.com
@@ -11556,7 +11550,6 @@ anrlm.com
 anruan.com
 anruichina.com
 ansendun.com
-ansgo.com
 anshahouse.com
 anshibuff.com
 anshiduo.com
@@ -12119,7 +12112,6 @@ aqioo.com
 aqisite.com
 aqjx.com
 aqjz.net
-aqlengqueta.com
 aqlife.com
 aqniu.com
 aqpta.com
@@ -12435,7 +12427,6 @@ askxt.org
 asleyu.com
 aslk2018.com
 asls.space
-aslvyou.com
 asm64.com
 asmasm.com
 asmlc.com
@@ -13908,7 +13899,6 @@ baofeng.com
 baofeng.la
 baofeng.net
 baofeng365.com
-baofengtuandui.com
 baofon.com
 baofoo.com
 baofoo.net
@@ -14529,7 +14519,6 @@ beespal.com
 beestor.com
 beeui.com
 beeweart.com
-bef9782b822d9e00.com
 befar.com
 begcl.com
 begeel.com
@@ -14845,7 +14834,6 @@ bestatic.com
 bestb2b.com
 bestbeibao.com
 bestblower.com
-bestbrocciu.com
 bestcdn.vip
 bestcem.com
 bestchoiceco.com
@@ -14968,6 +14956,7 @@ beyondcomparepro.com
 beyondfund.com
 beyondh.com
 beyonditsm.com
+beyondq.com
 beyonds.com
 beyondsungroup.com
 beyoner.net
@@ -15299,6 +15288,7 @@ bigbigsun.com
 bigbigwon.com
 bigbigwork.com
 bigbrosci.com
+bigcakegame.com
 bigcat.com
 bigcloud.click
 bigda.com
@@ -17525,7 +17515,6 @@ button-nt.com
 buxia.net
 buxian8.com
 buxiuga.com
-buxiugangban.net
 buy-bar.com
 buy-copi888.com
 buy-copys888.com
@@ -18919,6 +18908,7 @@ cciup.com
 ccj88.com
 ccjec.com
 ccjhdljs.com
+ccjkncdc.com
 ccjkwjjedu.com
 ccjoo.com
 ccjoy.com
@@ -20353,7 +20343,6 @@ chatqp.net
 chatvgx.com
 chatyygpt.com
 chawo.com
-chaxiaohao.com
 chaxiaow.com
 chaxinyu.net
 chaxun.biz
@@ -20592,7 +20581,6 @@ chengtianxiajy.com
 chengtiexinxi.com
 chengtongjz.com
 chengtu.com
-chengw.com
 chengwei.com
 chengweitx.com
 chengxiangqian.com
@@ -21184,7 +21172,6 @@ chinaccm.com
 chinaccsi.com
 chinacct.org
 chinacdc.com
-chinacdl.com
 chinacdnb2b.com
 chinacelacforum.org
 chinacenn.com
@@ -22528,6 +22515,7 @@ cidi.ai
 cidianbao.com
 cidiancn.com
 cidianso.com
+ciding.cc
 cidschina.com
 ciduw.com
 cie-lgr.com
@@ -25574,7 +25562,6 @@ cqtl.org
 cqtlskj.com
 cqtn.com
 cqtnfs.com
-cqtns.com
 cqtqzx.com
 cqtrans.com
 cqtransit.com
@@ -25727,6 +25714,7 @@ cqzrsh.com
 cqzskj.com
 cqzuxia.com
 cqzww.com
+cqzxmoto.com
 cqzxrmyy.com
 cqzxwx.com
 cqzxzlyy.com
@@ -28599,7 +28587,6 @@ dfcfs.com
 dfcfw.com
 dfcms.net
 dfcx-bj.com
-dfd608d3135509ae.com
 dfdaily.com
 dfdd-toubiaole.com
 dfdinsin.com
@@ -29818,7 +29805,6 @@ dnsppdd.com
 dnspro.icu
 dnsrw.com
 dnss.vip
-dnssec-poison.xyz
 dnssina.com
 dnstest.vip
 dnstx88.cc
@@ -31207,7 +31193,6 @@ dxzq.net
 dxztc.com
 dxzw.com
 dxzx.com
-dxzy163.com
 dy-bus.com
 dy-hospital.com
 dy120.net
@@ -31359,7 +31344,6 @@ dzdu.com
 dzdvip.com
 dzdxs.net
 dzdzzd.com
-dzelec.com
 dzemotor.com
 dzfang.com
 dzfc.com
@@ -34229,7 +34213,6 @@ fapselc.com
 faq-whtasapp.com
 faq-whtasapp.net
 faqianjia.com
-faqingtie.com
 faqiren.com
 far-china.com
 far123.com
@@ -34708,6 +34691,7 @@ feling.net
 felink.com
 felix021.com
 felizpg.com
+felmvip.com
 felo-ev.com
 femrice.com
 fen360.com
@@ -34873,7 +34857,6 @@ fenleidao.com
 fenleihu.com
 fenlekeji.com
 fenliu.net
-fenmach.com
 fenmitech.com
 fennessy.hk
 fenqile.com
@@ -34904,6 +34887,7 @@ feotech.com
 fequan.com
 ferlie.net
 ferlytc.com
+fermatmind.com
 ferqwo.sbs
 ferro-alloys.com
 fescoadecco.com
@@ -36483,7 +36467,6 @@ futurenetlab.com
 futureprize.org
 futurescontest.com
 futustatic.com
-fututools.com
 fututrade.com
 fututrustee.com
 fuwa.org
@@ -37113,7 +37096,6 @@ gankh5.com
 ganlj.com
 ganlongjt.com
 ganlv.net
-ganlv.org
 ganlvji.com
 ganniu.com
 ganode.org
@@ -38319,7 +38301,6 @@ gfxaa.com
 gfxcamp.com
 gfxtr1.com
 gfxy.com
-gfyseed.com
 gfzihua.com
 gfzj.us
 gg-lb.com
@@ -39574,7 +39555,6 @@ gouso.com
 gousu.com
 goutanzi.com
 gouwanmei.com
-gouwu3.com
 gouwubang.com
 gouwudang.com
 gouwuke.com
@@ -41689,7 +41669,6 @@ gxlansheng.com
 gxlbang.com
 gxlbbwg.com
 gxlbgf.com
-gxlbgz.com
 gxlbi.com
 gxlbzszy.com
 gxlcclean.com
@@ -41888,7 +41867,6 @@ gxnndghb.com
 gxnnedu.com
 gxnnfx.com
 gxnnhexiexinli.com
-gxnnhhdzkjyxgs.com
 gxnnip.com
 gxnnjn.com
 gxnnjqgg.com
@@ -43052,6 +43030,7 @@ gzjunyu.com
 gzjuqi.com
 gzjvcom.com
 gzjxchem.com
+gzjyh.com
 gzjykj.com
 gzjyme.com
 gzjyypt.com
@@ -44198,7 +44177,6 @@ haoduo.vip
 haoduobao6.com
 haoduofangs.com
 haoduojiaju.com
-haoduojie.com
 haoduorou.net
 haoduoziti.com
 haoe123.com
@@ -44321,7 +44299,6 @@ haoniu1.com
 haonongzi.com
 haooyuan.com
 haopeixun.com
-haopianyi.com
 haoqdl.com
 haoqiao.com
 haoqihb.com
@@ -44810,7 +44787,6 @@ hbjxym.com
 hbjy.net
 hbjyjmzg.com
 hbjzgw.com
-hbjzx.com
 hbjzxh.com
 hbjzzx.com
 hbkggroup.com
@@ -46821,7 +46797,6 @@ hlnpic.com
 hlnpm.com
 hlo-trade.com
 hloong.com
-hlpolice.com
 hlqiaojia.com
 hlqxj.com
 hlread.com
@@ -46986,7 +46961,6 @@ hndbsp.com
 hndca.com
 hndcyg.com
 hndec.com
-hndeguang.com
 hndfbg.com
 hndfsrmyy.com
 hndgxh.com
@@ -47244,7 +47218,6 @@ hntbpm.com
 hntchq.com
 hntcm.com
 hntcmc.net
-hnteacher.net
 hntele.com
 hnthrq.com
 hntiannuo.net
@@ -51482,7 +51455,6 @@ ifaxin.org
 ifconfig.cc
 ifcresidence.com
 ifdian.net
-ifdoo.com
 ifeart.ltd
 ifedge.com
 ifeehei.xyz
@@ -52154,7 +52126,6 @@ imok.run
 imoke.org
 imol.cc
 imolive.tv
-imomoe.com
 imoo.com
 imooc.com
 imoocc.com
@@ -56582,7 +56553,6 @@ johhan.com
 johnlz.com
 johnmedia.com
 johogames.com
-johome.com
 johouse.com
 joi09110pt.com
 joiest.com
@@ -56645,6 +56615,7 @@ joomobx.com
 joooz.com
 joowhee.com
 joox.com
+jooxemail.com
 jooyacn.com
 jooyoo.net
 jooyuu.com
@@ -60562,7 +60533,6 @@ kuanhuacheng.com
 kuanye.net
 kuark.com
 kuashou.com
-kuashuonk.com
 kuayuegroup.com
 kubercloud.com
 kubesre.xyz
@@ -60711,7 +60681,6 @@ kuocaicdn.com
 kuocaidns.com
 kuocaiyun.com
 kuoo8.com
-kuosanyun.com
 kuosheng.com
 kuosheng.net
 kuotu.com
@@ -61374,7 +61343,6 @@ lanyunbusiness.com
 lanyuncloud.com
 lanyuncms.com
 lanyunone.com
-lanyus.com
 lanyusf.com
 lanzchina.com
 lanzhouvw.com
@@ -62004,7 +61972,6 @@ legalsiri.com
 legend-si.com
 legendsec.com
 legendsemi.com
-legendtkl.com
 legion.com.hk
 legou456.com
 legowechat.com
@@ -63357,6 +63324,7 @@ litecoin.ren
 litefeel.com
 litemob.net
 liteng-industry.com
+litessl.com
 lithomaterial.com
 lithub.cc
 litian268.com
@@ -64714,7 +64682,6 @@ lulugda.icu
 luluhong.com
 luluju.com
 lum114.com
-lumachain.shop
 lumai.net
 lumen-chip.com
 lumiai.com
@@ -65303,7 +65270,6 @@ lywxww.com
 lyxinhua.com
 lyxltv.com
 lyxsjmm.com
-lyxybzd.com
 lyxyxx.com
 lyy99.com
 lyyapp.com
@@ -65608,7 +65574,6 @@ maanhui.com
 maasdk.com
 mabangerp.com
 mabaozhuyun.com
-mabibook.com
 mabiji.com
 mabotech.com
 mac169.com
@@ -65790,7 +65755,6 @@ mail-bitgate.net
 mail163.com
 mail4399.com
 maila88.com
-mailbusinfo.com
 maileds.com
 mailehudong.com
 mailejifen.com
@@ -66028,6 +65992,7 @@ manjiwang.com
 mankebao.com
 mankewenxue.cc
 manlaxy.com
+manlaxycloud.com
 manli.ltd
 manlinggame.com
 manlinwood.com
@@ -66981,7 +66946,6 @@ meiwafuying.com
 meiweibf.com
 meiweigroup.com
 meiweis.com
-meiweisha.net
 meiweishudan.com
 meiwulist.com
 meixin.com
@@ -67135,6 +67099,7 @@ merchaincargo.com
 mercitime.com
 mereith.com
 mergeek.com
+merivox.net
 merklechina.com
 merkpd.com
 merlinmedicine.com
@@ -67535,6 +67500,7 @@ midiclouds.com
 midicn.com
 midifan.com
 midingdong.com
+midiplus.com
 midita.com
 miditools.net
 midiyinyue.com
@@ -68568,6 +68534,7 @@ moneydata.hk
 monfetch.com
 mongac.com
 monhun.fun
+monidai.com
 monidata.com
 moniex-verifyb.com
 monika.love
@@ -71796,7 +71763,6 @@ nnhxwygs.com
 nnhytyy.com
 nnhzkj888.com
 nnhzt.com
-nnipaas.com
 nnippsp.com
 nnit30.com
 nnjajt.com
@@ -71810,7 +71776,6 @@ nnjieshuo.com
 nnjingchu.com
 nnjingda.com
 nnjingyuan.com
-nnjioko.com
 nnjiuji.com
 nnjiuzhidu.com
 nnjj120.com
@@ -74843,7 +74808,6 @@ phpspider.org
 phpstat.net
 phpub.mobi
 phpv.net
-phpvar.com
 phpwc.com
 phpwc.info
 phpweb.net
@@ -74905,7 +74869,6 @@ piaoxian.net
 piaoxingqiu.com
 piaoyi.org
 piaoyun.net
-piaozhilan.com
 piaozone.com
 piasy.com
 piaviation.com
@@ -75419,7 +75382,6 @@ pntryy.com
 pnty1688.com
 pnwww.com
 pnxct.com
-pnxseykj.com
 pnxyrykj.com
 pnzpw.com
 po.co
@@ -75869,7 +75831,6 @@ prolog-int.com
 prolto.com
 promise-sz.com
 promisingedu.com
-promptchoose.com
 pronax.tech
 pronetway.com
 prophecyi.com
@@ -76379,7 +76340,6 @@ qbox.net
 qbtxt.net
 qbtzjt.com
 qbview.com
-qbxs.com
 qbxz.com
 qc-hr.com
 qc-shanghaipathology.com
@@ -77241,7 +77201,6 @@ qimaiz.com
 qimao.com
 qimi.com
 qimiaosenlin.com
-qimiaozhiwu.com
 qiming.tech
 qimingcx.com
 qimingjiang.com
@@ -78744,7 +78703,6 @@ qushiw.com
 qushixi.net
 qushoumiao.com
 qushuba.com
-qushuba.net
 qushuiying.net
 qusibajjj.men
 qutaiwan.com
@@ -79200,7 +79158,6 @@ railshj.com
 railwaybill.com
 railworkschina.com
 raina.tech
-rainasmoon.com
 rainbond.com
 rainbowcn.com
 rainbowred.com
@@ -80005,7 +79962,6 @@ riveralydia.shop
 rivergame.net
 riverinepm.com
 riverlimittech.net
-riveryun.com
 rivocean.com
 riwise.com
 rix-dl.com
@@ -81043,6 +80999,7 @@ saikr.com
 sail-lab.net
 sail.name
 sail2world.com
+sailaweiwangluo.com
 sailfansclub.com
 saili.science
 sailingyun.com
@@ -81193,7 +81150,6 @@ sanhao.com
 sanhaoradio.com
 sanhaostreet.com
 sanhe-medical.com
-sanhe-scale.com
 sanhepile.com
 sanheqin.com
 sanhetimburly.com
@@ -82537,7 +82493,6 @@ sectigochina.com
 sectigochina.com.cdn.cloudflare.net
 secu100.net
 secure-83a.com
-secure-923.com
 secure-ch-ase03.online
 secure-chasle026.ink
 secure-chasle029.wiki
@@ -82757,7 +82712,6 @@ seodaniel.com
 seofangfa.com
 seoipo.com
 seokoubei.com
-seopath.net
 seoqx.com
 seosdc.com
 seosiguan.com
@@ -82820,7 +82774,6 @@ sex291roushipin.wiki
 sex2ribenwuma.wiki
 sex2xiaoluoli.wiki
 sex2yingtaoshipin.wiki
-sex2youaishipin.wiki
 sexytea2013.com
 seyoo.net
 seyuma-cn.com
@@ -85996,7 +85949,6 @@ sjwl.xyz
 sjwt.net
 sjwtlm.com
 sjwx.info
-sjwxzy.com
 sjwyx.com
 sjxinxiwang.com
 sjxqn.com
@@ -86028,7 +85980,6 @@ sjzbasha.com
 sjzbwx.com
 sjzcfjd.com
 sjzcmw.com
-sjzdongya.com
 sjzez.com
 sjzfeitai.com
 sjzfls.com
@@ -88250,7 +88201,6 @@ sunowe.com
 sunowo.com
 sunpala.com
 sunpapergroup.com
-sunpassvfgt.xin
 sunpeed.com
 sunpowergroup.biz
 sunprocn.com
@@ -89506,6 +89456,7 @@ szjcmr.com
 szjcyljt.com
 szjcyy.com
 szjcyyy.com
+szjdsd.com
 szjfh.com
 szjg.net
 szjgjt.com
@@ -90580,6 +90531,7 @@ tapdb.com
 tapdb.net
 tapenjoy.com
 tapimg.com
+tapjoytech.com
 tapotiexie.com
 tappile.com
 tapque.com
@@ -91898,7 +91850,6 @@ tianhai2002.com
 tianhaixing.com
 tianhebus.com
 tianhejiayi.com
-tianhelife.com
 tianheoil.com
 tianhepiano.com
 tianheplaza.com
@@ -94519,7 +94470,6 @@ typora.net
 typrotech.com
 tyqian.com
 tyqxzx.com
-tyr8.com
 tyrantg.com
 tyrbl.com
 tyrbw.com
@@ -96565,7 +96515,6 @@ voice9.com
 voicedic.com
 voicer.info
 voicer.me
-voidcc.com
 voidking.com
 vojs.tv
 vokop.com
@@ -98735,7 +98684,6 @@ wfjtjy.com
 wfkji.com
 wflgjx.com
 wflps.com
-wflscaidian.com
 wflushebei.com
 wfmzjscl.com
 wfrcsc.com
@@ -101351,7 +101299,6 @@ wzy6.com
 wzyc.com
 wzyds.com
 wzyestar.com
-wzylrj.com
 wzyzdyf.com
 wzz1809.com
 wzzbdz.com
@@ -103657,7 +103604,6 @@ xiolift.com
 xiongan1dt.org
 xionganxinxi.com
 xiongbagk.com
-xiongbingtianxia.com
 xiongchuan.com
 xiongdong.com
 xiongf.com
@@ -104971,7 +104917,6 @@ xuedingmiao.com
 xuedong97.com
 xuedou.com
 xueepay.com
-xueerdiyi.com
 xueersi.com
 xueersibook.com
 xueerxing.com
@@ -105282,6 +105227,7 @@ xuxueli.com
 xuxusheng.com
 xuyalipin.com
 xuyangny.com
+xuyanmaoyi.com
 xuyechem.com
 xuyi.net
 xuyongrongmei.com
@@ -105960,7 +105906,6 @@ yaliaojie.com
 yalikongzhi.com
 yaling8.com
 yalishiyanji.com
-yalixinli.com
 yalj.net
 yalongbay.net
 yalqq8976.com
@@ -106114,7 +106059,6 @@ yanhaijing.com
 yanhuamedia.net
 yanhuoidc.com
 yaniu.net
-yanjianshengwu.com
 yanjiao.com
 yanjiaoapp.com
 yanjiaoweixin.com
@@ -106132,7 +106076,6 @@ yankon.com
 yankong.com
 yanliang.com
 yanliaofang.work
-yanliu.org
 yanlong.shop
 yanmaiyingyu.com
 yannv.com
@@ -107000,7 +106943,6 @@ yh-group.com
 yh0.com
 yh2000.com
 yh31.com
-yh5291.com
 yh596.com
 yh598.com
 yh914.com
@@ -107174,6 +107116,7 @@ yichuntv.com
 yichuyifan.com
 yickd.com
 yiclear.com
+yicloud.org
 yicode.tech
 yicoe.com
 yicongfound.org
@@ -107478,7 +107421,6 @@ yimuymc.com
 yinbaitu.com
 yinban.com
 yinbangbroker.com
-yinbaor.com
 yinbian.cc
 yinbin.ink
 yincat.com
@@ -109868,7 +109810,6 @@ yugenmed.com
 yugew.com
 yuglf.com
 yugongw.com
-yugou1688.com
 yugudz.com
 yuguimedia.com
 yuguo.com
@@ -112677,7 +112618,6 @@ zhidtech.com
 zhiduopc.com
 zhidx.com
 zhienkeji.com
-zhierjie.com
 zhifa.cc
 zhifa315.com
 zhifang.com
@@ -115753,6 +115693,7 @@ zxlo.com
 zxls.com
 zxmall.com
 zxmn2018.com
+zxmoto.com
 zxmseed.com
 zxneweye.com
 zxnic.net
@@ -116797,10 +116738,19 @@ regexp:^images(-\d)?\.gog-statics\.com$
 regexp:^r+[0-9]+(---|\.)sn-(2x3|ni5|j5o)\w{5}\.googlevideo\.com$
 regexp:^r+[0-9]+(---|\.)sn-(2x3|ni5|j5o)\w{5}\.xn--ngstr-lra8j\.com$
 123cha.com
+19809844e27095b4.com
+303b4b97071880b4.com
+31ppt.com
+506fhq.com
 5g.xn--czrs0t
 5g.xn--vhquv
+6e22d5e666c6dbf2.com
 6g.xn--czrs0t
 6g.xn--vhquv
+6hezb.com
+7299tu75.cc
+740863d6d4d1a15e.com
+772it.com
 8zhou.wang
 account-api.dji.com
 account.djicdn.com
@@ -116808,6 +116758,7 @@ account.lenovo.com
 account.uds-sit.lenovo.com
 active.dji.com
 adam.akamai.com
+adttt.com
 aeroscope.djiservice.org
 ag-rtk-alg.dji.com
 ag-rtk.dji.com
@@ -116817,8 +116768,10 @@ agms-us.dji.com
 agms.dji.com
 airasia.com
 akashop1.akamai.com
+alnanaluminium.com
 aloha.akamai.com
 analytics.lenovo.com
+ansgo.com
 aotgo.akamai.com
 api-ar.cnno1.uds.lenovo.com
 api-ar.euwe1.uds.lenovo.com
@@ -116836,7 +116789,9 @@ app-distribution-download.djicdn.com
 app-distribution.djiops.com
 app-h5.dji.com
 app-store.dji.com
+aqlengqueta.com
 arabic.people.com.cn.akadns99.net
+aslvyou.com
 asset1.djicdn.com
 asset2.djicdn.com
 asset3.djicdn.com
@@ -116858,14 +116813,18 @@ axon.razerzone.com
 b2bicn.lenovo.com
 b2c.lenovo.com
 baidu.jp
+baofengtuandui.com
 bbs.dji.com
 bbs.dji.net
 bbs.djicdn.com
+bef9782b822d9e00.com
+bestbrocciu.com
 bgp.deploy.akamai.com
 box.lenovo.com
 brain.lenovo.com
 bsp.lenovo.com
 busytrade.com
+buxiugangban.net
 c.citic
 callhome.uds-qa.lenovo.com
 callhome.uds-sit.lenovo.com
@@ -116880,7 +116839,10 @@ cdp.djiservice.org
 certified-timestamp.globalsign.com
 cfeng.wang
 cfhc.citic
+chaxiaohao.com
 check.kt.lenovo.com
+chengw.com
+chinacdl.com
 class.smartedu.lenovo.com
 click.lenovo.com
 cms.csw.lenovo.com
@@ -116902,6 +116864,7 @@ connect.akamai.com
 contacts.akamai.com
 content.djiservice.org
 cortex.razerzone.com
+cqtns.com
 crl.alphassl.com
 crl.globalsign.com
 crl2.alphassl.com
@@ -116924,6 +116887,7 @@ dev.dji.com
 dev1.djicdn.com
 developer.dji.com
 devusa.djicdn.com
+dfd608d3135509ae.com
 discovery-sophie-pro.razerapi.com
 discovery.razerapi.com
 discovery3.razerapi.com
@@ -116936,6 +116900,7 @@ dl.djicdn.com
 dl.razerzone.com
 dl.ubnt.com
 dlm01-cn-sdc.blurdev.com
+dnssec-poison.xyz
 docs.djicdn.com
 dospy.wang
 dp.deploy.akamai.com
@@ -116944,43 +116909,61 @@ dtf.lenovo.com
 duanzhihu.com
 dundun.wang
 duosuna.lenovo.com
+dxzy163.com
+dzelec.com
 en.people.cn.akadns99.net
 enterprise-insights.dji.com
 enterprise.dji.com
 entertainment.dji.com
 epkipro.globalsign.com
 fangdalaw.box.lenovo.com
+faqingtie.com
+fenmach.com
 fly-safe.dji.com
 flysafe-api.dji.com
 flysafe.dji.com
 fod.lenovo.com
 fodapi.lenovo.com
+fututools.com
 gack.citic
 galaxymacau.com
 galstars.net
+ganlv.org
 gator.deploy.akamai.com
 geo.cnno1.uds.lenovo.com
 geo.uds-sit.lenovo.com
+gfyseed.com
 global.prd.cdn.globalsign.com
+gouwu3.com
 group.citic
 gs2-geo.psn.akadns99.net
+gxlbgz.com
+gxnnhhdzkjyxgs.com
 gzyat.relmeetingapp.lenovo.com
+haoduojie.com
+haopianyi.com
 hardware.deploy.akamai.com
+hbjzx.com
 hci.lenovo.com
 hcs.globalsign.com
 he.deploy.akamai.com
 health.citic
 heimdallr.dji.com
+hlpolice.com
+hndeguang.com
+hnteacher.net
 holoway.lenovo.com
 holowaytest.lenovo.com
 homeedgeserver.lenovo.com
 hostedocsp.atlas.globalsign.com
 i.survey.lenovo.com
 icc.lenovo.com
+ifdoo.com
 image.dji.com
 imfg.lenovo.com
 img.samsungapps.com.akadns99.net
 img.videos.dji.net
+imomoe.com
 inapi.lenovo.com
 info.support.web02.huawei.akadns99.net
 ins.citic
@@ -116989,13 +116972,18 @@ issues.deploy.akamai.com
 itiger.com
 j.people.com.cn.akadns99.net
 jingqu.wang
+johome.com
 jp.globalsign.com
 k.sohu
 kt.lenovo.com
+kuashuonk.com
+kuosanyun.com
+lanyus.com
 laogu.wang
 lcp.gtm.lenovo.com
 lcp.lenovo.com
 le-reporting.lenovo.com
+legendtkl.com
 legionzone.lenovo.com
 lenbpreturns.lenovo.com
 lenovomobilesupport.lenovo.com
@@ -117009,14 +116997,18 @@ logistics.deploy.akamai.com
 lovart.ai
 lpos.lenovo.com
 lrsrv.lenovo.com
+lumachain.shop
+lyxybzd.com
 m-mall-origin.icbc.perf.akadns99.net
 m.dji.com
 m.dji.net
 m.mall.icbc.com.cn.icbcweb.akadns99.net
 m.skypixel.com
 m.sohu
+mabibook.com
 macosx-aam.upgrade.akamai.com
 mail.lenovo.com
+mailbusinfo.com
 mailinglists.akamai.com
 mamamiya.wang
 manifest-assets-staging.razerzone.com
@@ -117024,6 +117016,7 @@ manifest-assets.razerzone.com
 manifest-sophie-pro.razerapi.com
 manifest.razerapi.com
 manifest3.razerapi.com
+meiweisha.net
 mengtuoshi.wang
 mimo.skypixel.com
 mitest.lenovo.com
@@ -117054,6 +117047,8 @@ nikke-global.com
 nikke-jp.com
 nikke-kr.com
 nikke-sea.com
+nnipaas.com
+nnjioko.com
 o3community.web03.huawei.akadns99.net
 ocngs.globalsign.com
 ocr.lenovo.com
@@ -117073,10 +117068,13 @@ pats.lenovo.com
 pay.djicdn.com
 pcgplmmobile.lenovo.com
 pcsupport.lenovo.com
+phpvar.com
+piaozhilan.com
 ping.ubnt.com
 plat.smartedu.lenovo.com
 plus-us.djicdn.com
 plus.dji.com
+pnxseykj.com
 polaris.lenovo.com
 portal.cnno1.thinkreality-qa.lenovo.com
 portal.cnno1.thinkshield-qa.lenovo.com
@@ -117090,12 +117088,17 @@ product1.djicdn.com
 product2.djicdn.com
 product4.djicdn.com
 profile.globalsign.com
+promptchoose.com
 psrefstuff.lenovo.com
 qas-cnlogistics.lenovo.com
+qbxs.com
 qcut.dji.com
 qi.lenovo.com
+qimiaozhiwu.com
 qliksense.lenovo.com
 qq.wang
+qushuba.net
+rainasmoon.com
 razer-customer-swassets.razerzone.com
 razerid-assets-staging.razerzone.com
 razerid-assets.razerzone.com
@@ -117108,30 +117111,37 @@ repair.dji.com
 repository.lenovo.com
 reserve-backend.dji.com
 retail.lenovo.com
+riveryun.com
 rm-static.djicdn.com
 rtc.smartedu.lenovo.com
 russian.people.com.cn.akadns99.net
 rzcsassets.razerzone.com
 sales.lenovo.com
+sanhe-scale.com
 scc.lenovo.com
 sdcsso.lenovo.com
 seal.alphassl.com
 seal.globalsign.com
 sec.lenovo.com
+secure-923.com
 secure.alphassl.com
 secure.globalsign.com
 secure.staging.alphassl.com
 secure.staging.globalsign.com
 secure2.alphassl.com
 sentry-io.djiops.com
+seopath.net
 service-adhoc.dji.com
 service.dji.com
 service.djicdn.com
+sex2youaishipin.wiki
 shop.globalsign.com
 siebel.akamai.com
 sim.djicdn.com
 single-test-2.cert-test.akamai.com
 single-test-3.cert-test.akamai.com
+sjwxzy.com
+sjzdongya.com
 smartrecruiter.lenovo.com
 smartssc.lenovo.com
 smartsupport.lenovo.com
@@ -117160,6 +117170,7 @@ stormsend1.djicdn.com
 stormsend2.djicdn.com
 stormsend4.djicdn.com
 stsproxy.lenovo.com
+sunpassvfgt.xin
 support-chat.dji.com
 support.dji.com
 support.globalsign.com
@@ -117180,18 +117191,21 @@ test-relay-service.djicdn.com
 test.codata.lenovo.com
 test.qi.lenovo.com
 testjp.globalsign.com
+tianhelife.com
 time.izatcloud.net
 tokyo.skypixel.com
 tools.deploy.akamai.com
 tools.gss.akamai.com
 transformu.lenovo.com
 tv.sohu
+tyr8.com
 u.dji.com
 us-ag2-api.dji.com
 ustclug.org
 v.sohu
 victim.xn--vuq861b
 voc.lenovo.com
+voidcc.com
 wan.wang
 we.dji.com
 webmail.akamai.com
@@ -117201,6 +117215,7 @@ webvpncnhet02.lenovo.com
 webvpncnpek01.lenovo.com
 webvpncnszx01.lenovo.com
 webvpntest.lenovo.com
+wflscaidian.com
 whohas.deploy.akamai.com
 whois.deploy.akamai.com
 whp.lenovo.com
@@ -117225,10 +117240,12 @@ www2.djicdn.com
 www3.djicdn.com
 www4.djicdn.com
 www5.djicdn.com
+wzylrj.com
 xapi.lenovo.com
 xclient.info
 xiaoma.wang
 xiaoyi.lenovo.com
+xiongbingtianxia.com
 xn--1lq90iba455sxghy10a.xn--3ds443g
 xn--1lq90iizjqm7afdaz44c.xn--3ds443g
 xn--2ssx2cb4cywb60vkockt5d081a5lm.xn--3ds443g
@@ -117286,8 +117303,16 @@ xn--xhq95newgtxk9sk8k6a9r4ba.xn--3ds443g
 xn--xxv969f.xn--ses554g
 xn--z3vq3r3u4a.xn--czr694b
 xn--zwtr2f7xebqvx24ax9a.xn--3ds443g
+xueerdiyi.com
+yalixinli.com
 yanghengjun.com
+yanjianshengwu.com
+yanliu.org
+yh5291.com
+yinbaor.com
+yugou1688.com
 yun.lenovo.com
+zhierjie.com
 zlzpdemo.cube.lenovo.com
 full:apps.apple.com
 full:iadsdk.apple.com
