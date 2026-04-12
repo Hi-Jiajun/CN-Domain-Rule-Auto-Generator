@@ -1,6 +1,6 @@
 # ============================================
 # PaoPaoDNS CN 标记域名列表
-# 生成时间: 2026-04-11 04:57:40
+# 生成时间: 2026-04-12 05:26:53
 # ============================================
 # 此文件由 generate_cn_rules.py 自动生成，请勿直接修改
 # 自定义规则请编辑 custom.txt 或 custom_rule.txt 后重新生成
@@ -23,7 +23,7 @@
 # 无
 
 # --- 自动聚合规则（请勿直接修改） ---
-# 共 119516 条
+# 共 119439 条
 full:1-fss24-s0.streamhoster.com
 full:1.cache.applinzi.com
 full:12371alic.v.myalicdn.com
@@ -1540,6 +1540,8 @@ domain:xn--4kq62z5rby2qupq9ub.top
 domain:afuns.me
 domain:sanligu.top
 domain:vbkr.com
+domain:shanghongbei.com
+domain:divoiotcloud.com
 domain:jsj.top
 domain:meloong.com
 domain:xn--mmz.cc
@@ -31423,6 +31425,7 @@ domain:duba.net
 domain:dubairen.com
 domain:dubao123.com
 domain:dubbing.tech
+domain:dubbingx.com
 domain:dubbo.io
 domain:duble.live
 domain:dubola.com
@@ -68016,6 +68019,7 @@ domain:miaoche.com
 domain:miaocode.com
 domain:miaodiyun.com
 domain:miaodongbar.com
+domain:miaodongshenghuo.com
 domain:miaogongzi.cc
 domain:miaogongzi.net
 domain:miaohuiyanyi.com
@@ -78968,6 +78972,7 @@ domain:quasarchs.com
 domain:quaspa.com
 domain:quazero.com
 domain:quba360.com
+domain:qubang.cc
 domain:qubaobei.com
 domain:qubiankeji.com
 domain:qucai.com
@@ -94297,6 +94302,7 @@ domain:tsfqw.com
 domain:tsg-online.net
 domain:tsggx.com
 domain:tsgks.com
+domain:tsgyun.com
 domain:tshaisen.com
 domain:tshe.com
 domain:tshe.me
@@ -109288,6 +109294,7 @@ domain:yoodb.com
 domain:yooek.com
 domain:yoofh.com
 domain:yoogene.com
+domain:yoohe.net
 domain:yoohouse.com
 domain:yoojia.com
 domain:yoojing.com
@@ -116787,19 +116794,10 @@ domain:zzzyyy.com
 domain:zzzzaaaa.com
 domain:zzzzzz.me
 domain:123cha.com
-domain:19809844e27095b4.com
-domain:303b4b97071880b4.com
-domain:31ppt.com
-domain:506fhq.com
 domain:5g.xn--czrs0t
 domain:5g.xn--vhquv
-domain:6e22d5e666c6dbf2.com
 domain:6g.xn--czrs0t
 domain:6g.xn--vhquv
-domain:6hezb.com
-domain:7299tu75.cc
-domain:740863d6d4d1a15e.com
-domain:772it.com
 domain:8zhou.wang
 domain:account-api.dji.com
 domain:account.djicdn.com
@@ -116807,7 +116805,6 @@ domain:account.lenovo.com
 domain:account.uds-sit.lenovo.com
 domain:active.dji.com
 domain:adam.akamai.com
-domain:adttt.com
 domain:aeroscope.djiservice.org
 domain:ag-rtk-alg.dji.com
 domain:ag-rtk.dji.com
@@ -116817,10 +116814,8 @@ domain:agms-us.dji.com
 domain:agms.dji.com
 domain:airasia.com
 domain:akashop1.akamai.com
-domain:alnanaluminium.com
 domain:aloha.akamai.com
 domain:analytics.lenovo.com
-domain:ansgo.com
 domain:aotgo.akamai.com
 domain:api-ar.cnno1.uds.lenovo.com
 domain:api-ar.euwe1.uds.lenovo.com
@@ -116838,9 +116833,7 @@ domain:app-distribution-download.djicdn.com
 domain:app-distribution.djiops.com
 domain:app-h5.dji.com
 domain:app-store.dji.com
-domain:aqlengqueta.com
 domain:arabic.people.com.cn.akadns99.net
-domain:aslvyou.com
 domain:asset1.djicdn.com
 domain:asset2.djicdn.com
 domain:asset3.djicdn.com
@@ -116862,18 +116855,14 @@ domain:axon.razerzone.com
 domain:b2bicn.lenovo.com
 domain:b2c.lenovo.com
 domain:baidu.jp
-domain:baofengtuandui.com
 domain:bbs.dji.com
 domain:bbs.dji.net
 domain:bbs.djicdn.com
-domain:bef9782b822d9e00.com
-domain:bestbrocciu.com
 domain:bgp.deploy.akamai.com
 domain:box.lenovo.com
 domain:brain.lenovo.com
 domain:bsp.lenovo.com
 domain:busytrade.com
-domain:buxiugangban.net
 domain:c.citic
 domain:callhome.uds-qa.lenovo.com
 domain:callhome.uds-sit.lenovo.com
@@ -116888,10 +116877,7 @@ domain:cdp.djiservice.org
 domain:certified-timestamp.globalsign.com
 domain:cfeng.wang
 domain:cfhc.citic
-domain:chaxiaohao.com
 domain:check.kt.lenovo.com
-domain:chengw.com
-domain:chinacdl.com
 domain:class.smartedu.lenovo.com
 domain:click.lenovo.com
 domain:cms.csw.lenovo.com
@@ -116913,7 +116899,6 @@ domain:connect.akamai.com
 domain:contacts.akamai.com
 domain:content.djiservice.org
 domain:cortex.razerzone.com
-domain:cqtns.com
 domain:crl.alphassl.com
 domain:crl.globalsign.com
 domain:crl2.alphassl.com
@@ -116936,7 +116921,6 @@ domain:dev.dji.com
 domain:dev1.djicdn.com
 domain:developer.dji.com
 domain:devusa.djicdn.com
-domain:dfd608d3135509ae.com
 domain:discovery-sophie-pro.razerapi.com
 domain:discovery.razerapi.com
 domain:discovery3.razerapi.com
@@ -116949,7 +116933,6 @@ domain:dl.djicdn.com
 domain:dl.razerzone.com
 domain:dl.ubnt.com
 domain:dlm01-cn-sdc.blurdev.com
-domain:dnssec-poison.xyz
 domain:docs.djicdn.com
 domain:dospy.wang
 domain:dp.deploy.akamai.com
@@ -116958,61 +116941,43 @@ domain:dtf.lenovo.com
 domain:duanzhihu.com
 domain:dundun.wang
 domain:duosuna.lenovo.com
-domain:dxzy163.com
-domain:dzelec.com
 domain:en.people.cn.akadns99.net
 domain:enterprise-insights.dji.com
 domain:enterprise.dji.com
 domain:entertainment.dji.com
 domain:epkipro.globalsign.com
 domain:fangdalaw.box.lenovo.com
-domain:faqingtie.com
-domain:fenmach.com
 domain:fly-safe.dji.com
 domain:flysafe-api.dji.com
 domain:flysafe.dji.com
 domain:fod.lenovo.com
 domain:fodapi.lenovo.com
-domain:fututools.com
 domain:gack.citic
 domain:galaxymacau.com
 domain:galstars.net
-domain:ganlv.org
 domain:gator.deploy.akamai.com
 domain:geo.cnno1.uds.lenovo.com
 domain:geo.uds-sit.lenovo.com
-domain:gfyseed.com
 domain:global.prd.cdn.globalsign.com
-domain:gouwu3.com
 domain:group.citic
 domain:gs2-geo.psn.akadns99.net
-domain:gxlbgz.com
-domain:gxnnhhdzkjyxgs.com
 domain:gzyat.relmeetingapp.lenovo.com
-domain:haoduojie.com
-domain:haopianyi.com
 domain:hardware.deploy.akamai.com
-domain:hbjzx.com
 domain:hci.lenovo.com
 domain:hcs.globalsign.com
 domain:he.deploy.akamai.com
 domain:health.citic
 domain:heimdallr.dji.com
-domain:hlpolice.com
-domain:hndeguang.com
-domain:hnteacher.net
 domain:holoway.lenovo.com
 domain:holowaytest.lenovo.com
 domain:homeedgeserver.lenovo.com
 domain:hostedocsp.atlas.globalsign.com
 domain:i.survey.lenovo.com
 domain:icc.lenovo.com
-domain:ifdoo.com
 domain:image.dji.com
 domain:imfg.lenovo.com
 domain:img.samsungapps.com.akadns99.net
 domain:img.videos.dji.net
-domain:imomoe.com
 domain:inapi.lenovo.com
 domain:info.support.web02.huawei.akadns99.net
 domain:ins.citic
@@ -117021,18 +116986,13 @@ domain:issues.deploy.akamai.com
 domain:itiger.com
 domain:j.people.com.cn.akadns99.net
 domain:jingqu.wang
-domain:johome.com
 domain:jp.globalsign.com
 domain:k.sohu
 domain:kt.lenovo.com
-domain:kuashuonk.com
-domain:kuosanyun.com
-domain:lanyus.com
 domain:laogu.wang
 domain:lcp.gtm.lenovo.com
 domain:lcp.lenovo.com
 domain:le-reporting.lenovo.com
-domain:legendtkl.com
 domain:legionzone.lenovo.com
 domain:lenbpreturns.lenovo.com
 domain:lenovomobilesupport.lenovo.com
@@ -117046,18 +117006,14 @@ domain:logistics.deploy.akamai.com
 domain:lovart.ai
 domain:lpos.lenovo.com
 domain:lrsrv.lenovo.com
-domain:lumachain.shop
-domain:lyxybzd.com
 domain:m-mall-origin.icbc.perf.akadns99.net
 domain:m.dji.com
 domain:m.dji.net
 domain:m.mall.icbc.com.cn.icbcweb.akadns99.net
 domain:m.skypixel.com
 domain:m.sohu
-domain:mabibook.com
 domain:macosx-aam.upgrade.akamai.com
 domain:mail.lenovo.com
-domain:mailbusinfo.com
 domain:mailinglists.akamai.com
 domain:mamamiya.wang
 domain:manifest-assets-staging.razerzone.com
@@ -117065,7 +117021,6 @@ domain:manifest-assets.razerzone.com
 domain:manifest-sophie-pro.razerapi.com
 domain:manifest.razerapi.com
 domain:manifest3.razerapi.com
-domain:meiweisha.net
 domain:mengtuoshi.wang
 domain:mimo.skypixel.com
 domain:mitest.lenovo.com
@@ -117096,8 +117051,6 @@ domain:nikke-global.com
 domain:nikke-jp.com
 domain:nikke-kr.com
 domain:nikke-sea.com
-domain:nnipaas.com
-domain:nnjioko.com
 domain:o3community.web03.huawei.akadns99.net
 domain:ocngs.globalsign.com
 domain:ocr.lenovo.com
@@ -117117,13 +117070,10 @@ domain:pats.lenovo.com
 domain:pay.djicdn.com
 domain:pcgplmmobile.lenovo.com
 domain:pcsupport.lenovo.com
-domain:phpvar.com
-domain:piaozhilan.com
 domain:ping.ubnt.com
 domain:plat.smartedu.lenovo.com
 domain:plus-us.djicdn.com
 domain:plus.dji.com
-domain:pnxseykj.com
 domain:polaris.lenovo.com
 domain:portal.cnno1.thinkreality-qa.lenovo.com
 domain:portal.cnno1.thinkshield-qa.lenovo.com
@@ -117137,17 +117087,12 @@ domain:product1.djicdn.com
 domain:product2.djicdn.com
 domain:product4.djicdn.com
 domain:profile.globalsign.com
-domain:promptchoose.com
 domain:psrefstuff.lenovo.com
 domain:qas-cnlogistics.lenovo.com
-domain:qbxs.com
 domain:qcut.dji.com
 domain:qi.lenovo.com
-domain:qimiaozhiwu.com
 domain:qliksense.lenovo.com
 domain:qq.wang
-domain:qushuba.net
-domain:rainasmoon.com
 domain:razer-customer-swassets.razerzone.com
 domain:razerid-assets-staging.razerzone.com
 domain:razerid-assets.razerzone.com
@@ -117160,37 +117105,30 @@ domain:repair.dji.com
 domain:repository.lenovo.com
 domain:reserve-backend.dji.com
 domain:retail.lenovo.com
-domain:riveryun.com
 domain:rm-static.djicdn.com
 domain:rtc.smartedu.lenovo.com
 domain:russian.people.com.cn.akadns99.net
 domain:rzcsassets.razerzone.com
 domain:sales.lenovo.com
-domain:sanhe-scale.com
 domain:scc.lenovo.com
 domain:sdcsso.lenovo.com
 domain:seal.alphassl.com
 domain:seal.globalsign.com
 domain:sec.lenovo.com
-domain:secure-923.com
 domain:secure.alphassl.com
 domain:secure.globalsign.com
 domain:secure.staging.alphassl.com
 domain:secure.staging.globalsign.com
 domain:secure2.alphassl.com
 domain:sentry-io.djiops.com
-domain:seopath.net
 domain:service-adhoc.dji.com
 domain:service.dji.com
 domain:service.djicdn.com
-domain:sex2youaishipin.wiki
 domain:shop.globalsign.com
 domain:siebel.akamai.com
 domain:sim.djicdn.com
 domain:single-test-2.cert-test.akamai.com
 domain:single-test-3.cert-test.akamai.com
-domain:sjwxzy.com
-domain:sjzdongya.com
 domain:smartrecruiter.lenovo.com
 domain:smartssc.lenovo.com
 domain:smartsupport.lenovo.com
@@ -117219,7 +117157,6 @@ domain:stormsend1.djicdn.com
 domain:stormsend2.djicdn.com
 domain:stormsend4.djicdn.com
 domain:stsproxy.lenovo.com
-domain:sunpassvfgt.xin
 domain:support-chat.dji.com
 domain:support.dji.com
 domain:support.globalsign.com
@@ -117240,21 +117177,18 @@ domain:test-relay-service.djicdn.com
 domain:test.codata.lenovo.com
 domain:test.qi.lenovo.com
 domain:testjp.globalsign.com
-domain:tianhelife.com
 domain:time.izatcloud.net
 domain:tokyo.skypixel.com
 domain:tools.deploy.akamai.com
 domain:tools.gss.akamai.com
 domain:transformu.lenovo.com
 domain:tv.sohu
-domain:tyr8.com
 domain:u.dji.com
 domain:us-ag2-api.dji.com
 domain:ustclug.org
 domain:v.sohu
 domain:victim.xn--vuq861b
 domain:voc.lenovo.com
-domain:voidcc.com
 domain:wan.wang
 domain:we.dji.com
 domain:webmail.akamai.com
@@ -117264,7 +117198,6 @@ domain:webvpncnhet02.lenovo.com
 domain:webvpncnpek01.lenovo.com
 domain:webvpncnszx01.lenovo.com
 domain:webvpntest.lenovo.com
-domain:wflscaidian.com
 domain:whohas.deploy.akamai.com
 domain:whois.deploy.akamai.com
 domain:whp.lenovo.com
@@ -117289,12 +117222,10 @@ domain:www2.djicdn.com
 domain:www3.djicdn.com
 domain:www4.djicdn.com
 domain:www5.djicdn.com
-domain:wzylrj.com
 domain:xapi.lenovo.com
 domain:xclient.info
 domain:xiaoma.wang
 domain:xiaoyi.lenovo.com
-domain:xiongbingtianxia.com
 domain:xn--1lq90iba455sxghy10a.xn--3ds443g
 domain:xn--1lq90iizjqm7afdaz44c.xn--3ds443g
 domain:xn--2ssx2cb4cywb60vkockt5d081a5lm.xn--3ds443g
@@ -117352,16 +117283,8 @@ domain:xn--xhq95newgtxk9sk8k6a9r4ba.xn--3ds443g
 domain:xn--xxv969f.xn--ses554g
 domain:xn--z3vq3r3u4a.xn--czr694b
 domain:xn--zwtr2f7xebqvx24ax9a.xn--3ds443g
-domain:xueerdiyi.com
-domain:yalixinli.com
 domain:yanghengjun.com
-domain:yanjianshengwu.com
-domain:yanliu.org
-domain:yh5291.com
-domain:yinbaor.com
-domain:yugou1688.com
 domain:yun.lenovo.com
-domain:zhierjie.com
 domain:zlzpdemo.cube.lenovo.com
 domain:a2z.org.cn:@cn
 domain:amazonaws.cn:@cn
