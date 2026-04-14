@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-04-13 05:45:22
+# 生成时间: 2026-04-14 05:27:22
 # ============================================
 
 
@@ -148,6 +148,9 @@ DOMAIN-SUFFIX,afuns.me
 DOMAIN-SUFFIX,sanligu.top
 DOMAIN-SUFFIX,vbkr.com
 DOMAIN-SUFFIX,jsj.top
+DOMAIN-SUFFIX,alonginwind.top
+DOMAIN-SUFFIX,exiliumgf.com
+DOMAIN-SUFFIX,lightmake.site
 DOMAIN-SUFFIX,cone-x.com
 DOMAIN-SUFFIX,jiangningwater.com
 DOMAIN-SUFFIX,tongkask.com
@@ -117772,10 +117775,15 @@ regexp:^.+-mihayo\\.akamaized\\.net$:@cn
 domain:100.me
 domain:anlaiye.com.cn
 domain:ccspeed.cn
+domain:gangwan.com
 domain:jiasu.bohe.com
 domain:leigod.cn
+domain:leigodjsq.com
+domain:ls66.cn
+domain:nnbooster.com
 domain:qiyou.cn
 domain:uu.163.com
+domain:waifushangcheng.com
 domain:pkuh6.cn
 domain:puh3.net.cn
 domain:apidns.kwd.inkuai.com:@ads
