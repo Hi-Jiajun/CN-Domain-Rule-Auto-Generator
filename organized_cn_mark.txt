@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-04-14 05:27:22
+# 生成时间: 2026-04-15 05:27:22
 # ============================================
 
 
@@ -10309,6 +10309,7 @@ ailuntan.com
 ailvxing.com
 aim-ec.com
 aimaker.space
+aimap.com
 aimatech.com
 aimatrix.ai
 aimcx.com
@@ -15941,6 +15942,7 @@ bjfpw.com
 bjfqy.com
 bjfriendshiphotel.com
 bjfsali.com
+bjftfy.com
 bjfzst.com
 bjgas.com
 bjgasgh.com
@@ -19821,6 +19823,7 @@ cetcssi.com
 cetgps.com
 cethik.com
 cetkmh.com
+cetsteam.com
 cetzig.com
 ceultimate.com
 ceve-market.org
@@ -33466,6 +33469,7 @@ evotrue.com
 evpartner.com
 evpowergroup.com
 evtcn.com
+evtrust.com
 evyy.net
 evzhidao.com
 evznl.org
@@ -35414,6 +35418,7 @@ fjzzct.com
 fk100.com
 fkask.net
 fkblog.org
+fkbuff.com
 fkcaijing.com
 fkdex.com
 fkdmg.com
@@ -37099,6 +37104,7 @@ gangpaibao.com
 gangqinpu.com
 gangqinxiansheng.com
 gangshenglian.com
+gangwan.com
 gangyu.org
 gangyuan.com
 ganhao.vip
@@ -46533,6 +46539,7 @@ hivi.com
 hivictor.net
 hiwafer.com
 hiwaysemi.com
+hiwayslaw.com
 hiwbb.com
 hiwechats.com
 hiweixiu.com
@@ -58242,6 +58249,7 @@ jxxdf.com
 jxxdxy.com
 jxxhdn.com
 jxxhsd.com
+jxxinzhe.com
 jxxnyqc.com
 jxxs.net
 jxycqy.com
@@ -62025,6 +62033,7 @@ leiboyiqi.com
 leidacj.com
 leidianip.com
 leigod.com
+leigodjsq.com
 leihetg.com
 leihuo.net
 leijue.net
@@ -71701,6 +71710,7 @@ nnbbrn.com
 nnbdfyy.com
 nnbnutritionchina.com
 nnboao.com
+nnbooster.com
 nnboyi.com
 nnbsjyk.com
 nnbtl.com
@@ -91172,6 +91182,7 @@ tencentcloudbase.net
 tencentcloudclub.com
 tencentcloudcore.com
 tencentcloudcr.com
+tencentcloudcs.com
 tencentcloudga.com
 tencentcloudga001.com
 tencentcloudga001.net
@@ -97027,6 +97038,7 @@ waibao123.com
 waibao12333.com
 waibaodashi.com
 waibou.com
+waifushangcheng.com
 waig8.com
 waigamer.com
 waigf.com
@@ -117775,15 +117787,11 @@ regexp:^.+-mihayo\\.akamaized\\.net$:@cn
 domain:100.me
 domain:anlaiye.com.cn
 domain:ccspeed.cn
-domain:gangwan.com
 domain:jiasu.bohe.com
 domain:leigod.cn
-domain:leigodjsq.com
 domain:ls66.cn
-domain:nnbooster.com
 domain:qiyou.cn
 domain:uu.163.com
-domain:waifushangcheng.com
 domain:pkuh6.cn
 domain:puh3.net.cn
 domain:apidns.kwd.inkuai.com:@ads
