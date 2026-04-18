@@ -1,6 +1,6 @@
 # ============================================
 # CN 域名规则列表 (原始格式)
-# 生成时间: 2026-04-17 05:30:49
+# 生成时间: 2026-04-18 05:09:37
 # ============================================
 
 
@@ -148,6 +148,7 @@ DOMAIN-SUFFIX,afuns.me
 DOMAIN-SUFFIX,sanligu.top
 DOMAIN-SUFFIX,vbkr.com
 DOMAIN-SUFFIX,jsj.top
+DOMAIN-SUFFIX,acepanel.net
 DOMAIN-SUFFIX,miraiemby.com
 DOMAIN-SUFFIX,zhiexa.com
 DOMAIN-SUFFIX,alonginwind.top
